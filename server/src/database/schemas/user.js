@@ -18,35 +18,19 @@ const UserSchema=new mongoose.Schema({
     },
     password:{
         type:String,
-        required:true,
+        // required:true,
         minlength:8,
     },
-    batch:{
-        type:Number,
-        required:true,
-    },
-    department:{
-        type:String,
-        required:true,
-    },
-    year:{
-        type:Number,
-        // required:true,
+    block:{
+        type:CharacterData,
     },
     roomNo:{
         type:Number,
-        // required:true,
-        default:null
+        required:true,
     },
-    block:{
+    blockNo:{
         type:String,
-        // required:true,
-        default:null
-    },
-    floorNo:{
-        type:Number,
-        // required:true,
-        default:0
+        required:true,
     },
     role:{
         type:String,
