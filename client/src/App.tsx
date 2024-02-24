@@ -4,6 +4,9 @@ import Loading from './components/Loading';
 import Roomallocation from './pages/Roomallocation'
 import Complains from "./pages/Complains";
 import Notices from "./pages/Notices";
+import Clientdashboard from "./pages/Clientdashboard";
+import Clientnotices from "./pages/Clientnotices";
+import Clientcomplains from "./pages/Clientcomplains";
 
 
 const Admindashboard=lazy(()=> import("./pages/Admindashboard"));
@@ -18,6 +21,9 @@ const App = () => {
           <Route path="/admin/roomallocation" element={<Roomallocation/>}/>
           <Route path="/admin/complains" element={<Complains/>}/>
           <Route path="/admin/notices" element={<Notices/>}/>
+          <Route path="/client/dashboard" element={<Clientdashboard/>}/>
+          <Route path="/client/notices" element={<Clientnotices/>}/>
+          <Route path="/client/complains" element={<Clientcomplains/>}/>
         </Routes>
       </Suspense>
     </Router>
