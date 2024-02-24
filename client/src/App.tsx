@@ -5,6 +5,7 @@ import Loading from './components/Loading';
 import Roomallocation from './pages/Roomallocation'
 import Complains from "./pages/Complains";
 import Notices from "./pages/Notices";
+import Clientregisterroom from "./pages/Clientregisterroom";
 import '../index.css';
 // import Clientdashboard from "./pages/Clientdashboard";
 import Clientnotices from "./pages/Clientnotices";
@@ -29,6 +30,7 @@ const App = () => {
           <Route path="/client/dashboard" element={<Profile/>} />
           <Route path="/client/notices" element={<Clientnotices/>}/>
           <Route path="/client/complains" element={<Clientcomplains/>}/>
+          <Route path="/client/registerroom" element={<Clientregisterroom/>}/>
         </Routes>
       </Suspense>
     </Router>
