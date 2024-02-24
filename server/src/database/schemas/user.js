@@ -21,8 +21,26 @@ const UserSchema=new mongoose.Schema({
         // required:true,
         minlength:8,
     },
+<<<<<<< HEAD
+    rollNo:{
+        type:String,
+        required:true,
+    },
+    batch:{
+        type:Number,
+        required:true,
+    },
+    department:{
+        type:String,
+        required:true,
+    },
+    year:{
+        type:Number,
+        // required:true,
+=======
     block:{
         type:CharacterData,
+>>>>>>> f049a2ce9b8ab31c47ad32064bd0d55f560c3059
     },
     roomNo:{
         type:Number,

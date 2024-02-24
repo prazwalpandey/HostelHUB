@@ -1,9 +1,9 @@
-
 import AdminSidebar from '../components/Sidebar';
 import { IconType } from "react-icons";
 import { FaHotel,  FaPeopleGroup} from "react-icons/fa6";
 import { IoNotifications } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
+import Checkboxes from '../components/Checkboxes';
 
 
 const Roomallocation = () => {
@@ -35,8 +35,13 @@ const Roomallocation = () => {
                             Icon={item.Icon}
                         />
                     ))}
+
+                </section>
+                <section className="Rooms">
+                    <Checkboxes/>
                 </section>
             </main>
+
         </div>
     );
 };
@@ -64,4 +69,3 @@ const WidgetItem = ({
 );
 
 export default Roomallocation;
- 
