@@ -23,7 +23,6 @@ const UserSchema=new mongoose.Schema({
     },
     block:{
         type:CharacterData,
-        required:true,
     },
     roomNo:{
         type:Number,
@@ -33,6 +32,19 @@ const UserSchema=new mongoose.Schema({
         type:String,
         required:true,
         default:'Student'
+    },
+    guardianName:{
+        type:String,
+        required: true,
+    },
+    guardianContact:{
+        type:Number,
+        required:true,
+        min:10,
+    },
+    guardianRelationship:{
+        type:String,
+        required:true,
     },
     createdAt:{
         type:Date,

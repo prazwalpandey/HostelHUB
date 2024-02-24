@@ -8,7 +8,7 @@ const AdminSchema=new mongoose.Schema({
     role:{
         type:String,
         required:true,
-        default:'HostelWaden',
+        default:'HostelAdmin',
     },
     email:{
         type:String,
