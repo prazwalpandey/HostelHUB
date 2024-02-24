@@ -18,9 +18,10 @@ const UserSchema=new mongoose.Schema({
     },
     password:{
         type:String,
-        required:true,
+        // required:true,
         minlength:8,
     },
+<<<<<<< HEAD
     rollNo:{
         type:String,
         required:true,
@@ -36,21 +37,18 @@ const UserSchema=new mongoose.Schema({
     year:{
         type:Number,
         // required:true,
+=======
+    block:{
+        type:CharacterData,
+>>>>>>> f049a2ce9b8ab31c47ad32064bd0d55f560c3059
     },
     roomNo:{
         type:Number,
-        // required:true,
-        default:null
+        required:true,
     },
-    block:{
+    blockNo:{
         type:String,
-        // required:true,
-        default:null
-    },
-    floorNo:{
-        type:Number,
-        // required:true,
-        default:0
+        required:true,
     },
     role:{
         type:String,
