@@ -30,15 +30,15 @@ router.post('/register', async (req, res) => {
 //Admin login
 router.post('/login',async (req, res) => {
     const {email,password}=req.body;
-    const user=await Admin.findOne({email:req.body.email});
-    if(!user){
+    const admin=await Admin.findOne({email});
+    if(!admin){
         return res.status(401).send({
             success:false,
             message:"Cound not find the Admin",
         })
     }
     //password check
-    const isValid=comparePassword(password,user.password);
+    const isValid=comparePassword(password,admin.password);
     if(!isValid){
         return res.status(401).send({
             success:false,
@@ -47,16 +47,16 @@ router.post('/login',async (req, res) => {
     }
 
     const jwtPayload={
-        username:user.email,
-        id:user._id,
-        role:user.role,
+        adminusername:admin.email,
+        id:admin._id,
+        role:admin.role,
     };
     const token=jwt.sign(jwtPayload,process.env.JWT_SECRET);
 
     return res.status(200).send({
         success:true,
         message:"Logged in successfully",
-        role:user.role,
+        role:admin.role,
         token:"Bearer "+token,
     });
 
@@ -66,15 +66,21 @@ router.post('/login',async (req, res) => {
 //Access only after loggedin
 router.get(
 	"/protected",
-	passport.authenticate("jwt", { session: false }),
+	passport.authenticate("jwt-admin", { session: false }),
 	(req, res) => {
-		return res.status(200).send({
-			success: true,
-			user: {
-				id: req.user._id,
-				username: req.user.email,
-			},
-		});
+        try{
+            return res.status(200).send({
+                success: true,
+                admin: {
+                    id: req.user._id,
+                    username: req.user.email,
+                },
+            });
+        } catch(err){
+            console.log(err);
+            return res.status(500).send({msg:"Internal Server Error"});
+        }
+		
 	}
 );
 
