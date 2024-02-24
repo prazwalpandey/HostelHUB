@@ -21,6 +21,10 @@ const UserSchema=new mongoose.Schema({
         required:true,
         minlength:8,
     },
+    rollNo:{
+        type:String,
+        required:true,
+    },
     batch:{
         type:Number,
         required:true,
