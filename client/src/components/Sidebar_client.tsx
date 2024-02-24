@@ -16,6 +16,11 @@ const ClientSidebar = () => {
             Icon: RiDashboardFill
         },
         {
+            url: "/client/registerroom",
+            text: "Register Room",
+            Icon: AiFillFileText
+        },
+        {
             url: "/client/complains",
             text: "Complains",
             Icon: IoIosPeople
