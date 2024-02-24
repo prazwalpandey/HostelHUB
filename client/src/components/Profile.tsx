@@ -3,7 +3,6 @@ import "../styles/profile.scss";
 import ClientSidebar from "./Sidebar_client";
 
 const Profile = () => {
-  const [editing, setEditing] = useState(false);
   const [profile, setProfile] = useState({
     name: "Prazwal Stark",
     email: "prazwalstark@gmail.com",
@@ -20,66 +19,7 @@ const Profile = () => {
   return (
     <>
       <div className="adminContainer">
-        <ClientSidebar />
-<<<<<<< HEAD
-        <div className="profile">
-          <h2>Profile Information</h2>
-          {editing ? (
-            <div className='data'>
-              <label>
-                Name:
-                <input type="text" name="name" value={profile.name} onChange={handleChange} />
-              </label>
-              <label>
-                Email:
-                <input type="email" name="email" value={profile.email} onChange={handleChange} />
-              </label>
-              <label>
-                Contact:
-                <input type="text" name="contact" value={profile.contact} onChange={handleChange} />
-              </label>
-              <label>
-                Block:
-                <input type="text" name="block" value={profile.block} onChange={handleChange} />
-              </label>
-              <label>
-                Room No:
-                <input type="text" name="roomNo" value={profile.roomNo} onChange={handleChange} />
-              </label>
-              <label>
-                Floor No:
-                <input type="text" name="floorNo" value={profile.floorNo} onChange={handleChange} />
-              </label>
-              <label>
-                Guardian Name:
-                <input type="text" name="guardianName" value={profile.guardianName} onChange={handleChange} />
-              </label>
-              <label>
-                Guardian Contact:
-                <input type="text" name="guardianContact" value={profile.guardianContact} onChange={handleChange} />
-              </label>
-              <label>
-                Guardian Relationship:
-                <input type="text" name="guardianRelationship" value={profile.guardianRelationship} onChange={handleChange} />
-              </label>
-              <button onClick={handleSave}>Save</button>
-            </div>
-          ) : (
-            <div className='data'>
-              <p>Name: {profile.name}</p>
-              <p>Email: {profile.email}</p>
-              <p>Contact: {profile.contact}</p>
-              <p>Block: {profile.block}</p>
-              <p>Room No: {profile.roomNo}</p>
-              <p>Floor No: {profile.floorNo}</p>
-              <p>Guardian Name: {profile.guardianName}</p>
-              <p>Guardian Contact: {profile.guardianContact}</p>
-              <p>Guardian Relationship: {profile.guardianRelationship}</p>
-              <button onClick={handleEdit}>Edit</button>
-            </div>
-          )}
-        </div>
-=======
+        <ClientSidebar />;
         <div className="profile bg-white shadow-md rounded-lg ">
   <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">Student's Profile</h2>
   <ul className="list-disc m-0">
@@ -129,8 +69,6 @@ const Profile = () => {
     </li>
   </ul>
 </div>
-
->>>>>>> 84b58523cf68e4342951c69b840489ee0cf61b98
       </div>
     </>
   );
