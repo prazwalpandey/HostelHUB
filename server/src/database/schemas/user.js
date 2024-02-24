@@ -18,19 +18,25 @@ const UserSchema=new mongoose.Schema({
     },
     password:{
         type:String,
-        required:true,
+        // required:true,
         minlength:8,
     },
+<<<<<<< HEAD
     block:{
         type:CharacterData,
     },
+=======
+>>>>>>> 614cba32b09209816e2ac8783021db5975c19ece
     roomNo:{
         type:Number,
         required:true,
     },
-    role:{
+    blockNo:{
         type:String,
         required:true,
+    },
+    role:{
+        type:String,
         default:'Student'
     },
     guardianName:{
@@ -53,4 +59,5 @@ const UserSchema=new mongoose.Schema({
     }
 });
 
-module.exports=mongoose.model('UserData',UserSchema);
+const User=mongoose.model('UserData',UserSchema);
+export default User;
