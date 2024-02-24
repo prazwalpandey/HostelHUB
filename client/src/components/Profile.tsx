@@ -21,7 +21,6 @@ const Profile = () => {
     <>
       <div className="adminContainer">
         <ClientSidebar />
-<<<<<<< HEAD
         <div className="profile">
           <h2>Profile Information</h2>
           {editing ? (
@@ -79,7 +78,7 @@ const Profile = () => {
             </div>
           )}
         </div>
-=======
+
         <div className="profile bg-white shadow-md rounded-lg ">
   <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">Student's Profile</h2>
   <ul className="list-disc m-0">
@@ -129,8 +128,6 @@ const Profile = () => {
     </li>
   </ul>
 </div>
-
->>>>>>> 84b58523cf68e4342951c69b840489ee0cf61b98
       </div>
     </>
   );
