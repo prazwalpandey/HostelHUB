@@ -30,7 +30,8 @@ a {
 
 .adminContainer{
   @include grid(1fr 4fr,2rem);
-  height: 100%;
+  width:"100vw";
+  height:"100vh";
   background-color: rgb(247,247,247);
   > aside{
     width: 100%;

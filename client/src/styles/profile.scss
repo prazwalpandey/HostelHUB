@@ -1,28 +1,9 @@
 @import "_mixins";
 .profile {
-    // @include postCenter();
-    // @include grid-template-columns(2);
-    // width: 100%;
-    // height: 90vh;
     background-color: #f9f9f9;
     border-radius: 10px;
     padding: 50px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-    // .data{
-    //     @include flex();
-    // }
-  // .profile h2 {
-  //   @include flex();
-  //   // position:absolute;
-  //   // left:50%;
-  //   font-size: 24px;
-  //   // margin-bottom: auto;
-  //   color: rgb(49, 134, 219);
-  // }
-  
-  // .profile p {
-  //   font-size: 16px;
-  //   // margin-bottom: auto;
-  // }
+
   
