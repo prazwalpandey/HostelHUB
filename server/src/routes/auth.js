@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import User from '../database/schemas/user.js';
 import passport from 'passport';
 import { hashedPassword, getAdminData, getUserData, comparePassword } from '../utils/helpers.js';
+import { authenticateUser } from '../utils/authenticateUsers.js';
 
 import '../strategies/passport.js';
 import dotenv from 'dotenv';
@@ -15,13 +16,15 @@ const router = Router();
 
 //User Register
 router.post('/register', async (req, res) => {
-    const { name, email, contact, password, roomNo, blockNo } = req.body;
+    const { name, email, contact, password,batch,department, roomNo, block,floorNo,guardianName,guardianContact,guardianRelationship } = req.body;
     const userDb = await User.findOne({ email });
     if (userDb)
         res.status(400).send({ msg: 'user laready exists' });
     else {
         const pwdHash = hashedPassword(password);
-        const newUser = await User.create({ name, email, contact, password: pwdHash, roomNo, blockNo });
+        const currentYear=new Date().getFullYear();
+        const yearCalc=(currentYear+56)-batch;
+        const newUser = await User.create({ name, email, contact, password: pwdHash,batch,department,year:yearCalc ,roomNo, block,floorNo,guardianName,guardianContact,guardianRelationship });
         newUser.save();
         res.sendStatus(201);
     }
@@ -64,23 +67,20 @@ router.post('/login', async (req, res) => {
 
 
 //Access only after loggedin
-router.get("/protected",
-    passport.authenticate("jwt-user", { session: false }),
-    (req, res) => {
-        try {
-            return res.status(200).send({
-                success: true,
-                user: {
-                    id: req.user._id,
-                    username: req.user.email,
-                },
-            });
-        } catch (err) {
-            console.log(err);
-            return res.status(500).send({ msg: "Internal Server Error" });
-        }
+router.get("/protected",authenticateUser,(req,res)=>{
+    try{
+        return res.status(200).send({
+            success:true,
+            user:{
+                id:req.user._id,
+                username:req.user.email,
+            }
+        })
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({msg:'Internal Server Error'});
     }
-);
+});
 
 
 export default router;

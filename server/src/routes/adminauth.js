@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import Admin from '../database/schemas/admin.js';
 import passport from 'passport';
 import { hashedPassword,getAdminData, comparePassword} from '../utils/helpers.js';
+import { authenticateAdmin } from '../utils/authenticateUsers.js';
 
 import '../strategies/passport.js';
 import dotenv from 'dotenv';
@@ -64,25 +65,20 @@ router.post('/login',async (req, res) => {
 
 
 //Access only after loggedin
-router.get(
-	"/protected",
-	passport.authenticate("jwt-admin", { session: false }),
-	(req, res) => {
-        try{
-            return res.status(200).send({
-                success: true,
-                admin: {
-                    id: req.user._id,
-                    username: req.user.email,
-                },
-            });
-        } catch(err){
-            console.log(err);
-            return res.status(500).send({msg:"Internal Server Error"});
-        }
-		
-	}
-);
+router.get("/protected",authenticateAdmin,(req,res)=>{
+    try{
+        return res.status(200).send({
+            success:true,
+            user:{
+                id:req.user._id,
+                username:req.user.email,
+            }
+        })
+    }catch(err){
+        console.log(err);
+        return res.status(500).send({msg:'Internal Server Error'});
+    }
+});
 
 
 export default router;

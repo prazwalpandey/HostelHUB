@@ -10,6 +10,9 @@ import './strategies/passport.js';
 // ROUTES
 import authRoute from './routes/auth.js';
 import adminRoute from './routes/adminauth.js'
+
+import noticeRoute from './routes/noticesRoutes.js';
+import complainRoute from './routes/complainsRoute.js';
 const app=express();
 
 
@@ -27,7 +30,15 @@ app.use('/admin/auth',adminRoute,(req,res)=>{
     res.sendStatus(200);
 });
 
+//NOTICES ROUTES
+app.use('/admin/notices',noticeRoute,(req,res)=>{
+    res.sendStatus(200);
+})
 
+//COMPLAINS ROUTES
+app.use('/user/complains',complainRoute,(req,res)=>{
+    res.sendStatus(200);
+})
 
 
 

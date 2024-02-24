@@ -18,22 +18,35 @@ const UserSchema=new mongoose.Schema({
     },
     password:{
         type:String,
-        // required:true,
+        required:true,
         minlength:8,
     },
-<<<<<<< HEAD
-    block:{
-        type:CharacterData,
-    },
-=======
->>>>>>> 614cba32b09209816e2ac8783021db5975c19ece
-    roomNo:{
+    batch:{
         type:Number,
         required:true,
     },
-    blockNo:{
+    department:{
         type:String,
         required:true,
+    },
+    year:{
+        type:Number,
+        // required:true,
+    },
+    roomNo:{
+        type:Number,
+        // required:true,
+        default:null
+    },
+    block:{
+        type:String,
+        // required:true,
+        default:null
+    },
+    floorNo:{
+        type:Number,
+        // required:true,
+        default:0
     },
     role:{
         type:String,
