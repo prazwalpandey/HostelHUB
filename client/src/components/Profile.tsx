@@ -3,7 +3,6 @@ import "../styles/profile.scss";
 import ClientSidebar from "./Sidebar_client";
 
 const Profile = () => {
-  const [editing, setEditing] = useState(false);
   const [profile, setProfile] = useState({
     name: "Prazwal Stark",
     email: "prazwalstark@gmail.com",
@@ -20,6 +19,7 @@ const Profile = () => {
   return (
     <>
       <div className="adminContainer">
+
         <ClientSidebar />
         <div className="profile">
           <h2>Profile Information</h2>
@@ -79,6 +79,9 @@ const Profile = () => {
           )}
         </div>
 
+=======
+        <ClientSidebar />;
+>>>>>>> 21839513f9a0472abdb74458a5c433704919d810
         <div className="profile bg-white shadow-md rounded-lg ">
   <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">Student's Profile</h2>
   <ul className="list-disc m-0">
