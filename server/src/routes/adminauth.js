@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
-import User from '../database/schemas/user.js';
+import Admin from '../database/schemas/admin.js';
 import passport from 'passport';
-import { hashedPassword,getAdminData,getUserData, comparePassword} from '../utils/helpers.js';
+import { hashedPassword,getAdminData, comparePassword} from '../utils/helpers.js';
 
 import '../strategies/passport.js';
 import dotenv from 'dotenv';
@@ -13,28 +13,28 @@ dotenv.config();
 const router = Router();
 
 
-//User Register
+//Admin Register
 router.post('/register', async (req, res) => {
-    const { name, email, contact, password, roomNo, blockNo } = req.body;
-    const userDb = await User.findOne({ email });
-    if (userDb)
-        res.status(400).send({ msg: 'user laready exists' });
+    const { name, email, contact, password,} = req.body;
+    const adminDb = await Admin.findOne({ email });
+    if (adminDb)
+        res.status(400).send({ msg: 'Admin laready exists' });
     else {
         const pwdHash = hashedPassword(password);
-        const newUser = await User.create({ name, email, contact, password: pwdHash, roomNo, blockNo });
-        newUser.save();
+        const newAdmin = await Admin.create({ name, email, contact, password: pwdHash});
+        newAdmin.save();
         res.sendStatus(201);
     }
 });
 
-//User login
+//Admin login
 router.post('/login',async (req, res) => {
     const {email,password}=req.body;
-    const user=await User.findOne({email:req.body.email});
+    const user=await Admin.findOne({email:req.body.email});
     if(!user){
         return res.status(401).send({
             success:false,
-            message:"Cound not find the user",
+            message:"Cound not find the Admin",
         })
     }
     //password check
@@ -49,7 +49,7 @@ router.post('/login',async (req, res) => {
     const jwtPayload={
         username:user.email,
         id:user._id,
-        role:user.role
+        role:user.role,
     };
     const token=jwt.sign(jwtPayload,process.env.JWT_SECRET);
 

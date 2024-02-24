@@ -5,11 +5,7 @@ const AdminSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    role:{
-        type:String,
-        required:true,
-        default:'HostelWaden',
-    },
+    
     email:{
         type:String,
         required:true,
@@ -24,7 +20,14 @@ const AdminSchema=new mongoose.Schema({
         type:String,
         required:true,
         min:8,
-    }
+    },
+    role:{
+        type:String,
+        required:true,
+        default:'HostelWaden',
+    },
 });
 
-module.exports=mongoose.model('AdminData',AdminSchema);
+const Admin=mongoose.model('AdminData',AdminSchema);
+
+export default Admin;
