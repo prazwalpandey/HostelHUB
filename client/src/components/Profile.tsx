@@ -24,6 +24,7 @@ const Profile = () => {
            <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">
              Student's Profile
            </h2>
+           <hr className="border-t border-gray-300 border-width-2" />
            <ul className="list-disc m-0">
              <li>
                <span className="font-small">Name:</span>

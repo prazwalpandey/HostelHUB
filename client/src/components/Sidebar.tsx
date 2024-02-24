@@ -4,6 +4,7 @@ import { RiDashboardFill } from "react-icons/ri";
 import { AiFillFileText } from "react-icons/ai";
 import { SiGoogleclassroom } from "react-icons/si";
 import { IoIosPeople } from "react-icons/io";
+import { RiFileList3Fill } from 'react-icons/ri';
 
 const AdminSidebar = () => {
 
@@ -29,6 +30,11 @@ const AdminSidebar = () => {
             url: "/admin/notices",
             text: "Notices",
             Icon: AiFillFileText
+        },
+        {
+            url: "/admin/studentrecords",
+            text: "Student Records",
+            Icon: RiFileList3Fill
         }
     ];
     return (

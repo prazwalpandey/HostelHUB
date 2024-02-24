@@ -3,9 +3,9 @@ import { useState } from 'react';
 function CheckboxLayout() {
   const [selectedRooms, setSelectedRooms] = useState({});
 
-  const handleCheckboxChange = (event, block, floor, roomNumber) => {
+  const handleCheckboxChange = (event,block,roomNumber) => {
     const isChecked = event.target.checked;
-    const id = `${block}${floor}${roomNumber.toString().padStart(2, '0')}`;
+    const id = `${block}${roomNumber.toString()}`;
 
     setSelectedRooms((prevState) => ({
       ...prevState,
@@ -75,3 +75,4 @@ function CheckboxLayout() {
 }
 
 export default CheckboxLayout;
+

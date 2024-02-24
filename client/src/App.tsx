@@ -12,6 +12,7 @@ import Clientnotices from "./pages/Clientnotices";
 import Clientcomplains from "./pages/Clientcomplains";
 import Profile from "./components/Profile";
 import Signin from "./pages/clientSignin";
+import Studentrecords from "./pages/Studentrecords";
 
 
 const Admindashboard=lazy(()=> import("./pages/Admindashboard"));
@@ -26,6 +27,7 @@ const App = () => {
           <Route path="/admin/roomallocation" element={<Roomallocation/>}/>
           <Route path="/admin/complains" element={<Complains/>}/>
           <Route path="/admin/notices" element={<Notices/>}/>
+          <Route path="/admin/studentrecords" element={<Studentrecords/>}/>
           <Route path="/" element={<Signin/>} />
           <Route path="/client/dashboard" element={<Profile/>} />
           <Route path="/client/notices" element={<Clientnotices/>}/>

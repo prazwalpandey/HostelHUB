@@ -1,18 +1,17 @@
-import AdminSidebar from "../components/Sidebar";
 import ClientSidebar from "../components/Sidebar_client";
-import registerform from "../components/registerform";
 
 const Clientregisterroom = () => {
   return (
     <>
   <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
     <ClientSidebar />
-    <main className="dashboard" style={{ width: "100%", height: "100%" }}>
+    <main className="dashboard" style={{ width: "100%", height: "100%"}}>
       <div
         className="flex flex-col w-full p-4 rounded-lg shadow-md bg-white items-center justify-center h-full"
-        style={{ margin: "auto", width: "auto", height: "100%", padding:"30px" }}
+        style={{width: "auto", height: "100%", padding:"30px" }}
       >
     <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">Register For Room Allocation</h2>
+    <hr className="border-t border-gray-300 border-width-2" />
         <p
           className="reminder text-center mb-4"
           style={{ color: "#333", fontSize: "0.875rem" }}

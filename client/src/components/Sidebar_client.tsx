@@ -18,7 +18,7 @@ const ClientSidebar = () => {
         {
             url: "/client/registerroom",
             text: "Register Room",
-            Icon: AiFillFileText
+            Icon: SiGoogleclassroom
         },
         {
             url: "/client/complains",
