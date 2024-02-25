@@ -16,7 +16,7 @@ const router = Router();
 
 //User Register
 router.post('/register', async (req, res) => {
-    const { name, email, contact, password,batch,department, roomNo, block,floorNo,guardianName,guardianContact,guardianRelationship } = req.body;
+    const { name, email, contact, password,rollNo,batch,department, roomNo, block,floorNo,guardianName,guardianContact,guardianRelationship } = req.body;
     const userDb = await User.findOne({ email });
     if (userDb)
         res.status(400).send({ msg: 'user laready exists' });
@@ -24,7 +24,7 @@ router.post('/register', async (req, res) => {
         const pwdHash = hashedPassword(password);
         const currentYear=new Date().getFullYear();
         const yearCalc=(currentYear+56)-batch;
-        const newUser = await User.create({ name, email, contact, password: pwdHash,batch,department,year:yearCalc ,roomNo, block,floorNo,guardianName,guardianContact,guardianRelationship });
+        const newUser = await User.create({ name, email, contact, password: pwdHash,rollNo,batch,department,year:yearCalc ,roomNo, block,floorNo,guardianName,guardianContact,guardianRelationship });
         newUser.save();
         res.sendStatus(201);
     }
@@ -55,13 +55,14 @@ router.post('/login', async (req, res) => {
         role: user.role
     };
     const token = jwt.sign(jwtPayload, process.env.JWT_SECRET);
-
-    return res.status(200).send({
+    res.setHeader('Authorization', `Bearer ${token}`);
+    res.status(200).send({
         success: true,
         message: "Logged in successfully",
         role: user.role,
         token: "Bearer " + token,
     });
+    console.log('Authenticated Successfully');
 
 });
 

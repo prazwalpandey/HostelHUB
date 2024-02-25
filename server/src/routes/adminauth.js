@@ -54,12 +54,13 @@ router.post('/login',async (req, res) => {
     };
     const token=jwt.sign(jwtPayload,process.env.JWT_SECRET);
 
-    return res.status(200).send({
+    res.status(200).send({
         success:true,
         message:"Logged in successfully",
         role:admin.role,
         token:"Bearer "+token,
     });
+    console.log('Logged as Admin');
 
 });
 
