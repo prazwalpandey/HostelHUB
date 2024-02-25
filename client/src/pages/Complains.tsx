@@ -4,7 +4,7 @@ import ComplaintsList from '../components/ComplaintsList'; // Import ComplaintsL
 
 const Admindashboard = () => {
     return (
-        <div className="adminContainer">
+        <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
             <Sidebar />
             <div className="w-full p-4">
                 <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>

@@ -6,9 +6,6 @@
   line-height: 2;
   font-weight: 400;
   box-sizing: border-box;
-  // &::-webkit-scrollbar{
-  //   display: none;
-  // }
 }
 
 * {
@@ -76,7 +73,7 @@ a{
     &::-webkit-scrollbar{
       display: none;
     }
-    overflow-y:auto ;
+    overflow-y:auto;
     // margin: 0.5vw 0.5vw;
     height: 100vh;
     .bar{

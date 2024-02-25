@@ -23,7 +23,7 @@ const Notices = () => {
     ];
 
     return (
-        <div className='adminContainer'>
+        <div className='adminContainer' style={{ width: "100vw", height: "100vh" }}>
             <AdminSidebar />
             <main className='dashboard'>
                 <section className="widgetcontainer">

@@ -10,13 +10,13 @@ const Studentrecords = () => {
     setIsUploadModalOpen(true);
   };
   return (
-    <div className="adminContainer">
+    <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
       <AdminSidebar />
       <main
         className="dashboard mb-0"
         style={{ width: "100%", height: "100%" }}
       >
-       <div className="profile bg-white shadow-md rounded-lg ">
+       <div className="profile bg-white shadow-md">
           <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">
             Student Records
           </h2>

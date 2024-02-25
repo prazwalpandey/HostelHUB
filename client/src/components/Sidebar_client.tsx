@@ -97,7 +97,7 @@ const ClientSidebar = () => {
                 </div>
             </div>
         </aside>
-    )
+    );
 };
 
 export default ClientSidebar;

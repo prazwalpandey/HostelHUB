@@ -196,16 +196,17 @@ const Roomallocation = () => {
   ];
 
   return (
-    <div className="adminContainer">
+    <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
       <AdminSidebar />
       <main
-        className="dashboard mb-0"
-        style={{ width: "100%", height: "100%" }}
+        className="dashboard"
+        style={{ width: "100%", height: "100%",overflowY:"auto"}}
       >
-        <div className="profile bg-white shadow-md rounded-lg ">
+        <div className="profile bg-white shadow-md">
           <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">
             Random Room Assign
           </h2>
+          <hr className="w-full my-4 border-t border-gray-300" />
           <p
             className="reminder text-center mb-4"
             style={{ color: "#333", fontSize: "0.875rem" }}
@@ -225,7 +226,7 @@ const Roomallocation = () => {
                 >
                   Block {block}
                 </p>
-                <hr className="border-t border-gray-300 border-width-2" />
+                <hr className="w-full my-4 border-t border-gray-300" />
                 <div className="bg-gray-200 p-2 flex flex-wrap">
                   {roomNames
                     .filter((room) => room.startsWith(block))
@@ -246,6 +247,7 @@ const Roomallocation = () => {
                       </div>
                     ))}
                 </div>
+                <br />
               </div>
             ))}
             <div className="flex justify-center mt-4">
