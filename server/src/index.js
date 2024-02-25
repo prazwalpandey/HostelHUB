@@ -30,31 +30,16 @@ app.use(passport.initialize());
 
 
 //  LOGIN AND REGISTRATION ROUTES
-app.use('/user/auth',authRoute,(req,res)=>{
-    res.sendStatus(200);
-});
-app.use('/admin/auth',adminauthRoute,(req,res)=>{
-    res.sendStatus(200);
-});
+app.use('/user/auth',authRoute);
+app.use('/admin/auth',adminauthRoute);
 
 //NOTICES ROUTES
-app.use('/admin/notices',noticeRoute,(req,res)=>{
-    res.sendStatus(200);
-})
+app.use('/admin',noticeRoute);
+app.use('/user',noticeRoute)
 
 //COMPLAINS ROUTES
-app.use('/user/complains',complainRoute,(req,res)=>{
-    res.sendStatus(200);
-})
-
-
-//LOGUT ROUTES
-app.use('/user',authRoute,(req,res)=>{
-    res.sendStatus(200);
-})
-app.use('/admin',adminauthRoute,(req,res)=>{
-    res.sendStatus(200);
-})
+app.use('/user',complainRoute);
+app.use('/admin',complainRoute);
 
 
 
