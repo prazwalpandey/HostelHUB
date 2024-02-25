@@ -29,7 +29,7 @@ const Studentrecords = () => {
             </h2>
             <hr className="border-t border-gray-300 border-width-2" />
             <br />
-            <div className="add data flex flex-row" style={{justifyContent:"space-between", alignItems:"center"}}><p>Click on "Select File" and Upload a csv, xlsx or sl to add student records.</p>
+            <div className="add data flex flex-row" style={{justifyContent:"space-between", alignItems:"center"}}><p>Click on "Select File" and Upload a csv, xlsx or xls to add student records.</p>
             {/* Button for uploading CSV file */}
             <FileUpload />
             </div>
