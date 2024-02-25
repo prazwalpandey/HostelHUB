@@ -17,10 +17,9 @@
   gap: $gap;
 }
 
-@mixin grid($col: 1fr, $gap: 1rem, $row: unset) {
+@mixin grid($col: 1fr, $gap: 1rem) {
   display: grid;
   grid-template-columns: $col;
-  gric-template-rows: $row;
   gap: $gap;
 }
 

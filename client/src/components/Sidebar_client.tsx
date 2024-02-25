@@ -55,10 +55,10 @@ const ClientSidebar = () => {
     ];
     return (
         <aside>
+            <div>
             <div className="logo-container">
                 <img src={Logo} alt="Logo" className="logo" />
             </div>
-            <div>
                 <h5>Dashboard</h5>
                 <ul>
                     {menuItemsDashboard.map(({ url, text, Icon }) => (
@@ -84,14 +84,9 @@ const ClientSidebar = () => {
                         </li>
                     ))}
                 </ul>
-            </div>
-            <div
-                className="flex justify-center mt-4"
-                style={{ position: "absolute", bottom: "1%" }}
-            >
                 <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded"
-                    style={{ width: "auto" }}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
+                    style={{ width: "auto",marginTop: "220px"}}
                     onClick={handleLogout}
                 >
                     Log Out
