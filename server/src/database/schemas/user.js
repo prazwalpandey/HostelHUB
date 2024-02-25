@@ -21,6 +21,17 @@ const UserSchema=new mongoose.Schema({
         // required:true,
         minlength:8,
     },
+    department:{
+        type:String,
+        required:true,
+    },
+    year:{
+        type:Number,
+    },
+    batch:{
+        type:Number,
+        required:true,
+    },
     rollNo:{
         type:String,
         required:true,

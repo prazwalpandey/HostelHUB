@@ -1,5 +1,6 @@
 import AdminSidebar from "../components/Sidebar";
 import { useState } from "react";
+import FileUpload from "../components/FileUpload";
 
 const Studentrecords = () => {
     const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
@@ -22,20 +23,9 @@ const Studentrecords = () => {
           <hr className="border-t border-gray-300 border-width-2" />
           
           {/* Button for uploading CSV file */}
-          <div className="flex justify-end mt-4">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-              onClick={handleUploadClick}
-            >
-              Add Students
-            </button>
-          </div>
+          <FileUpload />
         </div>
       </main>
-      {/* Modal for uploading CSV file */}
-      {isUploadModalOpen && (
-        {/* Render your modal component here */}
-      )}
     </div>
   );
 };
