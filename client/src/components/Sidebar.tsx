@@ -5,6 +5,7 @@ import { AiFillFileText } from "react-icons/ai";
 import { SiGoogleclassroom } from "react-icons/si";
 import { IoIosPeople } from "react-icons/io";
 import { RiFileList3Fill } from "react-icons/ri";
+import Logo from '../assets/logo.png';
 
 const AdminSidebar = () => {
   const location = useLocation();
@@ -61,7 +62,7 @@ const AdminSidebar = () => {
     <aside>
       <div className="logo-container">
       <div className="logo-container">
-        <img src="../assets/logo" alt="Logo" className="logo" />
+        <img src={Logo} alt="Logo" className="logo" />
       </div>
       </div>
       <div>

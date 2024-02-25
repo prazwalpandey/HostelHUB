@@ -4,6 +4,7 @@ import { RiDashboardFill } from "react-icons/ri";
 import { AiFillFileText } from "react-icons/ai";
 import { SiGoogleclassroom } from "react-icons/si";
 import { IoIosPeople } from "react-icons/io";
+import Logo from "../assets/logo.png";
 
 const ClientSidebar = () => {
 
@@ -55,7 +56,7 @@ const ClientSidebar = () => {
     return (
         <aside>
             <div className="logo-container">
-                <img src="../assets/logo" alt="Logo" className="logo" />
+                <img src={Logo} alt="Logo" className="logo" />
             </div>
             <div>
                 <h5>Dashboard</h5>
