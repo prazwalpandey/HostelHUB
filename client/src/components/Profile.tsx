@@ -3,7 +3,7 @@ import "../styles/profile.scss";
 import ClientSidebar from "./Sidebar_client";
 const Profile = () => {
   const [profile, setProfile] = useState({
-        name: "Prazwal Stark",
+        name: "Prazwal Pandey",
         email: "prazwalstark@gmail.com",
         contact: "9867824200",
         block: "A",
@@ -13,7 +13,7 @@ const Profile = () => {
         department: "Computer",
         guardianName: "Tony Stark",
         guardianContact: "9810101010",
-        guardianRelationship: "GodFather",
+        guardianRelationship: "Uncle",
       });
   return (
     <>
