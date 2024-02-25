@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {FaEye, FaEyeSlash} from 'react-icons/fa';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
   const handleAdminClick = () => {
@@ -59,15 +61,21 @@ function Login() {
               required
             />
           </div>
-          <div className="flex items-center">
+          <div className=" relative ">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full border px-3 py-2 rounded-md focus:outline-none focus:border-sky-500 focus:ring-sky-500"
+              className="w-full border px-3 py-2 pr-10 rounded-md focus:outline-none focus:border-sky-500 focus:ring-sky-500"
               placeholder="Enter Password"
               required
             />
+            <span
+              onClick={()=>{setShowPassword(!showPassword)}}
+              className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
+            >
+              {showPassword? <FaEye/> : <FaEyeSlash/>}
+            </span>
           </div>
           <button
             type="submit"
