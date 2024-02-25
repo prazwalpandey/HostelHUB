@@ -10,8 +10,7 @@ import './strategies/passport.js';
 
 // ROUTES
 import authRoute from './routes/auth.js';
-import adminRoute from './routes/adminauth.js'
-import logoutRoute from './routes/logout.js'
+import adminauthRoute from './routes/adminauth.js'
 
 import noticeRoute from './routes/noticesRoutes.js';
 import complainRoute from './routes/complainsRoute.js';
@@ -34,7 +33,7 @@ app.use(passport.initialize());
 app.use('/user/auth',authRoute,(req,res)=>{
     res.sendStatus(200);
 });
-app.use('/admin/auth',adminRoute,(req,res)=>{
+app.use('/admin/auth',adminauthRoute,(req,res)=>{
     res.sendStatus(200);
 });
 
@@ -50,10 +49,10 @@ app.use('/user/complains',complainRoute,(req,res)=>{
 
 
 //LOGUT ROUTES
-app.use('/user',logoutRoute,(req,res)=>{
+app.use('/user',authRoute,(req,res)=>{
     res.sendStatus(200);
 })
-app.use('/admin',logoutRoute,(req,res)=>{
+app.use('/admin',adminauthRoute,(req,res)=>{
     res.sendStatus(200);
 })
 

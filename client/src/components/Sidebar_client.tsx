@@ -1,5 +1,5 @@
 // import { IconType } from "react-icons";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation,useNavigate } from "react-router-dom";
 import { RiDashboardFill } from "react-icons/ri";
 import { AiFillFileText } from "react-icons/ai";
 import { SiGoogleclassroom } from "react-icons/si";
@@ -7,6 +7,26 @@ import { IoIosPeople } from "react-icons/io";
 
 const ClientSidebar = () => {
 
+    const navigate=useNavigate();
+    const handleLogout=async()=>{
+        try{
+         const response=await fetch('http://localhost:5000/user/logout', {
+             method: 'Get',
+             headers: {
+                 'Content-Type':'application/json',
+             },
+         });
+         if(response.ok){
+             console.log('Logout Successful');
+             navigate('/');
+         } else{
+             console.log('Logout failed:',response.statusText);
+         }
+        }
+        catch(error){
+         console.log('Logout failed:',error);
+        }
+     };
     const location = useLocation();
 
     const menuItemsDashboard = [
@@ -61,6 +81,7 @@ const ClientSidebar = () => {
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded"
                 style={{ width: "auto" }}
+                onClick={handleLogout}
               >
                 Log Out
               </button>

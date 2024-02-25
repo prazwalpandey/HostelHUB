@@ -88,13 +88,12 @@ router.get("/protected",authenticateUser,(req,res)=>{
 //User Logout
 router.get('/logout',(req,res)=>{
     try{
-        const { authorization }=req.headers;
 
         res.clearCookie('jwtToken');
-        res.send('Logged out successfully');
-        res.clearCookie('token');
+        console.log('User Logged out successfully');
+        res.sendStatus(200);
     } catch(err){
-        console.error('Error Logging out:',err);
+        console.log('Error Logging out:',err);
         res.status(500).send({msg:'Internal Server Error'});
     }
 })
