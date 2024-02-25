@@ -57,7 +57,14 @@ const ClientSidebar = () => {
                 ))}
                 </ul>
             </div>
-           
+            <div className="flex justify-center mt-4" style={{position:"absolute", bottom:"1%"}}>
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded"
+                style={{ width: "auto" }}
+              >
+                Log Out
+              </button>
+            </div>
         </aside>
     );
 };
