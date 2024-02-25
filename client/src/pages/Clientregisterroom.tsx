@@ -32,7 +32,7 @@ const Clientregisterroom = () => {
         <ClientSidebar />
         <main className="dashboard" style={{ width: "100%", height: "100%" }}>
           <div
-            className="flex flex-col w-full p-4 rounded-lg shadow-md bg-white items-center h-full"
+            className="flex flex-col w-full p-4 shadow-md bg-white items-center h-full"
             style={{ width: "auto", height: "100%", padding: "30px" }}
           >
             <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">

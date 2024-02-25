@@ -55,7 +55,8 @@ const ClientSidebar = () => {
     ];
     return (
         <aside>
-            <div>
+            <div style={{height:"100%",padding:"0"}}>
+                <div className="topper" style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",height:"50%"}}>
             <div className="logo-container">
                 <img src={Logo} alt="Logo" className="logo" />
             </div>
@@ -84,13 +85,16 @@ const ClientSidebar = () => {
                         </li>
                     ))}
                 </ul>
+                </div>
+                <div className="lower" style={{display:"flex",flexDirection:"column",justifyContent:"flex-end",height:"50%"}}>
                 <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
-                    style={{ width: "auto",marginTop: "220px"}}
+                    style={{ width: "auto",}}
                     onClick={handleLogout}
                 >
                     Log Out
                 </button>
+                </div>
             </div>
         </aside>
     )

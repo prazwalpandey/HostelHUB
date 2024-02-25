@@ -19,8 +19,8 @@ const Profile = () => {
     <>
   <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
     <ClientSidebar />
-    <main className="dashboard" style={{ width: "100%", height: "100%" }}>
-    <div className="profile bg-white shadow-md rounded-lg " >
+    <main className="dashboard" style={{ width: "100%", height: "100%"}}>
+    <div className="profile bg-white shadow-md" >
            <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">
              Student's Profile
            </h2>
