@@ -82,5 +82,20 @@ router.get("/protected",authenticateAdmin,(req,res)=>{
 });
 
 
+
+//Admin Logout
+router.get('/logout',(req,res)=>{
+    try{
+        const { authorization }=req.headers;
+
+        res.clearCookie('jwtToken');
+        res.send('Logged out successfully');
+        res.clearCookie('token');
+    } catch(err){
+        console.error('Error Logging out:',err);
+        res.status(500).send({msg:'Internal Server Error'});
+    }
+})
+
 export default router;
 
