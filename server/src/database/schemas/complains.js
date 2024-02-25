@@ -13,6 +13,14 @@ const ComplainsSchema=new mongoose.Schema({
         type:String,
         default:'Student'
     },
+    message:{
+        type:String,
+
+    },
+    status:{
+        type:String,
+        default:'Pending',
+    },
     createdAt:{
         type:Date,
         default:Date.now()
