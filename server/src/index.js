@@ -14,6 +14,8 @@ import adminauthRoute from './routes/adminauth.js'
 
 import noticeRoute from './routes/noticesRoutes.js';
 import complainRoute from './routes/complainsRoute.js';
+import fileuploadRoute from './routes/fileUpload.js';
+
 const app=express();
 
 
@@ -22,7 +24,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(cors());
 app.use(cors({
-    origin:'http://localhost:5173',
+    origin:'http://localhost:5173/',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders:'Content-Type, Authorization'
 }));
@@ -42,7 +44,8 @@ app.use('/user',complainRoute);
 app.use('/admin',complainRoute);
 
 
-
+//FILEUPLOADS ROUTES
+app.use('/',fileuploadRoute);
 
 
 
@@ -68,5 +71,5 @@ app.use('/admin',complainRoute);
 
 
 app.listen(process.env.PORT,()=>{
-    console.log(`listening port ${process.env.PORT}`);
+    console.log(listening port ${process.env.PORT});
 })
