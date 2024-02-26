@@ -252,8 +252,8 @@ const Roomallocation = () => {
             ))}
             <div className="flex justify-center mt-4">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                style={{ width: "30%" }}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-small py-2 px-2 rounded"
+                style={{ width: "20%", fontSize:"20px"}}
                 onClick={handleSubmit}
               >
                 Submit

@@ -32,7 +32,7 @@ const Roomchart = () => {
   ];
   //get the value of bookedRooms from database
 
-  
+
   // Count the number of free rooms
   const freeRooms = totalRooms.length - bookedRooms.length;
 
@@ -49,7 +49,7 @@ const Roomchart = () => {
 
   return (
     <div>
-        <h2 className="text-xl font-light mb-4">Room Availability Pie Chart</h2>
+        <h2 className="text-center text-xl font-light mb-4" style={{ color: "#3a3e59",fontSize: "24px"}}>Room Availability Pie Chart</h2>
         <PieChart
         colors={['red', 'blue', 'green']}
   series={[
@@ -67,8 +67,8 @@ const Roomchart = () => {
       cx: 150,
       cy: 150,}
   ]}
-  width={400}
-  height={600}
+  width={450}
+  height={400}
 />
 
 </div>
