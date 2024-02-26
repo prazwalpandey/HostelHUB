@@ -8,12 +8,12 @@ import Roomchart from "../components/Roomchart";
 const Admindashboard = () => {
   const widgetItemsData = [
     {
-      value: 300,
+      value: 171,
       heading: "Rooms",
       Icon: FaHotel,
     },
     {
-      value: 400,
+      value: 342,// change the value according to data in database
       heading: "Students",
       Icon: FaPeopleGroup,
     },
@@ -22,18 +22,12 @@ const Admindashboard = () => {
       heading: "Complains",
       Icon: CgNotes,
     },
-    {
-      value: 300,
-      heading: "Notices",
-      Icon: IoNotifications,
-    },
   ];
 
   return (
-    <div className="adminContainer">
+    <div className="adminContainer" style={{ width: "100vw", height: "100vh"}}>
       <AdminSidebar />
-      <div className="profile">
-        <main className="dashboard">
+        <main className="dashboard profile" style={{ width: "100%", height: "100%",overflowY:"auto",paddingBottom:"0",marginBottom:"0"}}>
           <section className="widgetcontainer">
             {widgetItemsData.map((item, index) => (
               <WidgetItem
@@ -45,11 +39,13 @@ const Admindashboard = () => {
             ))}
           </section>
           <br />
-          <div className="container mx-auto mt-8">
+          <div className="info flex flex-row mt-8">
+            <div className="profile mx-5 w-1/2"></div>
+          <div className="profile container mx-auto  w-1/2">
             <Roomchart />
           </div>
-        </main>
-      </div>
+          </div>
+      </main>
     </div>
   );
 };

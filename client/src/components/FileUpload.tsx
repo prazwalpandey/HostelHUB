@@ -78,7 +78,7 @@ function FileUpload() {
           Select File
           <input
             type="file"
-            accept=".csv"
+            accept=".csv,.xlsx,.xls"
             className="hidden"
             onChange={handleFileChange}
             id="fileInput"
