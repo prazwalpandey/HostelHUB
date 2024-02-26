@@ -54,6 +54,11 @@ const Roomchart = () => {
         colors={['red', 'blue', 'green']}
   series={[
     
+    {data: [{ id: 0, value: freeRooms, label: 'Free Rooms',color: 'red'},
+    { id: 1, value: blockCounts["A"] || 0, label: 'Block A',color: ''},
+    { id: 2, value: blockCounts["B"] || 0, label: 'Block B',color: 'green'},
+    { id: 3, value: blockCounts["C"] || 0, label: 'Block C',color: 'aqua'}],
+      innerRadius: 55,
     {data: [{ id: 0, value: freeRooms, label: 'Free Rooms',color: '#f9ac66'},
     { id: 1, value: blockCounts["A"] || 0, label: 'Block A',color: '#3a3e59'},
     { id: 2, value: blockCounts["B"] || 0, label: 'Block B',color: '#ed6b5b'},
@@ -67,6 +72,9 @@ const Roomchart = () => {
       cx: 150,
       cy: 150,}
   ]}
+    width={400}
+    height={600}
+=======
   width={400}
   height={600}
 />

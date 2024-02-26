@@ -5,12 +5,6 @@ const AdminSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-
-    role:{
-        type:String,
-        required:true,
-        default:'HostelAdmin',
-    },
     email:{
         type:String,
         required:true,
@@ -31,6 +25,14 @@ const AdminSchema=new mongoose.Schema({
         required:true,
         default:'HostelWaden',
     },
+    createdAt:{
+        type:Date,
+        default:new Date()
+    },
+    token:{
+        type:String,
+        default:null
+    }
 });
 
 const Admin=mongoose.model('AdminData',AdminSchema);
