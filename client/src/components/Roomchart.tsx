@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 // import * as React from "react";
 // import { PieChart } from '@mui/x-charts/PieChart';
 
+=======
+import React from 'react';
+>>>>>>> dfbfec2f1537b46f6d12efe20ec7ab25873dddcf
 import { PieChart } from '@mui/x-charts/PieChart';
 
 const Roomchart = () => {
@@ -32,7 +36,9 @@ const Roomchart = () => {
     "B211", "B212", "B213", "B214", "B215", "B216", "B217", "B218", "B219",
     "C101", "C102", "C103", "C104", "C105", "C106", "C107", "C108", "C109", "C110",
   ];
+  //get the value of bookedRooms from database
 
+  
   // Count the number of free rooms
   const freeRooms = totalRooms.length - bookedRooms.length;
 
@@ -49,16 +55,24 @@ const Roomchart = () => {
 
   return (
     <div>
-        <h2 className="text-xl font-bold mb-4">Room Availability Pie Chart</h2>
+        <h2 className="text-xl font-light mb-4">Room Availability Pie Chart</h2>
         <PieChart
         colors={['red', 'blue', 'green']}
   series={[
     
+<<<<<<< HEAD
     {data: [{ id: 0, value: freeRooms, label: 'Free Rooms',color: 'red'},
     { id: 1, value: blockCounts["A"] || 0, label: 'Block A',color: ''},
     { id: 2, value: blockCounts["B"] || 0, label: 'Block B',color: 'green'},
     { id: 3, value: blockCounts["C"] || 0, label: 'Block C',color: 'aqua'}],
       innerRadius: 55,
+=======
+    {data: [{ id: 0, value: freeRooms, label: 'Free Rooms',color: '#f9ac66'},
+    { id: 1, value: blockCounts["A"] || 0, label: 'Block A',color: '#3a3e59'},
+    { id: 2, value: blockCounts["B"] || 0, label: 'Block B',color: '#ed6b5b'},
+    { id: 3, value: blockCounts["C"] || 0, label: 'Block C',color: '#c36B84'}],
+      innerRadius: 65,
+>>>>>>> dfbfec2f1537b46f6d12efe20ec7ab25873dddcf
       outerRadius: 100,
       paddingAngle: 5,
       cornerRadius: 5,
@@ -67,8 +81,13 @@ const Roomchart = () => {
       cx: 150,
       cy: 150,}
   ]}
+<<<<<<< HEAD
     width={400}
     height={600}
+=======
+  width={400}
+  height={600}
+>>>>>>> dfbfec2f1537b46f6d12efe20ec7ab25873dddcf
 />
 
 </div>
