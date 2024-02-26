@@ -1,32 +1,49 @@
-import passport from "passport";
+import jwt from 'jsonwebtoken';
 
 
-
-export const authenticateUser=(req,res,next)=>{
-    passport.authenticate("jwt-user", { session: false }, (err, user, info) => {
-        if (err) {
-            console.error(err);
-            return res.status(500).send({ msg: "Internal Server Error" });
-        }
-        if (!user) {
-            return res.status(401).send({ msg: "Unauthorized" });
-        }
-        req.user = user;
-        next();
-    })(req, res, next);
-}
-
-export const authenticateAdmin=(req,res,next)=>{
-        passport.authenticate("jwt-admin", { session: false }, (err, user, info) => {
-            if (err) {
-                console.error(err);
-                return res.status(500).send({ msg: "Internal Server Error" });
-            }
-            if (!user) {
-                return res.status(401).send({ msg: "Unauthorized" });
-            }
-            req.user = user;
+export const authenticateUser = (req, res, next) => {
+    const token = req.cookies.token;
+    console.log(token)
+    if (!token) {
+        res.status(403).send('Please Login First');
+    }
+    try{
+        const decodedToken=jwt.verify(token,process.env.JWT_SECRET,{complete:true});
+        console.log(decodedToken);
+        if(decodedToken.payload.role==='Student'){
+            const decode=jwt.verify(token,process.env.JWT_SECRET);
+            console.log(decode);
+            req.user=decode;
             next();
-        })(req, res, next);
-    
-    };
+        }
+        else{
+            return res.status(401).send("You aren't student");
+        }
+
+    } catch(error){
+        res.status(401).status('Invalid token');
+    }
+};
+
+export const authenticateAdmin = (req, res, next) => {
+    const token = req.cookies.token;
+    console.log(token);
+    if (!token) {
+        res.status(403).send('please login first');
+    }
+    try {
+        const decodedToken=jwt.verify(token,process.env.JWT_SECRET,{complete:true});
+        if (decodedToken.payload.role === 'HostelWaden') {
+            const decode = jwt.verify(token, process.env.JWT_SECRET);
+            console.log(decode);
+            req.user = decode;
+            next();
+        }
+        else{
+            return res.status(401).send("You aren't admin");
+        }
+
+    } catch (error) {
+        res.status(401).status('Invalid token');
+    }
+};

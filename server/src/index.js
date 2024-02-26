@@ -1,16 +1,17 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import passport from 'passport';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
+
 
 
 dotenv.config();
 import './database/connect.js';
-import './strategies/passport.js';
 
 // ROUTES
 import authRoute from './routes/auth.js';
-import adminauthRoute from './routes/adminauth.js'
+import adminauthRoute from './routes/adminauth.js';
+import logoutRoute from './routes/logout.js';
 
 import noticeRoute from './routes/noticesRoutes.js';
 import complainRoute from './routes/complainsRoute.js';
@@ -26,7 +27,7 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders:'Content-Type, Authorization'
 }));
-app.use(passport.initialize());
+app.use(cookieParser());
 
 
 //  LOGIN AND REGISTRATION ROUTES
@@ -41,7 +42,9 @@ app.use('/user',noticeRoute)
 app.use('/user',complainRoute);
 app.use('/admin',complainRoute);
 
-
+//LOGOUT ROUTES
+app.use('/',logoutRoute);
+app.use('/',logoutRoute);
 
 
 

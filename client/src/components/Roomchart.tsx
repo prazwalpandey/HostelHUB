@@ -1,7 +1,6 @@
 // import * as React from "react";
 // import { PieChart } from '@mui/x-charts/PieChart';
 
-import React from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 
 const Roomchart = () => {
@@ -55,10 +54,10 @@ const Roomchart = () => {
         colors={['red', 'blue', 'green']}
   series={[
     
-    {data: [{ id: 0, value: freeRooms, label: 'Free Rooms',color: 'orange'},
-    { id: 1, value: blockCounts["A"] || 0, label: 'Block A',color: 'orange'},
-    { id: 2, value: blockCounts["B"] || 0, label: 'Block B',color: 'orange'},
-    { id: 3, value: blockCounts["C"] || 0, label: 'Block C',color: 'orange'}],
+    {data: [{ id: 0, value: freeRooms, label: 'Free Rooms',color: 'red'},
+    { id: 1, value: blockCounts["A"] || 0, label: 'Block A',color: ''},
+    { id: 2, value: blockCounts["B"] || 0, label: 'Block B',color: 'green'},
+    { id: 3, value: blockCounts["C"] || 0, label: 'Block C',color: 'aqua'}],
       innerRadius: 55,
       outerRadius: 100,
       paddingAngle: 5,
@@ -68,6 +67,8 @@ const Roomchart = () => {
       cx: 150,
       cy: 150,}
   ]}
+    width={400}
+    height={600}
 />
 
 </div>

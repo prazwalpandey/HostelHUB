@@ -1,11 +1,8 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 import Admin from '../database/schemas/admin.js';
-import passport from 'passport';
-import { hashedPassword,getAdminData, comparePassword} from '../utils/helpers.js';
-import { authenticateAdmin } from '../utils/authenticateUsers.js';
-
-import '../strategies/passport.js';
+import { hashedPassword, getAdminData, comparePassword } from '../utils/helpers.js';
+import { authenticateAdmin} from '../utils/authenticateUsers.js';
 import dotenv from 'dotenv';
 
 
@@ -16,85 +13,65 @@ const router = Router();
 
 //Admin Register
 router.post('/register', async (req, res) => {
-    const { name, email, contact, password,} = req.body;
+    const { name, email, contact, password, } = req.body;
     const adminDb = await Admin.findOne({ email });
     if (adminDb)
         res.status(400).send({ msg: 'Admin laready exists' });
     else {
         const pwdHash = hashedPassword(password);
-        const newAdmin = await Admin.create({ name, email, contact, password: pwdHash});
+        const newAdmin = await Admin.create({ name, email, contact, password: pwdHash });
         newAdmin.save();
+
+        //generate token
+
         res.sendStatus(201);
     }
 });
 
 //Admin login
-router.post('/login',async (req, res) => {
-    const {email,password}=req.body;
-    const admin=await Admin.findOne({email});
-    if(!admin){
-        return res.status(401).send({
-            success:false,
-            message:"Cound not find the Admin",
-        })
+router.post('/login', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        const admin = await Admin.findOne({ email });
+        if (admin && comparePassword(password, admin.password)) {
+            const token = jwt.sign(
+                { id: admin._id, email, role: admin.role },
+                process.env.JWT_SECRET,
+                {
+                    expiresIn: '2d',
+                }
+            )
+            admin.token = token;
+            admin.password = undefined;
+            //COOKIE SECTION send token in cookie
+            const options = {
+                expires: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000),
+                httpOnly: true,
+
+            }
+            res.status(200).cookie("token", token, options).json({
+                success: true,
+                token,
+            });
+
+            console.log('Admin Logged in');
+        } else {
+            res.status(400).send('Invalid credentials');
+        }
+    } catch (error) {
+        res.status(500).send('Internal Server error');
     }
-    //password check
-    const isValid=comparePassword(password,admin.password);
-    if(!isValid){
-        return res.status(401).send({
-            success:false,
-            message:"Invalid credentials",
-        })
-    }
-
-    const jwtPayload={
-        adminusername:admin.email,
-        id:admin._id,
-        role:admin.role,
-    };
-    const token=jwt.sign(jwtPayload,process.env.JWT_SECRET);
-
-    res.status(200).send({
-        success:true,
-        message:"Logged in successfully",
-        role:admin.role,
-        token:"Bearer "+token,
-    });
-    console.log('Logged as Admin');
-
 });
 
 
 //Access only after loggedin
-router.get("/protected",authenticateAdmin,(req,res)=>{
-    try{
-        return res.status(200).send({
-            success:true,
-            user:{
-                id:req.user._id,
-                username:req.user.email,
-            }
-        })
-    }catch(err){
-        console.log(err);
-        return res.status(500).send({msg:'Internal Server Error'});
-    }
+router.get("/protected", authenticateAdmin, (req, res) => {
+    res.status(200).send('Welcome to admin dashboard');
 });
 
 
 
-//Admin Logout
-router.get('/logout',(req,res)=>{
-    try{
 
-        res.clearCookie('jwtToken');
-        res.sendStatus(200);
-        console.log('Admin Logged out successfully');
-    } catch(err){
-        console.error('Error Logging out:',err);
-        res.status(500).send({msg:'Internal Server Error'});
-    }
-})
 
 export default router;
 
