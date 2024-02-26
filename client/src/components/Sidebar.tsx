@@ -11,22 +11,7 @@ const AdminSidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const handleLogout = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/admin/logout", {
-        method: "Get",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        console.log("Logout Successful");
-        navigate("/");
-      } else {
-        console.log("Logout failed:", response.statusText);
-      }
-    } catch (error) {
-      console.log("Logout failed:", error);
-    }
+   navigate('/');
   };
 
   const menuItemsDashboard = [

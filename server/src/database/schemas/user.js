@@ -63,9 +63,13 @@ const UserSchema=new mongoose.Schema({
     },
     createdAt:{
         type:Date,
-        required:true,
         default:new Date(),
+    },
+    token:{
+        type:String,
+        default:null
     }
+
 });
 
 const User=mongoose.model('UserData',UserSchema);
