@@ -9,7 +9,7 @@ export const authenticateUser = (req, res, next) => {
     }
     try{
         const decodedToken=jwt.verify(token,process.env.JWT_SECRET,{complete:true});
-        console.log(decodedToken);
+        // console.log(decodedToken);
         if(decodedToken.payload.role==='Student'){
             const decode=jwt.verify(token,process.env.JWT_SECRET);
             console.log(decode);
@@ -27,7 +27,7 @@ export const authenticateUser = (req, res, next) => {
 
 export const authenticateAdmin = (req, res, next) => {
     const token = req.cookies.token;
-    console.log(token);
+    // console.log(token);
     if (!token) {
         res.status(403).send('please login first');
     }

@@ -2,6 +2,8 @@ import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import path from 'path';
 
 
 
@@ -11,7 +13,6 @@ import './database/connect.js';
 // ROUTES
 import authRoute from './routes/auth.js';
 import adminauthRoute from './routes/adminauth.js';
-import logoutRoute from './routes/logout.js';
 
 import noticeRoute from './routes/noticesRoutes.js';
 import complainRoute from './routes/complainsRoute.js';
@@ -19,18 +20,19 @@ import fileuploadRoute from './routes/fileUpload.js';
 
 const app=express();
 
-
+const allowedOrigins=['http://localhost:5173','http://localhost:5173/']
 // MIDDLEWARES
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
-app.use(cors());
+app.use(express.urlencoded({extended:false}));
 app.use(cors({
-    origin:'http://localhost:5173/',
+    origin:allowedOrigins,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders:'Content-Type, Authorization'
+    allowedHeaders:['Content-Type', 'Authorization']
 }));
 app.use(cookieParser());
-
+app.use(bodyParser.urlencoded({extended:true}));
+app.set("view engine","ejs");
+app.set("views",path.resolve("./views"));
 
 //  LOGIN AND REGISTRATION ROUTES
 app.use('/user/auth',authRoute);
@@ -44,17 +46,12 @@ app.use('/user',noticeRoute)
 app.use('/user',complainRoute);
 app.use('/admin',complainRoute);
 
-<<<<<<< HEAD
-//LOGOUT ROUTES
-app.use('/',logoutRoute);
-app.use('/',logoutRoute);
-
-=======
 
 //FILEUPLOADS ROUTES
 app.use('/',fileuploadRoute);
->>>>>>> dfbfec2f1537b46f6d12efe20ec7ab25873dddcf
 
+
+//LOGOUT ROUTES
 
 
 
@@ -79,5 +76,5 @@ app.use('/',fileuploadRoute);
 
 
 app.listen(process.env.PORT,()=>{
-    console.log(listening port ${process.env.PORT});
+    console.log(`listening port ${process.env.PORT}`);
 })

@@ -84,7 +84,16 @@ router.get("/protected",authenticateUser ,(req, res) => {
     res.status(200).send('Welcome to Protected routee');
 });
 
+//LOGOUT ROUTE
+router.get('/logout',authenticateUser, (req, res) => {
+    try {
 
+        res.status(200).clearCookie('token').send('Logout successful');
+        console.log('User Logged out successfully');
+    } catch (err) {
+        res.status(500).send({ msg: 'Internal Server Error' });
+    }
+})
 
 
 
