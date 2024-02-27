@@ -19,6 +19,7 @@ import complainRoute from './routes/complainsRoute.js';
 import fileuploadRoute from './routes/fileUpload.js';
 
 const app=express();
+const app=express();
 
 const allowedOrigins=['http://localhost:5173','http://localhost:5173/']
 // MIDDLEWARES
@@ -26,6 +27,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors({
     origin:allowedOrigins,
+    origin:'http://localhost:5173/',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders:['Content-Type', 'Authorization']
 }));
@@ -50,6 +52,9 @@ app.use('/admin',complainRoute);
 //FILEUPLOADS ROUTES
 app.use('/',fileuploadRoute);
 
+
+//FILEUPLOADS ROUTES
+app.use('/',fileuploadRoute);
 
 //LOGOUT ROUTES
 
@@ -77,4 +82,5 @@ app.use('/',fileuploadRoute);
 
 app.listen(process.env.PORT,()=>{
     console.log(`listening port ${process.env.PORT}`);
+    console.log(listening port ${process.env.PORT});
 })
