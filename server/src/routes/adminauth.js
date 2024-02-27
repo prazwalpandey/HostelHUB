@@ -69,6 +69,15 @@ router.get("/protected", authenticateAdmin, (req, res) => {
     res.status(200).send('Welcome to admin dashboard');
 });
 
+//LOGOUT ROUTE
+router.get('/logout',authenticateAdmin, (req, res) => {
+    try {
+        res.clearCookie('token').send('Logout successful');
+        console.log('Admin Logged out successfully');
+    } catch (err) {
+        res.status(500).send({ msg: 'Internal Server Error' });
+    }
+})
 
 
 

@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
+    sn:Number,
     productName: String,
     customerName: String,
     quantity: Number,
@@ -11,7 +12,8 @@ const productSchema = new Schema({
     shippingCost: Number,
     region: String,
     category: String,
-    profitMargin: Number
+    profitMargin: Number,
+    key:String
 });
 
 const Product = mongoose.model('Product', productSchema);

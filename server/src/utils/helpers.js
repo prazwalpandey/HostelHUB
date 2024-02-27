@@ -1,12 +1,8 @@
 import bcrypt from 'bcryptjs';
 import User from '../database/schemas/user.js';
 import Admin from '../database/schemas/admin.js';
-import jwt from 'jsonwebtoken';
-import passport from 'passport';
-import dotenv from 'dotenv';
 
 
-dotenv.config();
 
 export const hashedPassword=((password)=>{
     const salt=bcrypt.genSaltSync(15);
