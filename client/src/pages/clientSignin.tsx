@@ -16,7 +16,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email,password);
+    // console.log(email,password);
     try {
       const loginUrl = isAdmin ? 'http://localhost:5000/admin/auth/login' : 'http://localhost:5000/user/auth/login';
 
@@ -31,9 +31,11 @@ function Login() {
       if (!response.ok) {
         const errorMessage = response.status === 401 ? 'Unauthorized' : 'Login failed';
         throw new Error(errorMessage);
+        console.error(error);
       }
-
       const data = await response.json();
+      document.cookie=`token=${data.token}`;
+      // console.log(document.cookie);
       const dashboardUrl = isAdmin ? '/admin/dashboard' : '/client/dashboard';
       navigate(dashboardUrl);
       console.log(data);
