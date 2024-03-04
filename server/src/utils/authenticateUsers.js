@@ -3,31 +3,30 @@ import jwt from 'jsonwebtoken';
 
 export const authenticateUser = (req, res, next) => {
     const token = req.cookies.token;
-    console.log(token)
+    console.log(token);
     if (!token) {
-        res.status(403).send('Please Login First');
+        res.status(403).send('please login first');
     }
-    try{
+    try {
         const decodedToken=jwt.verify(token,process.env.JWT_SECRET,{complete:true});
-        // console.log(decodedToken);
-        if(decodedToken.payload.role==='Student'){
-            const decode=jwt.verify(token,process.env.JWT_SECRET);
+        if (decodedToken.payload.role === 'Student') {
+            const decode = jwt.verify(token, process.env.JWT_SECRET);
             console.log(decode);
-            req.user=decode;
+            req.user = decode;
             next();
         }
         else{
-            return res.status(401).send("You aren't student");
+            return res.status(401).send("You aren't Student");
         }
 
-    } catch(error){
+    } catch (error) {
         res.status(401).status('Invalid token');
     }
 };
 
 export const authenticateAdmin = (req, res, next) => {
     const token = req.cookies.token;
-    // console.log(token);
+    console.log(token);
     if (!token) {
         res.status(403).send('please login first');
     }

@@ -13,20 +13,25 @@ const ClientSidebar = () => {
 
     const handleLogout = async () => {
         try {
-            const response = await fetch('http://localhost:5000/user/auth/logout', {
-              method: 'GET',
-              credentials: 'include' 
-            });
-            if (response.ok) {
-              console.log('Logout successful');
-              navigate('/');
-            } else {
-              console.log('Logout failed:', response.statusText);
-            }
-          } catch (error) {
-            console.log('Error logging out:', error.message);
+          const response = await fetch("http://localhost:5000/user/auth/logout", {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            credentials: 'include'
+          });
+    
+          if (response.ok) {
+            console.log('Logout successful');
+            navigate('/');
+          } else {
+            console.log('Logout failed error:', response.status);
+    
           }
-    };
+        } catch (error) {
+          console.log('Error logging out:', error.message);
+        }
+      };
     
     const menuItemsDashboard = [
         {

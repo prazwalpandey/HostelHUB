@@ -1,8 +1,26 @@
 import AdminSidebar from "../components/Sidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Roomallocation = () => {
   const [selectedRooms, setSelectedRooms] = useState([]);
+  const [bookedRooms, setBookedRooms] = useState([]);
+
+  useEffect(() => {
+    const fetchBookedRooms = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/bookedrooms");
+        if (!response.ok) {
+          throw new Error('Failed to fetch booked rooms');
+        }
+        const data = await response.json();
+        setBookedRooms(data.bookedRooms);
+      } catch (error) {
+        console.error("Error fetching booked rooms:", error);
+      }
+    };
+
+    fetchBookedRooms();
+  }, []);
 
   const handleCheckboxChange = (event) => {
     const { id, checked } = event.target;
@@ -16,11 +34,9 @@ const Roomallocation = () => {
   };
 
   const handleSubmit = () => {
-    // Handle submitting the selected rooms
     console.log("Selected Rooms:", selectedRooms);
   };
 
-  // Generate room names for each block
   const roomNames = [
     "A101",
     "A102",
@@ -200,7 +216,7 @@ const Roomallocation = () => {
       <AdminSidebar />
       <main
         className="dashboard"
-        style={{ width: "100%", height: "100%",overflowY:"auto"}}
+        style={{ width: "100%", height: "100%", overflowY: "auto" }}
       >
         <div className="profile bg-white shadow-md">
           <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">
@@ -240,11 +256,17 @@ const Roomallocation = () => {
                           type="checkbox"
                           className="form-checkbox h-3 w-3 text-indigo-600 transition duration-150 ease-in-out"
                           onChange={handleCheckboxChange}
+                          disabled={bookedRooms.includes(name)} // Disable checkbox for booked rooms
+                          checked={selectedRooms.includes(name) || bookedRooms.includes(name)} // Check if room is selected or booked
                         />
-                        <label htmlFor={name} className="ml-2">
+                        <label
+                          htmlFor={name}
+                          className={bookedRooms.includes(name) ? "text-blue-500 ml-2" : "ml-2"} // Apply blue color for booked rooms
+                        >
                           {name}
                         </label>
                       </div>
+
                     ))}
                 </div>
                 <br />
@@ -253,7 +275,7 @@ const Roomallocation = () => {
             <div className="flex justify-center mt-4">
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-small py-2 px-2 rounded"
-                style={{ width: "20%", fontSize:"20px"}}
+                style={{ width: "20%", fontSize: "20px" }}
                 onClick={handleSubmit}
               >
                 Submit
@@ -267,280 +289,3 @@ const Roomallocation = () => {
 };
 
 export default Roomallocation;
-
-// import AdminSidebar from "../components/Sidebar";
-// import { useState } from "react";
-
-// const Roomallocation = () => {
-//   const [selectedRooms, setSelectedRooms] = useState([]);
-
-//   const handleCheckboxChange = (event) => {
-//     const { id, checked } = event.target;
-//     if (checked) {
-//       setSelectedRooms((prevSelectedRooms) => [...prevSelectedRooms, id]);
-//     } else {
-//       setSelectedRooms((prevSelectedRooms) =>
-//         prevSelectedRooms.filter((room) => room !== id)
-//       );
-//     }
-//   };
-
-//   const generateRoomNames = (blockPrefix) => {
-//     const floors = ["01", "02", "03"];
-//     const rooms = [];
-//     floors.forEach((floor) => {
-//       for (let i = 1; i <= 19; i++) {
-//         rooms.push(`${blockPrefix}${floor}${i}`);
-//       }
-//     });
-//     return rooms;
-//   };
-
-//   const boxNamesA = generateRoomNames("A1");
-//   const boxNamesB = generateRoomNames("B1");
-//   const boxNamesC = generateRoomNames("C1");
-
-//   const handleSubmit = () => {
-//     // Handle submitting the selected rooms
-//     console.log("Selected Rooms:", selectedRooms);
-//   };
-
-//   return (
-//     <div className="adminContainer">
-//       <AdminSidebar />
-//       <main className="dashboard" style={{ width: "100%", height: "100%" }}>
-//         <div className="profile bg-white shadow-md rounded-lg ">
-//           <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">
-//             Random Room Assign
-//           </h2>
-//           <p
-//             className="reminder text-center mb-4"
-//             style={{ color: "#333", fontSize: "0.875rem" }}
-//           >
-//             Reminder: Select Only Available Rooms.
-//           </p>
-//           <br />
-//           <div className="p-4">
-//             <h4 className="text-2xl font-light text-gray-700 mb-2 text-center">
-//               Select Rooms
-//             </h4>
-//             <div className="block-section">
-//               <p
-//                 className="reminder text-center mb-2"
-//                 style={{ color: "#333", fontSize: "0.875rem" }}
-//               >
-//                 Block A
-//               </p>
-//               <div className="bg-gray-200 p-2 flex flex-wrap">
-//                 {boxNamesA.map((name) => (
-//                   <div key={name} className="flex items-center h-10 mr-4 mb-4">
-//                     <input
-//                       id={name}
-//                       type="checkbox"
-//                       className="form-checkbox h-3 w-3 text-indigo-600 transition duration-150 ease-in-out"
-//                       onChange={handleCheckboxChange}
-//                     />
-//                     <label htmlFor={name} className="ml-2">
-//                       {name}
-//                     </label>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-//             <div className="block-section">
-//               <p
-//                 className="reminder text-center mb-2"
-//                 style={{ color: "#333", fontSize: "0.875rem" }}
-//               >
-//                 Block B
-//               </p>
-//               <div className="bg-gray-200 p-2 flex flex-wrap">
-//                 {boxNamesB.map((name) => (
-//                   <div key={name} className="flex items-center h-10 mr-4 mb-4">
-//                     <input
-//                       id={name}
-//                       type="checkbox"
-//                       className="form-checkbox h-3 w-3 text-indigo-600 transition duration-150 ease-in-out"
-//                       onChange={handleCheckboxChange}
-//                     />
-//                     <label htmlFor={name} className="ml-2">
-//                       {name}
-//                     </label>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-//             <div className="block-section">
-//               <p
-//                 className="reminder text-center mb-2"
-//                 style={{ color: "#333", fontSize: "0.875rem" }}
-//               >
-//                 Block C
-//               </p>
-//               <div className="bg-gray-200 p-2 flex flex-wrap">
-//                 {boxNamesC.map((name) => (
-//                   <div key={name} className="flex items-center h-10 mr-4 mb-4">
-//                     <input
-//                       id={name}
-//                       type="checkbox"
-//                       className="form-checkbox h-3 w-3 text-indigo-600 transition duration-150 ease-in-out"
-//                       onChange={handleCheckboxChange}
-//                     />
-//                     <label htmlFor={name} className="ml-2">
-//                       {name}
-//                     </label>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-//             <button
-//               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-//               onClick={handleSubmit}
-//             >
-//               Submit
-//             </button>
-//           </div>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// };
-
-// export default Roomallocation;
-
-// import AdminSidebar from "../components/Sidebar";
-// import Checkboxes from "../components/Checkboxes";
-// import { useState } from "react";
-
-// const Roomallocation = () => {
-//   const [selectedRooms, setSelectedRooms] = useState([]);
-//   const boxNames = Array.from({ length: 19 }, (_, i) => `A1${i + 1}`);
-//   const handleCheckboxChange = (event) => {
-//     const { id, checked } = event.target;
-//     if (checked) {
-//       setSelectedRooms((prevSelectedRooms) => [...prevSelectedRooms, id]);
-//     } else {
-//       setSelectedRooms((prevSelectedRooms) =>
-//         prevSelectedRooms.filter((room) => room !== id)
-//       );
-//     }
-//   };
-//   const generateRoomNames = (blockPrefix) => {
-//     return Array.from({ length: 19 }, (_, i) => `${blockPrefix}${i + 1}`);
-//   };
-//   const boxNamesA = generateRoomNames("A1");
-//   const boxNamesB = generateRoomNames("B2");
-//   const boxNamesC = generateRoomNames("C3");
-
-//   const handleSubmit = () => {
-//     // Handle submitting the selected rooms
-//     console.log("Selected Rooms:", selectedRooms);
-//   };
-//   return (
-//     <div className="adminContainer">
-//       <AdminSidebar />
-//       <main className="dashboard" style={{ width: "100%", height: "100%" }}>
-//         <div className="profile bg-white shadow-md rounded-lg ">
-//           <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">
-//             Random Room Assign
-//           </h2>
-//           <p
-//             className="reminder text-center mb-4"
-//             style={{ color: "#333", fontSize: "0.875rem" }}
-//           >
-//             Reminder: Select Only Available Rooms.
-//           </p>
-//           <br />
-//           <div className="p-4">
-//             <h4 className="text-2xl font-light text-gray-700 mb-2 text-center">
-//               Select Rooms
-//             </h4>
-//             <div className="block-section">
-//               <p
-//                 className="reminder text-center mb-2"
-//                 style={{ color: "#333", fontSize: "0.875rem" }}
-//               >
-//                 Block A
-//               </p>
-//               <div className="bg-gray-200 p-2 flex flex-wrap">
-//                 {boxNamesA.map((name) => (
-//                   <div key={name} className="flex items-center h-10 mr-4 mb-4">
-//                     <input
-//                       id={name}
-//                       type="checkbox"
-//                       className="form-checkbox h-3 w-3 text-indigo-600 transition duration-150 ease-in-out"
-//                       onChange={handleCheckboxChange}
-//                     />
-//                     <label htmlFor={name} className="ml-2">
-//                       {name}
-//                     </label>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-//             <div className="block-section">
-//               <p
-//                 className="reminder text-center mb-2"
-//                 style={{ color: "#333", fontSize: "0.875rem" }}
-//               >
-//                 Block B
-//               </p>
-//               <div className="bg-gray-200 p-2 flex flex-wrap">
-//                 {boxNamesB.map((name) => (
-//                   <div key={name} className="flex items-center h-10 mr-4 mb-4">
-//                     <input
-//                       id={name}
-//                       type="checkbox"
-//                       className="form-checkbox h-3 w-3 text-indigo-600 transition duration-150 ease-in-out"
-//                       onChange={handleCheckboxChange}
-//                     />
-//                     <label htmlFor={name} className="ml-2">
-//                       {name}
-//                     </label>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-//             <div className="block-section">
-//               <p
-//                 className="reminder text-center mb-2"
-//                 style={{ color: "#333", fontSize: "0.875rem" }}
-//               >
-//                 Block C
-//               </p>
-//               <div className="bg-gray-200 p-2 flex flex-wrap">
-//                 {boxNamesC.map((name) => (
-//                   <div key={name} className="flex items-center h-10 mr-4 mb-4">
-//                     <input
-//                       id={name}
-//                       type="checkbox"
-//                       className="form-checkbox h-3 w-3 text-indigo-600 transition duration-150 ease-in-out"
-//                       onChange={handleCheckboxChange}
-//                     />
-//                     <label htmlFor={name} className="ml-2">
-//                       {name}
-//                     </label>
-//                   </div>
-//                 ))}
-//               </div>
-//             </div>
-//             <button
-//               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-//               onClick={handleSubmit}
-//             >
-//               Submit
-//             </button>
-//           </div>
-//         </div>
-//       </main>
-//     </div>
-//   );
-// };
-
-// export default Roomallocation;
-
-{
-  /* <section className="Rooms">
-            <Checkboxes />
-          </section> */
-}

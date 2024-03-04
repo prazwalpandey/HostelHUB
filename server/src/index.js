@@ -17,32 +17,33 @@ import adminauthRoute from './routes/adminauth.js';
 import noticeRoute from './routes/noticesRoutes.js';
 import complainRoute from './routes/complainsRoute.js';
 import fileuploadRoute from './routes/fileUpload.js';
+import getStudentsRoute from './routes/getStudents.js';
+import getRoomBookedRoute from './routes/getBookedRooms.js';
 
 const app=express();
-const app=express();
 
-const allowedOrigins=['http://localhost:5173','http://localhost:5173/']
+const allowedOrigins=['http://localhost:5173']
 // MIDDLEWARES
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors({
     origin:allowedOrigins,
-    origin:'http://localhost:5173/',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders:['Content-Type', 'Authorization']
+    allowedHeaders:['Content-Type', 'Authorization'],
+    optionsSuccessStatus:200,
+    credentials:true,
 }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
-app.set("view engine","ejs");
-app.set("views",path.resolve("./views"));
+app.options('*', cors())
 
-//  LOGIN AND REGISTRATION ROUTES
+//  LOGIN AND REGISTRATION AND LOGOUT ROUTES
 app.use('/user/auth',authRoute);
 app.use('/admin/auth',adminauthRoute);
 
 //NOTICES ROUTES
 app.use('/admin',noticeRoute);
-app.use('/user',noticeRoute)
+app.use('/user',noticeRoute);
 
 //COMPLAINS ROUTES
 app.use('/user',complainRoute);
@@ -52,17 +53,10 @@ app.use('/admin',complainRoute);
 //FILEUPLOADS ROUTES
 app.use('/',fileuploadRoute);
 
-
-//FILEUPLOADS ROUTES
-app.use('/',fileuploadRoute);
-
-//LOGOUT ROUTES
-
-
-
-
-
-
+//Get Students ROUTES
+app.use('/',getStudentsRoute);
+//Get Rooms Booked
+app.use('/bookedrooms',getRoomBookedRoute);
 
 
 
@@ -82,5 +76,4 @@ app.use('/',fileuploadRoute);
 
 app.listen(process.env.PORT,()=>{
     console.log(`listening port ${process.env.PORT}`);
-    console.log(listening port ${process.env.PORT});
 })
