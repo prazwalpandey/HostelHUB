@@ -77,6 +77,10 @@ router.post('/login', async (req, res) => {
         res.status(500).send('Internal Server error');
     }
 });
+//Check Authentication
+router.get('/checkauthentication',authenticateUser,(req,res)=>{
+    res.status(200).send('User is Authenticated');
+});
 
 
 //Access only after loggedin

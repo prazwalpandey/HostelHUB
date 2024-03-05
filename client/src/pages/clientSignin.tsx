@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {FaEye, FaEyeSlash} from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -8,7 +7,7 @@ function Login() {
   const [error, setError] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false); // New state variable for loading state
 
   const handleAdminClick = () => {
     setIsAdmin(!isAdmin);
@@ -16,7 +15,7 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(email,password);
+    setIsLoading(true); // Set loading state to true when the form is submitted
     try {
       const loginUrl = isAdmin ? 'http://localhost:5000/admin/auth/login' : 'http://localhost:5000/user/auth/login';
 
@@ -32,17 +31,17 @@ function Login() {
       if (!response.ok) {
         const errorMessage = response.status === 401 ? 'Unauthorized' : 'Login failed';
         throw new Error(errorMessage);
-        console.error(error);
       }
       const data = await response.json();
-      document.cookie=`token=${data.token}`;
-      // console.log(document.cookie);
+      document.cookie = `token=${data.token}`;
       const dashboardUrl = isAdmin ? '/admin/dashboard' : '/client/dashboard';
-      navigate(dashboardUrl);
+      window.location.href = dashboardUrl;
       console.log(data);
     } catch (error) {
       console.log(error);
       setError('Login failed. Please check your credentials.');
+    } finally {
+      setIsLoading(false); // Reset loading state regardless of success or failure
     }
   };
 
@@ -74,17 +73,18 @@ function Login() {
               required
             />
             <span
-              onClick={()=>{setShowPassword(!showPassword)}}
+              onClick={() => { setShowPassword(!showPassword) }}
               className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer"
             >
-              {showPassword? <FaEye/> : <FaEyeSlash/>}
+              {showPassword ? <FaEye /> : <FaEyeSlash />}
             </span>
           </div>
           <button
             type="submit"
             className="w-full bg-sky-500 text-white font-medium text-sm px-4 py-2 rounded-md shadow-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+            disabled={isLoading} 
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"} {/* Change button text based on loading state */}
           </button>
           <button
             type="button"

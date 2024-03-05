@@ -1,5 +1,5 @@
-// import { IconType } from "react-icons";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { Link, useLocation} from "react-router-dom";
 import { RiDashboardFill } from "react-icons/ri";
 import { AiFillFileText } from "react-icons/ai";
 import { SiGoogleclassroom } from "react-icons/si";
@@ -9,9 +9,11 @@ import Logo from "../assets/logo.png";
 
 const AdminSidebar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  const [isLoggingOut, setIsLoggingOut] = useState(false); // State variable to track logout loading state
+
   const handleLogout = async () => {
     try {
+      setIsLoggingOut(true); // Set loading state to true when logging out
       const response = await fetch("http://localhost:5000/admin/auth/logout", {
         method: 'GET',
         headers: {
@@ -22,13 +24,15 @@ const AdminSidebar = () => {
 
       if (response.ok) {
         console.log('Logout successful');
-        navigate('/');
+        window.location.href='/login';
       } else {
         console.log('Logout failed error:', response.status);
 
       }
     } catch (error) {
       console.log('Error logging out:', error.message);
+    } finally {
+      setIsLoggingOut(false); // Reset loading state regardless of success or failure
     }
   };
 
@@ -106,8 +110,9 @@ const AdminSidebar = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
             style={{ width: "auto", }}
             onClick={handleLogout}
+            disabled={isLoggingOut} // Disable button while logging out
           >
-            Log Out
+            {isLoggingOut ? "Logging out..." : "Log Out"} {/* Change button text based on loading state */}
           </button>
         </div>
       </div>
@@ -116,4 +121,3 @@ const AdminSidebar = () => {
 };
 
 export default AdminSidebar;
-
