@@ -19,7 +19,7 @@ import complainRoute from './routes/complainsRoute.js';
 import fileuploadRoute from './routes/fileUpload.js';
 import getStudentsRoute from './routes/getStudents.js';
 import getRoomBookedRoute from './routes/getBookedRooms.js';
-
+import getmeRoute from './routes/getme.js';
 const app=express();
 
 const allowedOrigins=['http://localhost:5173']
@@ -58,6 +58,8 @@ app.use('/',getStudentsRoute);
 //Get Rooms Booked
 app.use('/bookedrooms',getRoomBookedRoute);
 
+//GET ME
+app.use('/',getmeRoute);
 
 
 
