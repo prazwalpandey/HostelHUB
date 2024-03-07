@@ -14,7 +14,14 @@ router.get('/getStudents',authenticateAdmin,async (req, res) => {
     }
 });
 
-
+router.get('/studentscount',authenticateAdmin, async (req, res) => {
+    try {
+        const studentsCount = await User.countDocuments();
+        res.status(200).json({ count: studentsCount });
+    } catch (error) {
+        res.status(500).send({ msg: "Internal Server Error" });
+    }
+});
 
 
 export default router;

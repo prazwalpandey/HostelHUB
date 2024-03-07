@@ -5,8 +5,54 @@ import { IoNotifications } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import Roomchart from "../components/Roomchart";
 import Photo from "../assets/userpic.png";
+import { useState,useEffect } from "react";
 
 const Admindashboard = () => {
+  const [count, setCount] = useState<{ students: number, complains: number }>({ students: 0, complains: 0 });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const responseStudent = await fetch('http://localhost:5000/studentscount',{
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        if(!responseStudent.ok){
+          throw new Error('Could not fetch the data for that resource');
+        }
+        else{
+          const studentsCount = await responseStudent.json();
+          const noOfStudents = studentsCount.count;
+          console.log(noOfStudents);
+          setCount(prevCount=>({...prevCount,students:noOfStudents}));
+        }
+        const responseComplains = await fetch('http://localhost:5000/admin/complainscount',{
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+        if(!responseComplains.ok){
+          throw new Error('Could not fetch the data for that resource');
+        }
+        else{
+          const complainsCount = await responseComplains.json();
+          const noOfComplains = complainsCount.count;
+          console.log(noOfComplains);
+          setCount(prevCount=>({...prevCount,complains:noOfComplains}));
+        }
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   const widgetItemsData = [
     {
       value: 171,
@@ -14,12 +60,12 @@ const Admindashboard = () => {
       Icon: FaHotel,
     },
     {
-      value: 342, // change the value according to data in database
+      value: count.students,
       heading: "Students",
       Icon: FaPeopleGroup,
     },
     {
-      value: 200,
+      value: count.complains,
       heading: "Complains",
       Icon: CgNotes,
     },
