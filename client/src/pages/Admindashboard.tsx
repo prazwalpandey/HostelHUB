@@ -36,9 +36,10 @@ const Admindashboard = () => {
           overflowY: "auto",
           paddingBottom: "0",
           marginBottom: "0",
+          background:"white"
         }}
       >
-        <section className="widgetcontainer">
+        <section className="widgetcontainer" style={{justifyContent:"space-evenly"}}>
           {widgetItemsData.map((item, index) => (
             <WidgetItem
               key={index}
