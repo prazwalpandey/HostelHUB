@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import Sidebar from '../components/Sidebar';
 import ComplaintsList from '../components/ComplaintsList'; // Import ComplaintsList component
 

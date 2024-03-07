@@ -11,7 +11,7 @@ const ComplainsSchema=new mongoose.Schema({
     },
     complainBy:{
         type:String,
-        default:'Student'
+        required:true
     },
     message:{
         type:String,
