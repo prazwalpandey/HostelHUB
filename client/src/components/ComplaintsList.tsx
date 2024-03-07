@@ -67,7 +67,7 @@ const ComplaintsList: React.FC = () => {
           <div key={complaint._id} className="bg-white rounded-lg shadow-md p-4">
             <div className="font-semibold mb-2">{complaint.complainOn}</div>
             <div className="text-gray-600 mb-2">{complaint.description}</div>
-            <div className={`text-sm ${complaint.status === 'resolved' ? 'text-green-600' : 'text-red-600'}`}>
+            <div className={`text-sm ${complaint.status === 'resolved'||complaint.status==='Resolved' ? 'text-green-600' : 'text-red-600'}`}>
               Status: {complaint.status}
             </div>
             {complaint.status !== 'Resolved' && complaint.status !== 'resolved' && (

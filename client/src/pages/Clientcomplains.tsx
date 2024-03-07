@@ -124,10 +124,10 @@ const Clientcomplains: React.FC = () => {
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-3/4">
               {complaints && complaints.length > 0 ? (
                 complaints.map((complaint) => (
-                  <div key={complaint?._id} className="bg-white rounded-lg shadow-md p-4">
-                    <div className="font-semibold mb-2">{complaint?.complainOn}</div>
-                    <div className="text-gray-600 mb-2">{complaint?.description}</div>
-                    <div className={`text-gray-600 mb-2 ${complaint?.status === "resolved" ? "text-green-500" : "text-red-500"}`}>{complaint?.status}</div>
+                  <div key={complaint._id} className="bg-white rounded-lg shadow-md p-4">
+                    <div className="font-semibold mb-2">{complaint.complainOn}</div>
+                    <div className="text-gray-600 mb-2">{complaint.description}</div>
+                    <div className={`text-gray-600 mb-2 ${complaint.status === "resolved" ||complaint.status==='Resolved' ? "text-green-500" : "text-red-500"}`}>{complaint?.status}</div>
                   </div>
                 ))
               ) : (

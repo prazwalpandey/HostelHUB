@@ -58,7 +58,7 @@ router.put('/resolvecomplaint/:id', async (req, res) => {
     try {
       const complaint = await Complains.findOneAndUpdate(
         { _id: complaintId },
-        { status: 'resolved' },
+        { status: 'Resolved' },
         { new: true }
       );
       if (!complaint) {
