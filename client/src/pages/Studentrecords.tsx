@@ -29,8 +29,34 @@ const Studentrecords: React.FC = () => {
     setSelectedStudent(null);
     setShowDropdown(false);
   };
-  const handleEdit = (record) => {};
-  const handleDelete = (record) => {};
+  const handleEdit = (selectedStudent) => {
+
+  };
+
+  const handleDelete = async (selectedStudent) => {
+    try{
+      const userId=selectedStudent._id;
+      const userName=selectedStudent.name;
+    const response=await fetch(`http://localhost:5000/deleteuser/${userId}`, {
+      method: "DELETE",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    if (!response.ok) {
+      alert("Failed to delete user");
+      throw new Error("Failed to delete user");
+    }
+    alert(`${userName} deleted successfully`);
+    handleCloseModal();
+    console.log("User deleted successfully");
+    }catch(err)
+    {
+      console.error(err);
+    }
+
+  };
   useEffect(() => {
     const fetchStudentRecords = async () => {
       try {
@@ -178,6 +204,8 @@ const Studentrecords: React.FC = () => {
           </div>
         </div>
       )} */}
+
+
         {showDropdown && selectedStudent && (
           <div
             className="modal-overlay"
@@ -251,10 +279,10 @@ const Studentrecords: React.FC = () => {
                 >
                   Close
                 </button>
-                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 mr-2">
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 mr-2" onClick={()=>handleEdit(selectedStudent)}>
                   Edit
                 </button>
-                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">
+                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4" onClick={()=>handleDelete(selectedStudent)}>
                   Delete
                 </button>
               </div>

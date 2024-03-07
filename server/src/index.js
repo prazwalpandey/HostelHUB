@@ -20,6 +20,7 @@ import fileuploadRoute from './routes/fileUpload.js';
 import getStudentsRoute from './routes/getStudents.js';
 import getRoomBookedRoute from './routes/getBookedRooms.js';
 import getmeRoute from './routes/getme.js';
+import deleteUserRoute from './routes/deleteUser.js';
 const app=express();
 
 const allowedOrigins=['http://localhost:5173']
@@ -60,6 +61,9 @@ app.use('/bookedrooms',getRoomBookedRoute);
 
 //GET ME
 app.use('/',getmeRoute);
+
+//Delete USer
+app.use('/',deleteUserRoute);
 
 
 
