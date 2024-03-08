@@ -109,6 +109,15 @@ const AdminSidebar = () => {
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
             style={{ width: "auto", }}
+            // onClick={}
+           // Disable button while logging out
+          >
+          Change Password
+          </button>
+        
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
+            style={{ width: "auto", }}
             onClick={handleLogout}
             disabled={isLoggingOut} // Disable button while logging out
           >
