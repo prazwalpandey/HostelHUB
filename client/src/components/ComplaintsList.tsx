@@ -61,7 +61,8 @@ const ComplaintsList: React.FC = () => {
 
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-4">Your Complaints</h2>
+      <h2 className="text-lg font-semibold mb-4 text-center">Your Complaints</h2>
+      <hr className="mb-4 border-t border-gray-300 border-width-2" />
       <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {complaints.map(complaint => (
           <div key={complaint._id} className="bg-white rounded-lg shadow-md p-4">
