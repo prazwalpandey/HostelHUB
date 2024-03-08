@@ -64,9 +64,9 @@ const Clientcomplains: React.FC = () => {
   return (
     <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
       <ClientSidebar />
-      <main className="dashboard" style={{ width: "100%", height: "100vh" }}>
+      <main className="dashboard" style={{ width: "100%", height: "100%" }}>
         <div
-          className="flex flex-col items-center w-full p-4 shadow-md bg-white h-full"
+          className="flex flex-col items-center w-full p-4 shadow-md bg-white"
         >
           <h2 className="text-2xl font-semibold text-gray-700 mb-2 mt-4 text-center">
             Register Complaints
@@ -121,10 +121,10 @@ const Clientcomplains: React.FC = () => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-3/4">
+            <div className="flex flex-col w-full items-center">
               {complaints && complaints.length > 0 ? (
                 complaints.map((complaint) => (
-                  <div key={complaint._id} className="bg-white rounded-lg shadow-md p-4">
+                  <div key={complaint._id} className="bg-white rounded-lg shadow-md p-4 w-3/4" style={{marginTop:"10px"}}>
                     <div className="font-semibold mb-2">{complaint.complainOn}</div>
                     <div className="text-gray-600 mb-2">{complaint.description}</div>
                     <div className={`text-gray-600 mb-2 ${complaint.status === "resolved" ||complaint.status==='Resolved' ? "text-green-500" : "text-red-500"}`}>{complaint?.status}</div>
