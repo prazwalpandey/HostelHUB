@@ -11,6 +11,7 @@ interface StudentRecord {
   roomNo: string;
 }
 
+
 const Studentrecords: React.FC = () => {
   const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
   const [studentRecords, setStudentRecords] = useState<{
@@ -29,7 +30,7 @@ const Studentrecords: React.FC = () => {
     setSelectedStudent(null);
     setShowDropdown(false);
   };
-  const handleEdit = (selectedStudent) => {};
+  // const handleEdit = (selectedStudent) => {};
 
   const handleDelete = async (selectedStudent) => {
     try {
@@ -83,6 +84,33 @@ const Studentrecords: React.FC = () => {
   const handleUploadClick = () => {
     setIsUploadModalOpen(true);
   };
+
+
+
+
+
+
+
+
+
+
+
+  const [editableStudent, setEditableStudent] = useState<StudentRecord | null>(null);
+
+  const handleEdit = (selectedStudent) => {
+    setEditableStudent(selectedStudent); // Copy selectedStudent into editable form
+    setShowDropdown(false); // Assuming you want to close the current modal and open the edit form
+  };
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
 
   return (
     <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
@@ -217,7 +245,7 @@ const Studentrecords: React.FC = () => {
                   {selectedStudent.name}
                 </h2>
 
-                <div className="Data">
+                {/* <div className="Data">
                   <p>
                     <strong>Email:</strong> {selectedStudent.email}
                   </p>
@@ -245,7 +273,93 @@ const Studentrecords: React.FC = () => {
                     <strong>Guardian Relationship:</strong>{" "}
                     {selectedStudent.guardianRelationship}
                   </p>
-                </div>
+                </div> */}
+                
+
+
+
+
+
+
+                <div className="Data">
+  <div>
+    <strong>Email:</strong>
+    <input
+      type="email"
+      value={editableStudent.email}
+      onChange={(e) => setEditableStudent({ ...editableStudent, email: e.target.value })}
+    />
+  </div>
+  <div>
+    <strong>Contact:</strong>
+    <input
+      type="text"
+      value={editableStudent.contact}
+      onChange={(e) => setEditableStudent({ ...editableStudent, contact: e.target.value })}
+    />
+  </div>
+  <div>
+    <strong>Roll No:</strong>
+    <input
+      type="text"
+      value={editableStudent.rollNo}
+      onChange={(e) => setEditableStudent({ ...editableStudent, rollNo: e.target.value })}
+    />
+  </div>
+  <div>
+    <strong>Block:</strong>
+    <input
+      type="text"
+      value={editableStudent.block}
+      onChange={(e) => setEditableStudent({ ...editableStudent, block: e.target.value })}
+    />
+  </div>
+  <div>
+    <strong>Room No:</strong>
+    <input
+      type="text"
+      value={editableStudent.roomNo}
+      onChange={(e) => setEditableStudent({ ...editableStudent, roomNo: e.target.value })}
+    />
+  </div>
+  <div>
+    <strong>Guardian Name:</strong>
+    <input
+      type="text"
+      value={editableStudent.guardianName}
+      onChange={(e) => setEditableStudent({ ...editableStudent, guardianName: e.target.value })}
+    />
+  </div>
+  <div>
+    <strong>Guardian Contact:</strong>
+    <input
+      type="text"
+      value={editableStudent.guardianContact}
+      onChange={(e) => setEditableStudent({ ...editableStudent, guardianContact: e.target.value })}
+      />
+      
+        </div>
+        <div>
+          <strong>Guardian Relationship:</strong>
+          <input
+            type="text"
+            value={editableStudent.guardianRelationship}
+            onChange={(e) => setEditableStudent({ ...editableStudent, guardianRelationship: e.target.value })}
+          />
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+                
                 <div
                   className="buttons"
                   style={{
@@ -283,3 +397,123 @@ const Studentrecords: React.FC = () => {
 };
 
 export default Studentrecords;
+
+
+
+
+
+
+
+// {editableStudent && (
+//   <div
+//     className="modal-overlay"
+//     style={{
+//       position: "fixed",
+//       top: 0,
+//       left: 0,
+//       width: "100%",
+//       height: "100%",
+//       backgroundColor: "rgba(0, 0, 0, 0.5)",
+//       display: "flex",
+//       alignItems: "center",
+//       justifyContent: "center",
+//     }}
+//   >
+//     <form
+//       className="modal-content"
+//       style={{
+//         display: "flex",
+//         flexDirection: "column",
+//         backgroundColor: "white",
+//         padding: "20px",
+//         width: "30%",
+//         height: "auto", // Adjusted for form
+//         borderRadius: "8px",
+//         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+//         alignItems: "center",
+//         justifyContent: "space-around",
+//       }}
+//       onSubmit={handleFormSubmit} // You will need to implement this
+//     >
+      
+//       <input
+//         type="text"
+//         value={editableStudent.name}
+//         onChange={(e) => setEditableStudent({ ...editableStudent, name: e.target.value })}
+//       />
+      
+//       {/* Repeat input fields for email, contact, etc., similar to the above */}
+
+//       <div className="buttons" style={{ display: "flex", justifyContent: "space-evenly", width: "100%" }}>
+//         <button type="button" onClick={() => setEditableStudent(null)}>Cancel</button>
+//         <button type="submit">Submit</button>
+//       </div>
+//     </form>
+//   </div>
+// )}
+
+
+
+
+
+
+
+// <h2 className="text-2xl font-semibold mb-4">
+//                   {selectedStudent.name}
+//                 </h2>
+
+//                 <div className="Data">
+//                   <p>
+//                     <strong>Email:</strong> {selectedStudent.email}
+//                   </p>
+//                   <p>
+//                     <strong>Contact:</strong> {selectedStudent.contact}
+//                   </p>
+//                   <p>
+//                     <strong>Roll No:</strong> {selectedStudent.rollNo}
+//                   </p>
+//                   <p>
+//                     <strong>Block:</strong> {selectedStudent.block}
+//                   </p>
+//                   <p>
+//                     <strong>Room No:</strong> {selectedStudent.roomNo}
+//                   </p>
+//                   <p>
+//                     <strong>Guardian Name:</strong>{" "}
+//                     {selectedStudent.guardianName}
+//                   </p>
+//                   <p>
+//                     <strong>Guardian Contact:</strong>{" "}
+//                     {selectedStudent.guardianContact}
+//                   </p>
+//                   <p>
+//                     <strong>Guardian Relationship:</strong>{" "}
+//                     {selectedStudent.guardianRelationship}
+//                   </p>
+//                 </div>
+//                 <div
+//                   className="buttons"
+//                   style={{
+//                     display: "flex",
+//                     justifyContent: "space-evenly",
+//                     width: "100%",
+//                   }}
+//                 >
+//                   <button
+//                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mr-2"
+//                     onClick={handleCloseModal}
+//                   >
+//                     Close
+//                   </button>
+//                   <button
+//                     className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 mr-2"
+//                     onClick={() => handleEdit(selectedStudent)}
+//                   >
+//                     Edit
+//                   </button>
+//                   <button
+//                     className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+//                     onClick={() => handleDelete(selectedStudent)}
+//                   >
+//                     Delete
+//                   </button>
