@@ -1,10 +1,8 @@
 import { useState } from "react";
-import {useNavigate} from 'react-router-dom';
 
 function FileUpload() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false); // Add state for upload status
-  const navigate=useNavigate();
   const handleFileChange = (e) => {
     setSelectedFile(e.target.files[0]);
   };
@@ -31,7 +29,8 @@ function FileUpload() {
       }
 
       console.log("File uploaded successfully!");
-      navigate('/admin/dashboard');
+      setSelectedFile(null);
+      window.location.reload()
     } catch (error) {
       console.log("Error uploading file:", error);
     } finally {
