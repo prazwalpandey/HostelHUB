@@ -50,7 +50,7 @@ const Clientcomplains: React.FC = () => {
         setComplainOn("");
         setDescription("");
         alert("Complaint submitted successfully!");
-        // Refresh complaints after submission
+        window.location.reload();
         const updatedComplaints = await response.json();
         setComplaints(updatedComplaints);
       } else {

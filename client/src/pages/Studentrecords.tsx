@@ -50,6 +50,7 @@ const Studentrecords: React.FC = () => {
     }
     alert(`${userName} deleted successfully`);
     handleCloseModal();
+    window.location.reload();
     console.log("User deleted successfully");
     }catch(err)
     {
