@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface Complaint {
   _id: number;
@@ -50,7 +50,7 @@ const ComplaintsList: React.FC = () => {
         // Update the state to reflect the resolved complaint
         setComplaints(prevComplaints =>
           prevComplaints.map(complaint =>
-            complaint._id === complaintId ? { ...complaint, status: 'resolved' } : complaint
+            complaint._id === complaintId ? { ...complaint, status: 'Resolved' } : complaint
           )
         );
       }
@@ -67,10 +67,10 @@ const ComplaintsList: React.FC = () => {
           <div key={complaint._id} className="bg-white rounded-lg shadow-md p-4">
             <div className="font-semibold mb-2">{complaint.complainOn}</div>
             <div className="text-gray-600 mb-2">{complaint.description}</div>
-            <div className={`text-sm ${complaint.status === 'resolved'||complaint.status==='Resolved' ? 'text-green-600' : 'text-red-600'}`}>
+            <div className={`text-sm ${complaint.status === 'Resolved' ? 'text-green-600' : 'text-red-600'}`}>
               Status: {complaint.status}
             </div>
-            {complaint.status !== 'Resolved' && complaint.status !== 'resolved' && (
+            {complaint.status !== 'Resolved' && (
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2"
                 onClick={() => handleResolveComplaint(complaint._id)}

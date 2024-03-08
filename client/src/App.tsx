@@ -1,24 +1,24 @@
-
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense, lazy, useState, useEffect } from "react";
 import Loading from './components/Loading';
-import Roomallocation from './pages/Roomallocation'
-import Complains from "./pages/Complains";
-import Notices from "./pages/Notices";
-import Clientregisterroom from "./pages/Clientregisterroom";
 import '../index.css';
-import Clientnotices from "./pages/Clientnotices";
-import Clientcomplains from "./pages/Clientcomplains";
-import Login from "./pages/clientSignin";
-import Studentrecords from "./pages/Studentrecords";
 import { Navigate } from "react-router-dom";
 
 const Admindashboard = lazy(() => import("./pages/Admindashboard"));
 const Profile = lazy(() => import("./components/Profile"));
 
+const Roomallocation = lazy(() => import('./pages/Roomallocation'));
+const Complains = lazy(() => import('./pages/Complains'));
+const Clientregisterroom = lazy(() => import('./pages/Clientregisterroom'));
+const Notices = lazy(() => import('./pages/Notices'));
+const Clientnotices = lazy(() => import('./pages/Clientnotices'));
+const Clientcomplains = lazy(() => import('./pages/Clientcomplains'));
+const Studentrecords = lazy(() => import('./pages/Studentrecords'));
+const Login = lazy(() => import('./pages/clientSignin'));
 
 const App = () => {
   const [authState, setAuthState] = useState({ isAuthenticated: false, isAdmin: false });
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -42,20 +42,25 @@ const App = () => {
       } catch (error) {
         console.error("Authentication error:", error);
         setAuthState({ isAuthenticated: false, isAdmin: false });
+      } finally {
+        setLoading(false); // Set loading to false after authentication check is complete
       }
     };
 
     checkAuthentication();
   }, []);
 
+  // If still loading, show loading indicator
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <Router>
       <Suspense fallback={<Loading />}>
         <Routes>
-        <Route path="/" element={<Navigate to={authState.isAuthenticated ? (authState.isAdmin ? "/admin/dashboard" : "/client/dashboard") : "/login"} replace />} />
-          <Route path="/login" element={authState.isAuthenticated ?<Navigate to={authState.isAuthenticated ? (authState.isAdmin ? "/admin/dashboard" : "/client/dashboard") : "/login"} replace />: <Login />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Navigate to={authState.isAuthenticated ? (authState.isAdmin ? "/admin/dashboard" : "/client/dashboard") : "/login"} replace />} />
+          <Route path="/login" element={authState.isAuthenticated ? <Navigate to={authState.isAuthenticated ? (authState.isAdmin ? "/admin/dashboard" : "/client/dashboard") : "/login"} replace /> : <Login />} />
           <Route path="/admin/dashboard" element={authState.isAuthenticated && authState.isAdmin ? <Admindashboard /> : <Navigate to="/login" replace />} />
           <Route path="/client/dashboard" element={authState.isAuthenticated && !authState.isAdmin ? <Profile /> : <Navigate to="/login" replace />} />
           {/* Other routes for admin */}

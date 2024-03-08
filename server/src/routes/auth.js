@@ -21,12 +21,12 @@ router.post('/register', async (req, res) => {
     }
     const userDb = await User.findOne({ email });
     if (userDb)
-        res.status(400).send('User laready exists');
+        res.status(400).send('User alaready exists');
     else {
         const pwdHash = hashedPassword(password);
         const currentYear = new Date().getFullYear();
         const yearCalc = (currentYear + 56) - batch;
-        const newUser = await User.create({ name, email, contact, password: pwdHash, rollNo, batch, department, year: yearCalc, roomNo, block, floorNo, guardianName, guardianContact, guardianRelationship });
+        const newUser = await User.create({ name, email, contact, password:pwdHash, rollNo, batch, department, year: yearCalc, roomNo, block, floorNo, guardianName, guardianContact, guardianRelationship });
         newUser.save();
 
         //generate token 
