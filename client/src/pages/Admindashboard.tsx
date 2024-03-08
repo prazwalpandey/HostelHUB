@@ -26,7 +26,7 @@ const Admindashboard = () => {
         else{
           const studentsCount = await responseStudent.json();
           const noOfStudents = studentsCount.count;
-          console.log(noOfStudents);
+          // console.log(noOfStudents);
           setCount(prevCount=>({...prevCount,students:noOfStudents}));
         }
         const responseComplains = await fetch('http://localhost:5000/admin/complainscount',{
@@ -42,7 +42,7 @@ const Admindashboard = () => {
         else{
           const complainsCount = await responseComplains.json();
           const noOfComplains = complainsCount.count;
-          console.log(noOfComplains);
+          // console.log(noOfComplains);
           setCount(prevCount=>({...prevCount,complains:noOfComplains}));
         }
 

@@ -1,21 +1,65 @@
-import React, { useState } from "react";
+import  { useState,useEffect } from "react";
 import AdminSidebar from "../components/Sidebar";
 
 const Notices = () => {
   // State for form inputs
+  const [notices, setNotices] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    const fetchNotices = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/admin/getnotice", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          console.error("Failed to fetch Notices");
+        } else {
+          const data = await response.json();
+          setNotices(data.notices);
+        }
+      } catch (error) {
+        console.error("Error fetching Notices:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchNotices();
+  }, []);
+
   // Function to handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault(); // Prevents the default form submit action
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("http://localhost:5000/admin/createnotice", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ noticeOn: title, description }),
+      });
 
-    // Here, you would typically send the title and description to your backend or wherever you're handling the notices
-    console.log("Submitting", { title, description });
-
-    // Optionally, clear the form fields after submission
-    setTitle("");
-    setDescription("");
+      if (response.ok) {
+        setTitle("");
+        setDescription("");
+        alert("Notice submitted successfully!");
+      
+        window.location.reload();
+      } else {
+        alert("Failed to submit Notice. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting Notice:", error);
+    }
   };
 
   return (
@@ -41,16 +85,18 @@ const Notices = () => {
           >
             <div className="mb-4 w-3/4">
               <label
-                htmlFor="complainOn"
+                htmlFor="noticeOn"
                 className="text-sm font-light text-gray-700"
               >
                 Title
               </label>
               <input
                 type="text"
-                id="noticetitle"
+                id="noticeOn"
                 required
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-10 px-2 py-1 border border-gray-400 rounded-md text-lg"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
               />
             </div>
             <div className="mb-4 w-3/4">
@@ -64,6 +110,8 @@ const Notices = () => {
                 id="noticedescription"
                 required
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-32 px-2 py-1 border border-gray-400 rounded-md text-lg resize-vertical"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <button
@@ -77,6 +125,22 @@ const Notices = () => {
             Notices
           </h2>
           <hr className="w-full my-2 border-t border-gray-300" />
+          {loading ? (
+            <p>Loading...</p>
+          ) : (
+            <div className="flex flex-col w-full items-center">
+              {notices && notices.length > 0 ? (
+                notices.map((notice) => (
+                  <div key={notice._id} className="bg-white rounded-lg shadow-md p-4 w-3/4" style={{marginTop:"10px"}}>
+                    <div className="font-semibold mb-2">{notice.noticeOn}</div>
+                    <div className="text-gray-600 mb-2">{notice.description}</div>
+                  </div>
+                ))
+              ) : (
+                <p>No Notices found.</p>
+              )}
+            </div>
+          )}
       </main>
     </div>
   );
