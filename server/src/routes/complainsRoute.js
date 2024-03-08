@@ -57,11 +57,16 @@ router.get('/complainscount', authenticateAdmin, async (req, res) => {
 router.get('/getcomplain', authenticateUser, async (req, res) => {
   try {
     const token = req.cookies.token;
-    const decodecdToken = jwt.verify(token, process.env.JWT_SECRET, { complete: true });
-    const userId = decodecdToken.payload.id;
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET, { complete: true });
+    const userId = decodedToken.payload.id;
     console.log(userId);
     const complains = await Complains.find({ complainBy: userId });
-    res.status(200).json({ complains });
+    //Filter complaints
+    const pendingComplaints = complains.filter(complaint => complaint.status === 'Pending').sort((a, b) => b.createdAt - a.createdAt);
+    const resolvedComplaints = complains.filter(complaint => complaint.status === 'Resolved').sort((a, b) => b.createdAt - a.createdAt);
+    
+    const allComplaints = [...pendingComplaints, ...resolvedComplaints];
+    res.status(200).json({ allComplaints });
 
   } catch (error) {
     res.status(500).send({ msg: "Internal Server Error" });

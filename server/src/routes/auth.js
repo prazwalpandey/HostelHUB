@@ -15,33 +15,49 @@ const router = Router();
 
 //User Register
 router.post('/register', async (req, res) => {
-    const { name, email, contact, password, rollNo, batch, department, roomNo, block, floorNo, guardianName, guardianContact, guardianRelationship } = req.body;
-    if (!(name && email && contact && password && rollNo && batch && department && roomNo && block && floorNo && guardianName && guardianContact && guardianRelationship)) {
-        res.status(400).send('All fields are compulsory');
+    let { name, email, contact, password, rollNo, batch, department, roomNo, block, floorNo, guardianName, guardianContact, guardianRelationship } = req.body;
+
+    if (!password || password.trim() === '') {
+        password = rollNo; 
     }
-    const userDb = await User.findOne({ email });
-    if (userDb)
-        res.status(400).send('User alaready exists');
-    else {
+    if (!(name && email && contact && password && rollNo && batch && department && guardianName && guardianContact && guardianRelationship)) {
+        res.status(400).send('All fields are compulsory');
+        return; 
+    }
+
+    try {
+        const userDb = await User.findOne({ email });
+        if (userDb) {
+            res.status(400).send('User already exists');
+            return; 
+        }
+
         const pwdHash = hashedPassword(password);
         const currentYear = new Date().getFullYear();
         const yearCalc = (currentYear + 56) - batch;
-        const newUser = await User.create({ name, email, contact, password:pwdHash, rollNo, batch, department, year: yearCalc, roomNo, block, floorNo, guardianName, guardianContact, guardianRelationship });
-        newUser.save();
+        const newUser = await User.create({
+            name, email, contact, password: pwdHash, rollNo, batch,
+            department, year: yearCalc, roomNo, block, floorNo,
+            guardianName, guardianContact, guardianRelationship
+        });
 
-        //generate token 
         const token = jwt.sign(
             { id: newUser._id, email, role: newUser.role },
             process.env.JWT_SECRET,
-            {
-                expiresIn: '2d',
-            }
+            { expiresIn: '2d' }
         );
+        
         newUser.token = token;
+        await newUser.save(); 
+
         newUser.password = undefined;
         res.status(201).json(newUser);
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).send('Internal Server Error');
     }
 });
+
 
 //User login
 router.post('/login', async (req, res) => {

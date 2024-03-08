@@ -22,7 +22,7 @@ const Clientcomplains: React.FC = () => {
           console.error("Failed to fetch complaints");
         } else {
           const data = await response.json();
-          setComplaints(data.complains);
+          setComplaints(data.allComplaints);
         }
       } catch (error) {
         console.error("Error fetching complaints:", error);

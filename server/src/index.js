@@ -35,7 +35,6 @@ app.use(cors({
     credentials:true,
 }));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended:true}));
 app.options('*', cors())
 
 //  LOGIN AND REGISTRATION AND LOGOUT ROUTES
