@@ -6,104 +6,155 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
   const [contact, setContact] = useState(selectedStudent.contact);
   const [rollNo, setRollNo] = useState(selectedStudent.rollNo);
   const [block, setBlock] = useState(selectedStudent.block);
-  const [roomNo,setRoomNo]=useState(selectedStudent.roomNo);
-
+  const [roomNo, setRoomNo] = useState(selectedStudent.roomNo);
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedStudent = { name, email, contact, rollNo, block, roomNo }; 
-  
+    const updatedStudent = { name, email, contact, rollNo, block, roomNo };
+
     try {
-      const response = await fetch(`http://localhost:5000/update/${selectedStudent._id}`, {
-        method: 'PUT',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedStudent),
-      });
+      const response = await fetch(
+        `http://localhost:5000/update/${selectedStudent._id}`,
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedStudent),
+        }
+      );
       console.log(response);
       if (!response.ok) {
-        throw new Error('Failed to update student');
+        throw new Error("Failed to update student");
       }
-  
+
       onUpdate(updatedStudent);
       onClose();
       window.location.reload();
     } catch (error) {
-      console.error('Error updating student:', error);
+      console.error("Error updating student:", error);
     }
   };
-  
 
   return (
-    <div className="edit-form w-full max-w-md p-6 mx-auto bg-white rounded-md shadow-md">
-      <h2 className="text-2xl font-semibold mb-4">Edit Student</h2>
+    <div
+      className="w-full"
+      style={{
+        display:"flex",
+        flexDirection:"column",
+        backgroundColor: "white",
+        padding: "20px",
+        width: "30%",
+        height: "80%",
+        borderRadius: "8px",
+        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      }}
+    >
+      <h2 className="text-lg font-medium text-center">Edit Student</h2>
+      <hr className="w-full my-1 border-t border-gray-300" />
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label htmlFor="name" className="block mb-2">Name:</label>
+        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+          <label htmlFor="name" className="flex font-semibold w-1/3 text-blue-500">
+            Name
+          </label>
           <input
             type="text"
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block mb-2">Email:</label>
+        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+          <label htmlFor="email" className="flex font-semibold w-1/3 text-blue-500">
+            Email
+          </label>
           <input
             type="email"
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="contact" className="block mb-2">Contact:</label>
+        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+          <label htmlFor="contact" className="flex font-semibold w-1/3 text-blue-500">
+            Contact
+          </label>
           <input
             type="text"
             id="contact"
             value={contact}
             onChange={(e) => setContact(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="rollNo" className="block mb-2">Roll No:</label>
+        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+          <label htmlFor="rollNo" className="flex font-semibold w-1/3 text-blue-500">
+            Roll No
+          </label>
           <input
             type="text"
             id="rollNo"
             value={rollNo}
             onChange={(e) => setRollNo(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="Block" className="block mb-2">Block:</label>
+        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+          <label htmlFor="Block" className="flex font-semibold w-1/3 text-blue-500">
+            Block
+          </label>
           <input
             type="text"
             id="block"
             value={block}
             onChange={(e) => setBlock(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="Guardian Name" className="block mb-2">Room No:</label>
+        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+          <label htmlFor="roomNo" className="flex font-semibold w-1/3 text-blue-500">
+            Room No
+          </label>
           <input
             type="text"
-            id="Guardian Name"
+            id="roomNo"
             value={roomNo}
             onChange={(e) => setRoomNo(e.target.value)}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="flex justify-between">
-          <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-400">Save</button>
-          <button type="button" onClick={onClose} className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-gray-400">Cancel</button>
+        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+          <label htmlFor="guardianName" className="flex font-semibold w-1/3 text-blue-500">
+            GuardianN
+          </label>
+          <input
+            type="text"
+            id="guardianName"
+            
+            onChange={(e) => setRoomNo(e.target.value)}
+            className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+          />
+        </div>
+        <div className="flex justify-around">
+          <button
+            type="submit"
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-400"
+          >
+            Save
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-gray-400"
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </div>
