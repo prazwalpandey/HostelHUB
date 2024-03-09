@@ -3,8 +3,6 @@ import { Suspense, lazy, useState, useEffect } from "react";
 import Loading from './components/Loading';
 import '../index.css';
 import { Navigate } from "react-router-dom";
-import Changepassword from "./pages/Changepassword";
-import Clientchangepassword from "./pages/Clientchangepassword";
 
 const Admindashboard = lazy(() => import("./pages/Admindashboard"));
 const Profile = lazy(() => import("./components/Profile"));
@@ -17,6 +15,8 @@ const Clientnotices = lazy(() => import('./pages/Clientnotices'));
 const Clientcomplains = lazy(() => import('./pages/Clientcomplains'));
 const Studentrecords = lazy(() => import('./pages/Studentrecords'));
 const Login = lazy(() => import('./pages/clientSignin'));
+const Clientchangepassword=lazy(()=>import('./pages/Clientchangepassword'));
+const Changepassword=lazy(()=>import('./pages/Changepassword'));
 
 const App = () => {
   const [authState, setAuthState] = useState({ isAuthenticated: false, isAdmin: false });
@@ -45,14 +45,12 @@ const App = () => {
         console.error("Authentication error:", error);
         setAuthState({ isAuthenticated: false, isAdmin: false });
       } finally {
-        setLoading(false); // Set loading to false after authentication check is complete
-      }
+        setLoading(false); 
     };
 
     checkAuthentication();
   }, []);
 
-  // If still loading, show loading indicator
   if (loading) {
     return <Loading />;
   }
