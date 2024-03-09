@@ -8,7 +8,7 @@ import Photo from "../assets/userpic.png";
 import { useState,useEffect } from "react";
 
 const Admindashboard = () => {
-  const [count, setCount] = useState<{ students: number, complains: number }>({ students: 0, complains: 0 });
+  const [count, setCount] = useState<{ students: number, complainsPending: number,availableRooms: number }>({ students: 0, complains: 0, availableRooms: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,19 +43,34 @@ const Admindashboard = () => {
           const complainsCount = await responseComplains.json();
           const noOfComplains = complainsCount.count;
           // console.log(noOfComplains);
-          setCount(prevCount=>({...prevCount,complains:noOfComplains}));
+          setCount(prevCount=>({...prevCount,complainsPending:noOfComplains}));
         }
+        const responseRooms = await fetch('http://localhost:5000/availableroomscount',{
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      if(!responseRooms.ok){
+        throw new Error('Could not fetch the data for that resource');
+      }
+      else{
+        const availRooms = await responseRooms.json();
+        const noOfavailableRooms = availRooms.count;
+        setCount(prevCount=>({...prevCount,availableRooms:noOfavailableRooms}));
+      }
 
       } catch (error) {
         console.error('Error fetching data:', error);
       }
-    };
+    }
 
     fetchData();
   }, []);
   const widgetItemsData = [
     {
-      value: 171,
+      value: count.availableRooms,
       heading: "Rooms",
       Icon: FaHotel,
     },
@@ -65,7 +80,7 @@ const Admindashboard = () => {
       Icon: FaPeopleGroup,
     },
     {
-      value: count.complains,
+      value: count.complainsPending,
       heading: "Complains",
       Icon: CgNotes,
     },

@@ -43,15 +43,15 @@ router.get('/getallcomplain', authenticateAdmin, async (req, res) => {
   }
 });
 
-
 router.get('/complainscount', authenticateAdmin, async (req, res) => {
   try {
-    const complainsCount = await Complains.countDocuments();
-    res.status(200).json({ count:complainsCount });
+    const complainsCount = await Complains.countDocuments({ status: 'Pending' });
+    res.status(200).json({ count: complainsCount });
   } catch (error) {
     res.status(500).send({ msg: "Internal Server Error" });
   }
-})
+});
+
 
 
 router.get('/getcomplain', authenticateUser, async (req, res) => {
