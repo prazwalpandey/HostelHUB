@@ -15,6 +15,7 @@ router.get('/bookedrooms',authenticateAdmin,async (req, res) => {
             const combinedString=block+roomNo;
             return combinedString;
         });
+        // console.log(bookedRooms);
         res.status(200).json({bookedRooms});
 
     }catch(err){

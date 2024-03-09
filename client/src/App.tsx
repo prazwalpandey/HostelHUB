@@ -46,8 +46,8 @@ const App = () => {
         setAuthState({ isAuthenticated: false, isAdmin: false });
       } finally {
         setLoading(false); 
+    }
     };
-
     checkAuthentication();
   }, []);
 

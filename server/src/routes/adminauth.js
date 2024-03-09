@@ -75,6 +75,29 @@ router.get("/protected", authenticateAdmin, (req, res) => {
     res.status(200).send('Welcome to admin dashboard');
 });
 
+//Change Password Route
+router.put('/changepassword',authenticateAdmin, async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        const token=req.cookies.token;
+        const decodedToken=jwt.verify(token,process.env.JWT_SECRET,{complete:true});
+        const userId=decodedToken.payload.id;
+        const admin = await Admin.findById(userId);
+        if (admin && comparePassword(currentPassword, admin.password)) {
+            admin.password = hashedPassword(newPassword);
+            await admin.save();
+            res.clearCookie('token');
+            res.status(200).send('Password Changed Successfully');
+        }
+        else{
+            res.status(400).send('Invalid credentials');
+        }
+        
+    }catch(error){
+        res.status(500).send('Internal Server Error');
+    }
+})
+
 //LOGOUT ROUTE
 router.get('/logout',authenticateAdmin, (req, res) => {
     try {

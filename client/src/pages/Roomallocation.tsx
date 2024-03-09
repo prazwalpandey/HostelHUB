@@ -8,7 +8,13 @@ const Roomallocation = () => {
   useEffect(() => {
     const fetchBookedRooms = async () => {
       try {
-        const response = await fetch("http://localhost:5000/bookedrooms");
+        const response = await fetch("http://localhost:5000/bookedrooms",{
+          method: "GET",
+          credentials: 'include',
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch booked rooms');
         }
