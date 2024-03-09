@@ -22,6 +22,8 @@ const Studentrecords: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [searchByYear, setSearchByYear] = useState<string>("");
+  const [searchByName,setSearchByName]=useState<string>("");
+  const [byYear,setByYear]=useState<boolean>(false);
 
   const handleStudentClick = (record: StudentRecord) => {
     setSelectedStudent(record);
@@ -98,6 +100,11 @@ const Studentrecords: React.FC = () => {
     return isNaN(searchYear) || record.year === searchYear;
   });
 
+  const filterByName = studentRecords.filter((record) => {
+    return record.name.toLowerCase().startsWith(searchByName.toLowerCase());
+  });
+  
+
   const handleUploadClick = () => {
     setIsUploadModalOpen(true);
   };
@@ -150,33 +157,31 @@ const Studentrecords: React.FC = () => {
             <hr className="border-t border-gray-300 border-width-2" />
             <br />
             <div className="search-by-year" style={{display:"flex",marginBottom: "20px" , justifyContent:"space-evenly"}}>
-              {/* <input
-                type="text"
-                placeholder="Search By Name"
-                value={searchBy}
-                onChange={(e) => setSearchByYear(e.target.value)}
-                className="border border-gray-300 px-4 py-2 rounded-lg"
-              /> */}
 
+              {/* Search By Year  */}
               <input
                 type="text"
                 placeholder="Search By Year"
                 value={searchByYear}
-                onChange={(e) => setSearchByYear(e.target.value)}
+                onChange={(e) => {
+                  setSearchByYear(e.target.value);
+                  setByYear(true);
+                }}
                 className="border border-gray-300 px-4 py-2 rounded-lg"
               />
-              {/* Search By Roll NO */}
 
-
-              {/* <input
+              {/* Search By Name */}
+              <input
                 type="text"
-                placeholder="Search By RollNo"
-                value={searchByYear}
-                onChange={(e) => setSearchByYear(e.target.value)}
+                placeholder="Search By Name"
+                value={searchByName}
+                onChange={(e) => {
+                  setSearchByName(e.target.value)
+                  setByYear(false);
+                }}
                 className="border border-gray-300 px-4 py-2 rounded-lg"
-              /> */}
+              />
 
-               {/* Search By Name */}
 
 
             </div>
@@ -195,7 +200,36 @@ const Studentrecords: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredStudentRecords.map((record, index) => (
+                  {byYear? filteredStudentRecords.map((record,index) => (
+                    <tr key={index}>
+                      <td
+                        className="border border-gray-300 px-4 py-2 cursor-pointer"
+                        onClick={() => handleStudentClick(record)}
+                      >
+                        {record.name}
+                      </td>
+                      <td
+                        className="border border-gray-300 px-4 py-2 cursor-pointer"
+                        onClick={() => handleStudentClick(record)}
+                      >
+                        {record.email}
+                      </td>
+                      <td
+                        className="border border-gray-300 px-4 py-2 cursor-pointer"
+                        onClick={() => handleStudentClick(record)}
+                      >
+                        {record.contact}
+                      </td>
+                      <td
+                        className="border border-gray-300 px-4 py-2 cursor-pointer"
+                        onClick={() => handleStudentClick(record)}
+                      >
+                        {record.rollNo}
+                      </td>
+                    </tr>
+
+                  )):
+                  filterByName.map((record, index) => (
                     <tr key={index}>
                       <td
                         className="border border-gray-300 px-4 py-2 cursor-pointer"

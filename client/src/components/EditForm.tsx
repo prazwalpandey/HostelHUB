@@ -7,11 +7,15 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
   const [rollNo, setRollNo] = useState(selectedStudent.rollNo);
   const [block, setBlock] = useState(selectedStudent.block);
   const [roomNo, setRoomNo] = useState(selectedStudent.roomNo);
+  const [guardianName,setGuardianName]=useState(selectedStudent.guardianName);
+  const [guardianContact,setGuardianContact]=useState(selectedStudent.guardianContact);
+  const [guardianRelationship,setGuardianRelationship]=useState(selectedStudent.guardianRelationship);
+
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedStudent = { name, email, contact, rollNo, block, roomNo };
+    const updatedStudent = { name, email, contact, rollNo, block, roomNo,guardianName,guardianContact,guardianRelationship };
 
     try {
       const response = await fetch(
@@ -56,8 +60,8 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
     >
       <h2 className="text-lg font-medium text-center">Edit Student</h2>
       <hr className="w-full my-1 border-t border-gray-300" />
-      <form onSubmit={handleSubmit}>
-        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+      <form onSubmit={handleSubmit} className="w-full m-10" >
+        <div className="flex flex-row " style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="name" className="flex font-semibold w-1/3 text-blue-500">
             Name
           </label>
@@ -69,7 +73,7 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
             className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+        <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="email" className="flex font-semibold w-1/3 text-blue-500">
             Email
           </label>
@@ -81,7 +85,7 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
             className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+        <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="contact" className="flex font-semibold w-1/3 text-blue-500">
             Contact
           </label>
@@ -93,7 +97,7 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
             className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+        <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="rollNo" className="flex font-semibold w-1/3 text-blue-500">
             Roll No
           </label>
@@ -105,7 +109,7 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
             className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+        <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="Block" className="flex font-semibold w-1/3 text-blue-500">
             Block
           </label>
@@ -117,7 +121,7 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
             className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
+        <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="roomNo" className="flex font-semibold w-1/3 text-blue-500">
             Room No
           </label>
@@ -129,29 +133,53 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
             className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
-        <div className="flex flex-row" style={{alignItems:"center",marginBottom:"10px"}}>
-          <label htmlFor="guardianName" className="flex font-semibold w-1/3 text-blue-500">
-            GuardianN
+        <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
+          <label htmlFor="guardianName" className="flex font-semibold w-1/3  text-blue-500">
+            Guardian Name
           </label>
           <input
             type="text"
             id="guardianName"
-            
-            onChange={(e) => setRoomNo(e.target.value)}
+            value={guardianName}
+            onChange={(e) => setGuardianName(e.target.value)}
+            className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+          />
+        </div>
+        <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
+          <label htmlFor="guardianContact" className="flex font-semibold w-1/3  text-blue-500">
+            Guardian Contact
+          </label>
+          <input
+            type="text"
+            id="guardianContact"
+            value={guardianContact}
+            onChange={(e) => setGuardianContact(e.target.value)}
+            className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+          />
+        </div>
+        <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
+          <label htmlFor="guardianRelationship" className="flex font-semibold w-1/3  text-blue-500">
+            Guardian Name
+          </label>
+          <input
+            type="text"
+            id="guardianRelationship"
+            value={guardianRelationship}
+            onChange={(e) => setGuardianRelationship(e.target.value)}
             className="w-full px-3 ml-1 border-b rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
         </div>
         <div className="flex justify-around">
           <button
             type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-400"
+            className="bg-blue-500 mt-8 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-400"
           >
             Save
           </button>
           <button
             type="button"
             onClick={onClose}
-            className="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-gray-400"
+            className="bg-gray-500 mt-8 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-gray-400"
           >
             Cancel
           </button>
