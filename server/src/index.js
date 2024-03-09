@@ -57,7 +57,7 @@ app.use('/',fileuploadRoute);
 //Get Students ROUTES
 app.use('/',getStudentsRoute);
 //Get Rooms Booked
-app.use('/bookedrooms',getRoomBookedRoute);
+app.use('/',getRoomBookedRoute);
 
 //GET ME
 app.use('/',getmeRoute);

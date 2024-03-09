@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 
 export const authenticateUser = (req, res, next) => {
     const token = req.cookies.token;
-    console.log(token);
+    // console.log(token);
     if (!token) {
         res.status(403).send('please login first');
     }
@@ -11,7 +11,7 @@ export const authenticateUser = (req, res, next) => {
         const decodedToken=jwt.verify(token,process.env.JWT_SECRET,{complete:true});
         if (decodedToken.payload.role === 'Student') {
             const decode = jwt.verify(token, process.env.JWT_SECRET);
-            console.log(decode);
+            // console.log(decode);
             req.user = decode;
             next();
         }
@@ -26,7 +26,7 @@ export const authenticateUser = (req, res, next) => {
 
 export const authenticateAdmin = (req, res, next) => {
     const token = req.cookies.token;
-    console.log(token);
+    // console.log(token);
     if (!token) {
         res.status(403).send('please login first');
     }
@@ -34,7 +34,7 @@ export const authenticateAdmin = (req, res, next) => {
         const decodedToken=jwt.verify(token,process.env.JWT_SECRET,{complete:true});
         if (decodedToken.payload.role === 'HostelWaden') {
             const decode = jwt.verify(token, process.env.JWT_SECRET);
-            console.log(decode);
+            // console.log(decode);
             req.user = decode;
             next();
         }
