@@ -91,6 +91,13 @@ const ClientSidebar = () => {
                     </ul>
                 </div>
                 <div className="lower" style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", height: "50%" }}>
+                <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
+            style={{ width: "auto"}}
+            onClick={() => { window.location.href="/client/clientchangepassword"; }}
+          >
+                  Change Password
+          </button>
                     <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
                         style={{ width: "auto" }}
