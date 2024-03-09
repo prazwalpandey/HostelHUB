@@ -3,6 +3,8 @@ import { Suspense, lazy, useState, useEffect } from "react";
 import Loading from './components/Loading';
 import '../index.css';
 import { Navigate } from "react-router-dom";
+import Changepassword from "./pages/Changepassword";
+import Clientchangepassword from "./pages/Clientchangepassword";
 
 const Admindashboard = lazy(() => import("./pages/Admindashboard"));
 const Profile = lazy(() => import("./components/Profile"));
@@ -68,10 +70,13 @@ const App = () => {
           <Route path="/admin/complains" element={authState.isAuthenticated && authState.isAdmin ? <Complains /> : <Navigate to="/login" replace />} />
           <Route path="/admin/notices" element={authState.isAuthenticated && authState.isAdmin ? <Notices /> : <Navigate to="/login" replace />} />
           <Route path="/admin/studentrecords" element={authState.isAuthenticated && authState.isAdmin ? <Studentrecords /> : <Navigate to="/login" replace />} />
+          <Route path="/admin/changepassword" element={authState.isAuthenticated && authState.isAdmin ? <Changepassword /> : <Navigate to="/login" replace />} />
+
           {/* Other routes for client */}
           <Route path="/client/registerroom" element={authState.isAuthenticated && !authState.isAdmin ? <Clientregisterroom /> : <Navigate to="/login" replace />} />
           <Route path="/client/complains" element={authState.isAuthenticated && !authState.isAdmin ? <Clientcomplains /> : <Navigate to="/login" replace />} />
           <Route path="/client/notices" element={authState.isAuthenticated && !authState.isAdmin ? <Clientnotices /> : <Navigate to="/login" replace />} />
+          <Route path="/client/clientchangepassword" element={authState.isAuthenticated && !authState.isAdmin ? <Clientchangepassword /> : <Navigate to="/login" replace />} />
           {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}
         </Routes>
       </Suspense>
