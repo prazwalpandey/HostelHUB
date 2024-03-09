@@ -35,7 +35,6 @@ const AdminSidebar = () => {
       setIsLoggingOut(false); // Reset loading state regardless of success or failure
     }
   };
-
   const menuItemsDashboard = [
     {
       url: "/admin/dashboard",
@@ -108,11 +107,10 @@ const AdminSidebar = () => {
         <div className="lower" style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", height: "50%" }}>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
-            style={{ width: "auto", }}
-            // onClick={}
-           // Disable button while logging out
+            style={{ width: "auto"}}
+            onClick={() => { window.location.href="/admin/changepassword"; }}
           >
-          Change Password
+                  Change Password
           </button>
         
           <button
