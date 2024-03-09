@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 
 const Admindashboard = lazy(() => import("./pages/Admindashboard"));
 const Profile = lazy(() => import("./components/Profile"));
-
+const SignUp = lazy(()=>import("./pages/Signuppage"));
 const Roomallocation = lazy(() => import("./pages/Roomallocation"));
 const Complains = lazy(() => import("./pages/Complains"));
 const Clientregisterroom = lazy(() => import("./pages/Clientregisterroom"));
@@ -17,6 +17,7 @@ const Studentrecords = lazy(() => import("./pages/Studentrecords"));
 const Login = lazy(() => import("./pages/clientSignin"));
 const Clientchangepassword = lazy(() => import("./pages/Clientchangepassword"));
 const Changepassword = lazy(() => import("./pages/Changepassword"));
+
 
 const App = () => {
   const [authState, setAuthState] = useState({
@@ -103,6 +104,12 @@ const App = () => {
             }
           />
           <Route
+            path="/Signup"
+            element={
+                <SignUp />
+            }
+          />
+          <Route
             path="/admin/dashboard"
             element={
               authState.isAuthenticated && authState.isAdmin ? (
@@ -122,6 +129,7 @@ const App = () => {
               )
             }
           />
+          
           {/* Other routes for admin */}
           <Route
             path="/admin/roomallocation"
