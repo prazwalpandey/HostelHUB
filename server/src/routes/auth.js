@@ -104,6 +104,27 @@ router.get("/protected",authenticateUser ,(req, res) => {
     res.status(200).send('Welcome to Protected routee');
 });
 
+//Change Password Route
+router.put('/changepassword',authenticateUser, async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        const token=req.cookies.token;
+        const decodedToken=jwt.verify(token,process.env.JWT_SECRET,{complete:true});
+        const userId=decodedToken.payload.id;
+        const user = await User.findById(userId);
+        if (user && comparePassword(currentPassword, user.password)) {
+            user.password = hashedPassword(newPassword);
+            await user.save();
+            res.clearCookie('token');
+            res.status(200).send('Password changed successfully');
+        } else {
+            res.status(400).send('Invalid credentials');
+        }
+    } catch (error) {
+        res.status(500).send('Internal Server error');
+    }
+});
+
 //LOGOUT ROUTE
 router.get('/logout',authenticateUser, (req, res) => {
     try {
