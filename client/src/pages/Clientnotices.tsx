@@ -35,11 +35,8 @@ const ClientNotices = () => {
   return (
     <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
       <ClientSidebar />
-      <main className="dashboard" style={{ width: "100%", height: "100vh" }}>
-        <div
-          className="flex flex-col w-full p-4 shadow-md bg-white items-center  h-full"
-          style={{ width: "auto", height: "100%", padding: "30px" }}
-        >
+      <main className="dashboard bg-white" style={{ width: "100%", height: "100vh" }}>
+        <div className=" w-full h-full p-10 ">
           <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">
             Notices
           </h2>
@@ -47,10 +44,10 @@ const ClientNotices = () => {
           {loading ? (
             <p>Loading...</p>
           ) : (
-            <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div className="flex flex-col mt-10">
               {notices.map((notice) => (
-                <div key={notice._id} className="bg-white rounded-lg shadow-md p-4">
-                  <div className="font-semibold mb-2">{notice.title}</div>
+                <div key={notice._id} className="bg-white rounded-lg shadow-md p-4 mt-3 mb-3">
+                  <div className="font-semibold mb-2">{notice.noticeOn}</div>
                   <div className="text-gray-600 mb-2">{notice.description}</div>
                   <div className="text-sm text-gray-500">Date: {notice.createdAt}</div>
                 </div>

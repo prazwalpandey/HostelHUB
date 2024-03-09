@@ -338,10 +338,10 @@ const Studentrecords: React.FC = () => {
                   }}
                 >
                   <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mr-2"
-                    onClick={handleCloseModal}
+                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
+                    onClick={() => handleDelete(selectedStudent)}
                   >
-                    Close
+                    Delete
                   </button>
                   <button
                     className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4 mr-2"
@@ -350,10 +350,10 @@ const Studentrecords: React.FC = () => {
                     Edit
                   </button>
                   <button
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4"
-                    onClick={() => handleDelete(selectedStudent)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mr-2"
+                    onClick={handleCloseModal}
                   >
-                    Delete
+                    Close
                   </button>
                 </div>
               </div>

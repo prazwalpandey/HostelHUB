@@ -60,7 +60,7 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
     >
       <h2 className="text-lg font-medium text-center">Edit Student</h2>
       <hr className="w-full my-1 border-t border-gray-300" />
-      <form onSubmit={handleSubmit} className="w-full m-10" >
+      <form onSubmit={handleSubmit} className="w-full" >
         <div className="flex flex-row " style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="name" className="flex font-semibold w-1/3 text-blue-500">
             Name
@@ -135,7 +135,7 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
         </div>
         <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="guardianName" className="flex font-semibold w-1/3  text-blue-500">
-            Guardian Name
+            Guardian
           </label>
           <input
             type="text"
@@ -147,7 +147,7 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
         </div>
         <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="guardianContact" className="flex font-semibold w-1/3  text-blue-500">
-            Guardian Contact
+            G.Contact
           </label>
           <input
             type="text"
@@ -159,7 +159,7 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
         </div>
         <div className="flex flex-row" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="guardianRelationship" className="flex font-semibold w-1/3  text-blue-500">
-            Guardian Name
+            Relation
           </label>
           <input
             type="text"
@@ -172,14 +172,14 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
         <div className="flex justify-around">
           <button
             type="submit"
-            className="bg-blue-500 mt-8 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-400"
+            className="bg-blue-500  hover:bg-blue-600 text-white font-semibold  px-4 rounded focus:outline-none focus:ring focus:ring-blue-400"
           >
             Save
           </button>
           <button
             type="button"
             onClick={onClose}
-            className="bg-gray-500 mt-8 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:ring focus:ring-gray-400"
+            className="bg-gray-500 hover:bg-gray-600 text-white font-semibold  px-4 rounded focus:outline-none focus:ring focus:ring-gray-400"
           >
             Cancel
           </button>
