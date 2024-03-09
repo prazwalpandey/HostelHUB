@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 import User from '../database/schemas/user.js';
-import cookieParser from 'cookie-parser';
 import { hashedPassword, getAdminData, getUserData, comparePassword } from '../utils/helpers.js';
 import { authenticateUser } from '../utils/authenticateUsers.js';
 
