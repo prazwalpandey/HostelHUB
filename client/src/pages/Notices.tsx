@@ -134,6 +134,7 @@ const Notices = () => {
                   <div key={notice._id} className="bg-white rounded-lg shadow-md p-4 w-3/4" style={{marginTop:"10px"}}>
                     <div className="font-semibold mb-2">{notice.noticeOn}</div>
                     <div className="text-gray-600 mb-2">{notice.description}</div>
+                    <div className="text-gray-600 mb-2">Date: {new Date(notice.createdAt).toLocaleDateString()}</div>
                   </div>
                 ))
               ) : (

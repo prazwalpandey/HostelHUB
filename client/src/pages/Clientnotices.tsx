@@ -49,7 +49,7 @@ const ClientNotices = () => {
                 <div key={notice._id} className="bg-white rounded-lg shadow-md p-4 mt-3 mb-3">
                   <div className="font-semibold mb-2">{notice.noticeOn}</div>
                   <div className="text-gray-600 mb-2">{notice.description}</div>
-                  <div className="text-sm text-gray-500">Date: {notice.createdAt}</div>
+                  <div className="text-sm text-gray-500">Date: {new Date(notice.createdAt).toLocaleDateString()}</div>
                 </div>
               ))}
             </div>

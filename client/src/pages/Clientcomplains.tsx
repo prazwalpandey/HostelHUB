@@ -127,6 +127,7 @@ const Clientcomplains: React.FC = () => {
                   <div key={complaint._id} className="bg-white rounded-lg shadow-md p-4 w-3/4" style={{marginTop:"10px"}}>
                     <div className="font-semibold mb-2">{complaint.complainOn}</div>
                     <div className="text-gray-600 mb-2">{complaint.description}</div>
+                    <div className="text-gray-600 mb-2">Date: {new Date(complaint.createdAt).toLocaleDateString()}</div>
                     <div className={`text-gray-600 mb-2 ${complaint.status === "resolved" ||complaint.status==='Resolved' ? "text-green-500" : "text-red-500"}`}>{complaint?.status}</div>
                   </div>
                 ))

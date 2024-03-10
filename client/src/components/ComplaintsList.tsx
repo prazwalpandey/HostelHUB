@@ -68,6 +68,7 @@ const ComplaintsList: React.FC = () => {
           <div key={complaint._id} className="bg-white rounded-lg shadow-md p-4">
             <div className="font-semibold mb-2">{complaint.complainOn}</div>
             <div className="text-gray-600 mb-2">{complaint.description}</div>
+            <div className="text-gray-600 mb-2">Date: {new Date(complaint.createdAt).toLocaleDateString()}</div>
             <div className={`text-sm ${complaint.status === 'Resolved' ? 'text-green-600' : 'text-red-600'}`}>
               Status: {complaint.status}
             </div>
@@ -80,6 +81,7 @@ const ComplaintsList: React.FC = () => {
               </button>
             )}
           </div>
+
         ))}
       </div>
     </div>
