@@ -68,6 +68,7 @@ const SignUp = () => {
           <div className="grid grid-cols-4" style={{ alignItems: "center", margin: "10px" }}>
             <label htmlFor="name" className="font-medium text-blue-500">
               Full Name:
+              <span className="text-blue-400">*</span>
             </label>
             <input
               type="text"
@@ -82,6 +83,7 @@ const SignUp = () => {
           <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="email" className="font-medium text-blue-500">
             Email:
+            <span className="text-blue-400">*</span>
           </label>
           <input
             type="email"
@@ -95,6 +97,7 @@ const SignUp = () => {
         <div className="grid grid-cols-4" style={{ alignItems: "center", margin: "10px" }}>
             <label htmlFor="password" className="font-medium text-blue-500">
               Password:
+              <span className="text-blue-400">*</span>
             </label>
             <div className="relative col-span-2 w-full">
               <input
@@ -117,6 +120,7 @@ const SignUp = () => {
         <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="contact" className="font-medium text-blue-500">
             Contact Number:
+            <span className="text-blue-400">*</span>
           </label>
           <input
             type="text"
@@ -130,6 +134,7 @@ const SignUp = () => {
         <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="rollNo" className="font-medium text-blue-500">
             Roll No:
+            <span className="text-blue-400">*</span>
           </label>
           <input
             type="text"
@@ -179,6 +184,7 @@ const SignUp = () => {
         <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="Department" className="font-medium text-blue-500">
             Department:
+            <span className="text-blue-400">*</span>
           </label>
           <input
             type="text"
@@ -186,11 +192,13 @@ const SignUp = () => {
             onChange={handleChange}
             value={formData.department}
             className="px-3 col-span-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            required
           />
         </div>
         <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="batch" className="font-medium text-blue-500">
             Batch:
+            <span className="text-blue-400">*</span>
           </label>
           <input
             type="text"
@@ -204,6 +212,7 @@ const SignUp = () => {
         <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="guardianName" className="font-medium text-blue-500">
             Guardian Name:
+            <span className="text-blue-400">*</span>
           </label>
           <input
             type="text"
@@ -217,6 +226,7 @@ const SignUp = () => {
         <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="guardianContact" className="font-medium text-blue-500">
             Guardian Contact:
+            <span className="text-blue-400">*</span>
           </label>
           <input
             type="text"
@@ -230,6 +240,8 @@ const SignUp = () => {
         <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="guardianRelationship" className="font-medium text-blue-500">
             Relation with Guardian:
+            <span className="text-blue-400">*</span>
+
           </label>
           <input
             type="text"
