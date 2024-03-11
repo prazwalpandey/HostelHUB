@@ -4,7 +4,7 @@ import {authenticateAdmin} from "../utils/authenticateUsers.js";
 
 const router= Router();
 
-router.get('/getStudents',authenticateAdmin,async (req, res) => {
+router.get('/getStudents',async (req, res) => {
     try {
         const students =await User.find().sort({name:1});
         res.status(200).json({students});

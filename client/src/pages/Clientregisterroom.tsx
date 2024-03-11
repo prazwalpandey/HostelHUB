@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState, useEffect } from 'react';
 import Select from "react-select";
 import ClientSidebar from "../components/Sidebar_client";
 
@@ -6,26 +6,69 @@ const Clientregisterroom = () => {
   const [student1RollNo, setStudent1RollNo] = useState("");
   const [student2RollNo, setStudent2RollNo] = useState("");
   const [student3RollNo, setStudent3RollNo] = useState("");
+  const [rollNoOptions, setRollNoOptions] = useState([]);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/getstudents', {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Error fetching student roll numbers');
+        }
+
+        const data = await response.json();
+        const options = data.students.map(student => ({ value: student.rollNo, label: student.rollNo }));
+        setRollNoOptions(options);
+      } catch (error) {
+        console.error('Error fetching student roll numbers:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Do something with selected roll numbers
-    console.log("Student 1 Roll No:", student1RollNo);
-    console.log("Student 2 Roll No:", student2RollNo);
-    console.log("Student 3 Roll No:", student3RollNo);
-    // Reset selected roll numbers
-    setStudent1RollNo("");
-    setStudent2RollNo("");
-    setStudent3RollNo("");
+    
+      const data = {
+      student1RollNo,
+      student2RollNo,
+      student3RollNo
+      };
+  
+    try {
+      const response = await fetch('http://localhost:5000/registerforroom', {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error registering for room');
+      }
+  
+      console.log('Room registration successful');
+      alert('Room registration Successful !');
+    } catch (error) {
+      console.error('Error registering for room:', error);
+    }
   };
+  
 
-  const rollNoOptions = [
-    { value: "", label: "Select Roll No." },
-    { value: "PUL077BCT055", label: "PUL077BCT055" },
-    { value: "PUL077BCT067", label: "PUL077BCT067" },
-    { value: "PUL077BCT100", label: "PUL077BCT100" },
-    // fetch from database
-  ];
+  // Filter out selected option from rollNoOptions for each dropdown
+  const filteredOptions1 = rollNoOptions.filter(option => option.value !== student2RollNo && option.value !== student3RollNo);
+  const filteredOptions2 = rollNoOptions.filter(option => option.value !== student1RollNo && option.value !== student3RollNo);
+  const filteredOptions3 = rollNoOptions.filter(option => option.value !== student1RollNo && option.value !== student2RollNo);
 
   return (
     <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
@@ -51,18 +94,20 @@ const Clientregisterroom = () => {
               <Select
                 id="name1"
                 className="input-style w-1/3"
-                styles={{ control: (provided) => ({
-                  ...provided,
-                  minWidth: "50%",
-                  justifyContent: "center",
-                  padding: "0.1rem 1rem",
-                  border: "1px solid #ccc",
-                  borderRadius: "0.25rem",
-                  outline: "none",
-                }),}}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    minWidth: "50%",
+                    justifyContent: "center",
+                    padding: "0.1rem 1rem",
+                    border: "1px solid #ccc",
+                    borderRadius: "0.25rem",
+                    outline: "none",
+                  }),
+                }}
                 value={rollNoOptions.find((option) => option.value === student1RollNo)}
                 onChange={(selectedOption) => setStudent1RollNo(selectedOption ? selectedOption.value : "")}
-                options={rollNoOptions}
+                options={filteredOptions1}
               />
             </div>
             <br />
@@ -73,18 +118,20 @@ const Clientregisterroom = () => {
               <Select
                 id="name2"
                 className="input-style w-1/3"
-                styles={{ control: (provided) => ({
-                  ...provided,
-                  minWidth: "50%",
-                  justifyContent: "center",
-                  padding: "0.1rem 1rem",
-                  border: "1px solid #ccc",
-                  borderRadius: "0.25rem",
-                  outline: "none",
-                }),}}
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    minWidth: "50%",
+                    justifyContent: "center",
+                    padding: "0.1rem 1rem",
+                    border: "1px solid #ccc",
+                    borderRadius: "0.25rem",
+                    outline: "none",
+                  }),
+                }}
                 value={rollNoOptions.find((option) => option.value === student2RollNo)}
                 onChange={(selectedOption) => setStudent2RollNo(selectedOption ? selectedOption.value : "")}
-                options={rollNoOptions}
+                options={filteredOptions2}
               />
             </div>
             <br />
@@ -94,19 +141,21 @@ const Clientregisterroom = () => {
               </label>
               <Select
                 id="name3"
-                className="input-style w-1/3" 
-                styles={{ control: (provided) => ({
-                  ...provided,
-                  minWidth: "50%",
-                  justifyContent: "center",
-                  padding: "0.1rem 1rem",
-                  border: "1px solid #ccc",
-                  borderRadius: "0.25rem",
-                  outline: "none",
-                }),}}
+                className="input-style w-1/3"
+                styles={{
+                  control: (provided) => ({
+                    ...provided,
+                    minWidth: "50%",
+                    justifyContent: "center",
+                    padding: "0.1rem 1rem",
+                    border: "1px solid #ccc",
+                    borderRadius: "0.25rem",
+                    outline: "none",
+                  }),
+                }}
                 value={rollNoOptions.find((option) => option.value === student3RollNo)}
                 onChange={(selectedOption) => setStudent3RollNo(selectedOption ? selectedOption.value : "")}
-                options={rollNoOptions}
+                options={filteredOptions3}
               />
             </div>
             <br />

@@ -20,6 +20,8 @@ import getRoomBookedRoute from './routes/getBookedRooms.js';
 import getmeRoute from './routes/getme.js';
 import deleteUserRoute from './routes/deleteUser.js';
 import editUserRoute from './routes/editUser.js';
+import allocateRoomRoute from './routes/allocateRoom.js';
+
 const app=express();
 
 const allowedOrigins=['http://localhost:5173']
@@ -66,7 +68,8 @@ app.use('/',deleteUserRoute);
 //Update User's Details
 app.use('/',editUserRoute);
 
-
+//Allocate Room
+app.use('/',allocateRoomRoute);
 
 
 

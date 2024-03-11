@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 const Roomallocation = () => {
   const [selectedRooms, setSelectedRooms] = useState([]);
   const [bookedRooms, setBookedRooms] = useState([]);
+  // const [groupIds,setGroupIds]=useState([]);
 
   useEffect(() => {
     const fetchBookedRooms = async () => {
@@ -39,9 +40,46 @@ const Roomallocation = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log("Selected Rooms:", selectedRooms);
+  const handleSubmit = async () => {
+    try {
+      const groupResponse = await fetch("http://localhost:5000/registerforroom", {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+  
+      if (!groupResponse.ok) {
+        throw new Error('Failed to fetch group IDs');
+      }
+  
+      const groupData = await groupResponse.json();
+      const data = groupData.groups.map(group=>group.groupId);
+      // setGroupIds(data);
+      console.log(data);
+  
+      const allocateResponse = await fetch("http://localhost:5000/allocateroom", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ groupId: data, selectedRooms: selectedRooms }),
+      });
+      console.log(data,selectedRooms);
+
+      if (!allocateResponse.ok) {
+        throw new Error('Failed to allocate rooms');
+      }
+      setSelectedRooms([]);
+      alert("Rooms allocated successfully! check the details in the student records");
+  
+    } catch (error) {
+      console.error("Error handling submit:", error);
+    }
   };
+  
 
   const roomNames = [
     "A101",

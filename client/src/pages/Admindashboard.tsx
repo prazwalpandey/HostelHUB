@@ -1,7 +1,6 @@
 import AdminSidebar from "../components/Sidebar";
 import { IconType } from "react-icons";
 import { FaHotel, FaPeopleGroup } from "react-icons/fa6";
-import { IoNotifications } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import Roomchart from "../components/Roomchart";
 import Photo from "../assets/userpic.png";
@@ -18,7 +17,7 @@ const Admindashboard = () => {
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
-          }
+          },
         });
         if(!responseStudent.ok){
           throw new Error('Could not fetch the data for that resource');
