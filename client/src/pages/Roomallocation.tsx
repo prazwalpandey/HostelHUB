@@ -74,6 +74,7 @@ const Roomallocation = () => {
       }
       setSelectedRooms([]);
       alert("Rooms allocated successfully! check the details in the student records");
+      window.location.reload();
   
     } catch (error) {
       console.error("Error handling submit:", error);

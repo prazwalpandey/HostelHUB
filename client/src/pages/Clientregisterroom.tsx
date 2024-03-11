@@ -59,6 +59,7 @@ const Clientregisterroom = () => {
   
       console.log('Room registration successful');
       alert('Room registration Successful !');
+      window.location.reload();
     } catch (error) {
       console.error('Error registering for room:', error);
     }

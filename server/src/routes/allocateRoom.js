@@ -70,7 +70,7 @@ router.put('/allocateroom', async (req, res) => {
             await User.findOneAndUpdate({ rollNo }, { block, roomNo });
         }));
 
-        await RegisterStudent.deleteMany({ roomNo: { $eq: '' } });
+        await RegisterStudent.deleteMany({ roomNo: { $ne: '' } });
 
         res.status(200).json({ message: 'Rooms allocated successfully' });
     } catch (error) {
