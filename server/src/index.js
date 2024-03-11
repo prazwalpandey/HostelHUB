@@ -21,6 +21,7 @@ import getmeRoute from './routes/getme.js';
 import deleteUserRoute from './routes/deleteUser.js';
 import editUserRoute from './routes/editUser.js';
 import allocateRoomRoute from './routes/allocateRoom.js';
+import resetRoomsRoute from './routes/resetRooms.js';
 
 const app=express();
 
@@ -70,6 +71,9 @@ app.use('/',editUserRoute);
 
 //Allocate Room
 app.use('/',allocateRoomRoute);
+
+//Reset Rooms
+app.use('/',resetRoomsRoute);
 
 
 

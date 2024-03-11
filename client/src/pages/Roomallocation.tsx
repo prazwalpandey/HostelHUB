@@ -39,7 +39,25 @@ const Roomallocation = () => {
       );
     }
   };
-
+  const handleReset=async()=>{
+    try {
+      const response = await fetch("http://localhost:5000/resetrooms", {
+        method: "PUT",
+        credentials: "include",
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      })
+      if(!response.ok){
+        throw new Error('Failed to reset rooms');
+      }
+      console.log('Rooms reset successfully');
+      alert('Rooms reset successfully');
+      window.location.reload();
+    }catch(error){
+      console.error('Error resetting rooms:', error);
+    }
+  }
   const handleSubmit = async () => {
     try {
       const groupResponse = await fetch("http://localhost:5000/registerforroom", {
@@ -319,11 +337,18 @@ const Roomallocation = () => {
             ))}
             <div className="flex justify-center mt-4">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-small py-2 px-2 rounded"
+                className="bg-blue-500 hover:bg-blue-700 m-1 text-white font-small py-2 px-2 rounded"
                 style={{ width: "20%", fontSize: "20px" }}
                 onClick={handleSubmit}
               >
                 Submit
+              </button>
+              <button
+                className="bg-gray-500 hover:bg-blue-700 m-1 text-white font-small py-2 px-2 rounded"
+                style={{ width: "20%", fontSize: "20px" }}
+                onClick={handleReset}
+              >
+                Reset Rooms
               </button>
             </div>
           </div>
