@@ -67,7 +67,7 @@ router.post('/login', async (req, res) => {
 //Check Admin Authentication
 //Check Authentication
 router.get('/checkauthentication',authenticateAdmin,(req,res)=>{
-    res.status(200).send('User is Authenticated');
+    res.status(200).send('Admin is Authenticated');
 });
 
 //Access only after loggedin

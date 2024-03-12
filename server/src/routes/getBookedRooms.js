@@ -10,18 +10,19 @@ router.get('/bookedrooms', authenticateAdmin, async (req, res) => {
         const users = await User.find({}, 'name block roomNo').exec();
 
         const bookedRooms = users.map(user => {
-            const block = user.block;
-            const roomNo = user.roomNo;
+            const block = user.block || ''; // Handle potential null values
+            const roomNo = user.roomNo || ''; // Handle potential null values
             const combinedString = block + roomNo;
-            return combinedString;
-        });
-        // console.log(bookedRooms);
+            return combinedString.trim(); // Trim any leading or trailing whitespace
+        }).filter(combinedString => combinedString !== ''); // Filter out empty strings
+
         res.status(200).json({ bookedRooms });
 
     } catch (err) {
-        res.status(505).send('Internal Server Error');
+        res.status(500).send('Internal Server Error'); // Corrected status code to 500
     }
 })
+
 
 
 

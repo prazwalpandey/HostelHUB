@@ -34,6 +34,9 @@ const App = () => {
           {
             method: "GET",
             credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            }
           }
         );
         const userResponse = await fetch(
@@ -41,6 +44,9 @@ const App = () => {
           {
             method: "GET",
             credentials: "include",
+            headers: {
+              "Content-Type": "application/json",
+            }
           }
         );
 
