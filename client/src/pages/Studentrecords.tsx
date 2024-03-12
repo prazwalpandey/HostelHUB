@@ -4,6 +4,7 @@ import FileUpload from "../components/FileUpload";
 import EditForm from "../components/EditForm";
 
 interface StudentRecord {
+  _id: string; // Assuming _id is present in your data
   name: string;
   email: string;
   contact: string;
@@ -11,10 +12,14 @@ interface StudentRecord {
   block: string;
   roomNo: string;
   year: string; // Add year property
+  batch: string; // Add batch property
+  guardianName: string; // Add guardianName property
+  guardianContact: string; // Add guardianContact property
+  guardianRelationship: string;// Add year property
 }
 
 const Studentrecords: React.FC = () => {
-  const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
+  // const [isUploadModalOpen, setIsUploadModalOpen] = useState<boolean>(false);
   const [studentRecords, setStudentRecords] = useState<StudentRecord[]>([]); // Change type to array of StudentRecord
   const [selectedStudent, setSelectedStudent] = useState<StudentRecord | null>(
     null
@@ -40,7 +45,7 @@ const Studentrecords: React.FC = () => {
     setIsEditModalOpen(true);
   };
 
-  const handleUpdate = async (updatedStudent: StudentRecord) => {
+  const handleUpdate = async () => {
     // Implement update logic here
     setIsEditModalOpen(false);
   };
@@ -98,17 +103,13 @@ const Studentrecords: React.FC = () => {
 
   const filteredStudentRecords = studentRecords.filter((record) => {
     const searchYear = parseInt(searchByYear);
-    return isNaN(searchYear) || record.year === searchYear;
+    return isNaN(searchYear) || parseInt(record.year) === searchYear;
   });
 
   const filterByName = studentRecords.filter((record) => {
     return record.name.toLowerCase().startsWith(searchByName.toLowerCase());
   });
   
-
-  const handleUploadClick = () => {
-    setIsUploadModalOpen(true);
-  };
 
   return (
     <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
@@ -376,7 +377,7 @@ const Studentrecords: React.FC = () => {
             }}
           >
                 <EditForm
-                  selectedStudent={selectedStudent}
+                  selectedStudent={selectedStudent as StudentRecord}
                   onClose={() => setIsEditModalOpen(false)}
                   onUpdate={handleUpdate}
                 />

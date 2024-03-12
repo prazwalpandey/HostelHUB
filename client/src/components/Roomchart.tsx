@@ -1,8 +1,8 @@
 import React from 'react';
 import { PieChart } from '@mui/x-charts/PieChart';
 
-const Roomchart = () => {
-  const totalRooms = [
+const Roomchart: React.FC = () => {
+    const totalRooms:string[] = [
     "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A108", "A109", "A110",
     "A111", "A112", "A113", "A114", "A115", "A116", "A117", "A118", "A119",
     "A201", "A202", "A203", "A204", "A205", "A206", "A207", "A208", "A209", "A210",
@@ -23,54 +23,56 @@ const Roomchart = () => {
     "C311", "C312", "C313", "C314", "C315", "C316", "C317", "C318", "C319"
   ];
 
-  const bookedRooms =[
+  const bookedRooms: string[] =[
     "A101", "A102", "A103", "A104", "A105", "A106", "A107", "A108", "A109", "A110",
     "A111", "A112", "A113", "A114", "A115", "A116", "A117", "A118", "A119",
     "B201", "B202", "B203", "B204", "B205", "B206", "B207", "B208", "B209", "B210",
     "B211", "B212", "B213", "B214", "B215", "B216", "B217", "B218", "B219",
     "C101", "C102", "C103", "C104", "C105", "C106", "C107", "C108", "C109", "C110",
   ];
-  //get the value of bookedRooms from database
-
 
   // Count the number of free rooms
-  const freeRooms = totalRooms.length - bookedRooms.length;
+  const freeRooms: number = totalRooms.length - bookedRooms.length;
 
   // Count the number of booked rooms in each block
   interface BlockCounts {
     [block: string]: number;
   }
   
-  const blockCounts = bookedRooms.reduce((acc: BlockCounts, room) => {
-    const block = room[0];
+  const blockCounts: BlockCounts = bookedRooms.reduce((acc: BlockCounts, room: string) => {
+    const block: string = room[0];
     acc[block] = (acc[block] || 0) + 1;
     return acc;
   }, {});
 
   return (
     <div>
-        <h2 className="text-center text-xl font-light mb-4" style={{ color: "#3a3e59",fontSize: "24px"}}>Room Availability Pie Chart</h2>
-        <PieChart
+      <h2 className="text-center text-xl font-light mb-4" style={{ color: "#3a3e59", fontSize: "24px" }}>Room Availability Pie Chart</h2>
+      <PieChart
         colors={['red', 'blue', 'green']}
-  series={[
-    {data: [{ id: 0, value: freeRooms, label: 'Free Rooms',color: '#f9ac66'},
-    { id: 1, value: blockCounts["A"] || 0, label: 'Block A',color: '#3a3e59'},
-    { id: 2, value: blockCounts["B"] || 0, label: 'Block B',color: '#ed6b5b'},
-    { id: 3, value: blockCounts["C"] || 0, label: 'Block C',color: '#c36B84'}],
-      innerRadius: 65,
-      outerRadius: 100,
-      paddingAngle: 5,
-      cornerRadius: 5,
-      startAngle: -90,
-      endAngle: 180,
-      cx: 150,
-      cy: 150,}
-  ]}
-  width={450}
-  height={400}
-/>
-
-</div>
+        series={[
+          {
+            data: [
+              { id: 0, value: freeRooms, label: 'Free Rooms', color: '#f9ac66' },
+              { id: 1, value: blockCounts["A"] || 0, label: 'Block A', color: '#3a3e59' },
+              { id: 2, value: blockCounts["B"] || 0, label: 'Block B', color: '#ed6b5b' },
+              { id: 3, value: blockCounts["C"] || 0, label: 'Block C', color: '#c36B84' }
+            ],
+            innerRadius: 65,
+            outerRadius: 100,
+            paddingAngle: 5,
+            cornerRadius: 5,
+            startAngle: -90,
+            endAngle: 180,
+            cx: 150,
+            cy: 150,
+          }
+        ]}
+        width={450}
+        height={400}
+      />
+    </div>
   );
 };
+
 export default Roomchart;

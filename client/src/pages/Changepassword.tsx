@@ -1,14 +1,14 @@
+import React, { useState, useEffect } from "react";
 import AdminSidebar from "../components/Sidebar";
-import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const Changepassword = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [newPassword, setNewPassword] = useState("");
-  const [retypePassword, setRetypePassword] = useState("");
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [passwordMatch, setPasswordMatch] = useState(true); // State variable to track password match
-  const [loading, setLoading] = useState(false); // State variable to track loading state
+const Changepassword: React.FC = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [retypePassword, setRetypePassword] = useState<string>("");
+  const [currentPassword, setCurrentPassword] = useState<string>("");
+  const [passwordMatch, setPasswordMatch] = useState<boolean>(true); // State variable to track password match
+  const [loading, setLoading] = useState<boolean>(false); // State variable to track loading state
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -18,7 +18,7 @@ const Changepassword = () => {
     setPasswordMatch(newPassword === retypePassword);
   }, [newPassword, retypePassword]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoading(true); // Set loading state to true when the request starts
 

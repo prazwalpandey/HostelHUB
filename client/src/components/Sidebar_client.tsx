@@ -6,9 +6,15 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { IoIosPeople } from "react-icons/io";
 import Logo from "../assets/logo.png";
 
-const ClientSidebar = () => {
+interface MenuItem {
+    url: string;
+    text: string;
+    Icon: React.ElementType;
+}
+
+const ClientSidebar: React.FC = () => {
     const location = useLocation();
-    const [isLoggingOut, setIsLoggingOut] = useState(false); // State variable to track logout loading state
+    const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false); // State variable to track logout loading state
 
     const handleLogout = async () => {
         try {
@@ -28,13 +34,13 @@ const ClientSidebar = () => {
                 console.log('Logout failed error:', response.status);
             }
         } catch (error) {
-            console.log('Error logging out:', error.message);
+            console.log('Error logging out:', error);
         } finally {
             setIsLoggingOut(false); // Reset loading state regardless of success or failure
         }
     };
 
-    const menuItemsDashboard = [
+    const menuItemsDashboard: MenuItem[] = [
         {
             url: "/client/dashboard",
             text: "Profile",
@@ -91,13 +97,13 @@ const ClientSidebar = () => {
                     </ul>
                 </div>
                 <div className="lower" style={{ display: "flex", flexDirection: "column", justifyContent: "flex-end", height: "50%" }}>
-                <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
-            style={{ width: "auto"}}
-            onClick={() => { window.location.href="/client/clientchangepassword"; }}
-          >
-                  Change Password
-          </button>
+                    <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
+                        style={{ width: "auto"}}
+                        onClick={() => { window.location.href="/client/clientchangepassword"; }}
+                    >
+                        Change Password
+                    </button>
                     <button
                         className="bg-blue-500 hover:bg-blue-700 text-white font-small py-1 px-1 rounded flex justify-center mt-4"
                         style={{ width: "auto" }}

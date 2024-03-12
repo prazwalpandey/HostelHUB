@@ -1,9 +1,16 @@
+import React, { useState, useEffect } from "react";
 import ClientSidebar from "../components/Sidebar_client";
-import { useState, useEffect } from "react";
 
-const ClientNotices = () => {
-  const [notices, setNotices] = useState([]);
-  const [loading, setLoading] = useState(true);
+interface Notice {
+  _id: string;
+  noticeOn: string;
+  description: string;
+  createdAt: string;
+}
+
+const ClientNotices: React.FC = () => {
+  const [notices, setNotices] = useState<Notice[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchNotices = async () => {

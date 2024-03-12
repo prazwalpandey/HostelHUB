@@ -1,18 +1,34 @@
-import { useState } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "../styles/signup.css";
 
-const SignUp = () => {
-  const navigate=useNavigate();
-  const [formData, setFormData] = useState({
+interface FormData {
+  name: string;
+  email: string;
+  password: string;
+  contact: string;
+  rollNo: string;
+  roomNo: string;
+  block: string;
+  floorNo: string;
+  department: string;
+  batch: string;
+  guardianName: string;
+  guardianContact: string;
+  guardianRelationship: string;
+}
+
+const SignUp: React.FC = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     password: "",
     contact: "",
     rollNo: "",
     roomNo: "",
-    block:"",
+    block: "",
     floorNo: "",
     department: "",
     batch: "",
@@ -22,14 +38,16 @@ const SignUp = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [registering, setRegistering] = useState(false);
-  const handleChange = (e) => {
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
-  const handleSubmit = async (event) => {
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setRegistering(true);
     try {
@@ -41,14 +59,14 @@ const SignUp = () => {
         },
         body: JSON.stringify(formData),
       });
-      if(!response.ok)
-      {
+
+      if (!response.ok) {
         const data = await response.json();
         console.log(data);
         return data;
       }
       alert("Registered successfully");
-      navigate('/login');
+      navigate("/login");
     } catch (err) {
       console.log(err);
     }
@@ -56,15 +74,11 @@ const SignUp = () => {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-100">
-      <div
-        className="my flex flex-col bg-white px-10 py-10 m-10 "
-        style={{ width: "90vw", height: "90vh", margin: "5vw 5vh", overflowY: "auto" }}
-      >
+      <div className="my flex flex-col bg-white px-10 py-10 m-10 " style={{ width: "90vw", height: "90vh", margin: "5vw 5vh", overflowY: "auto" }}>
         <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">REGISTER</h2>
         <hr className="w-full my-1 border-t border-gray-300" />
         <form onSubmit={handleSubmit} className="w-full mt-5">
           {/* Input fields */}
-          {/* Full Name */}
           <div className="grid grid-cols-4" style={{ alignItems: "center", margin: "10px" }}>
             <label htmlFor="name" className="font-medium text-blue-500">
               Full Name:
@@ -80,21 +94,22 @@ const SignUp = () => {
             />
           </div>
 
-          <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
-          <label htmlFor="email" className="font-medium text-blue-500">
-            Email:
-            <span className="text-blue-400">*</span>
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            className="px-3 col-span-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
-          />
-        </div>
-        <div className="grid grid-cols-4" style={{ alignItems: "center", margin: "10px" }}>
+          <div className="grid grid-cols-4" style={{ alignItems: "center", margin: "10px" }}>
+            <label htmlFor="email" className="font-medium text-blue-500">
+              Email:
+              <span className="text-blue-400">*</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="px-3 col-span-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
+            />
+          </div>
+
+          <div className="grid grid-cols-4" style={{ alignItems: "center", margin: "10px" }}>
             <label htmlFor="password" className="font-medium text-blue-500">
               Password:
               <span className="text-blue-400">*</span>
@@ -117,7 +132,8 @@ const SignUp = () => {
               </button>
             </div>
           </div>
-        <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
+
+          <div className="grid grid-cols-4" style={{alignItems:"center",margin:"10px"}}>
           <label htmlFor="contact" className="font-medium text-blue-500">
             Contact Number:
             <span className="text-blue-400">*</span>
@@ -251,9 +267,7 @@ const SignUp = () => {
             value={formData.guardianRelationship}
             className="px-3 col-span-2 w-full border rounded-md focus:outline-none focus:ring focus:ring-blue-400"
           />
-        </div>
-
-          {/* Submit Button */}
+        </div>          {/* Submit Button */}
           <div className="w-full flex flex-col mt-10">
             <div className="flex justify-center">
               <button

@@ -1,21 +1,51 @@
-import { useState } from "react";
-const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
-  // Define state variables for form fields
-  const [name, setName] = useState(selectedStudent.name);
-  const [email, setEmail] = useState(selectedStudent.email);
-  const [contact, setContact] = useState(selectedStudent.contact);
-  const [rollNo, setRollNo] = useState(selectedStudent.rollNo);
-  const [block, setBlock] = useState(selectedStudent.block);
-  const [roomNo, setRoomNo] = useState(selectedStudent.roomNo);
-  const [guardianName,setGuardianName]=useState(selectedStudent.guardianName);
-  const [guardianContact,setGuardianContact]=useState(selectedStudent.guardianContact);
-  const [guardianRelationship,setGuardianRelationship]=useState(selectedStudent.guardianRelationship);
+import React, { useState, FormEvent } from 'react';
 
+interface StudentRecord {
+  _id: string;
+  name: string;
+  email: string;
+  contact: string;
+  rollNo: string;
+  block: string;
+  roomNo: string;
+  guardianName: string;
+  guardianContact: string;
+  guardianRelationship: string;
+}
+
+interface Props {
+  selectedStudent: StudentRecord;
+  onClose: () => void;
+  onUpdate: (updatedStudent: StudentRecord) => void;
+}
+
+const EditForm: React.FC<Props> = ({ selectedStudent, onClose, onUpdate }) => {
+  // Define state variables for form fields
+  const [name, setName] = useState<string>(selectedStudent.name);
+  const [email, setEmail] = useState<string>(selectedStudent.email);
+  const [contact, setContact] = useState<string>(selectedStudent.contact);
+  const [rollNo, setRollNo] = useState<string>(selectedStudent.rollNo);
+  const [block, setBlock] = useState<string>(selectedStudent.block);
+  const [roomNo, setRoomNo] = useState<string>(selectedStudent.roomNo);
+  const [guardianName, setGuardianName] = useState<string>(selectedStudent.guardianName);
+  const [guardianContact, setGuardianContact] = useState<string>(selectedStudent.guardianContact);
+  const [guardianRelationship, setGuardianRelationship] = useState<string>(selectedStudent.guardianRelationship);
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const updatedStudent = { name, email, contact, rollNo, block, roomNo,guardianName,guardianContact,guardianRelationship };
+    const updatedStudent: StudentRecord = {
+      ...selectedStudent,
+      name,
+      email,
+      contact,
+      rollNo,
+      block,
+      roomNo,
+      guardianName,
+      guardianContact,
+      guardianRelationship,
+    };
 
     try {
       const response = await fetch(
@@ -43,21 +73,18 @@ const EditForm = ({ selectedStudent, onClose, onUpdate }) => {
   };
 
   return (
-    <div
-      className="w-full"
-      style={{
-        display:"flex",
-        flexDirection:"column",
-        backgroundColor: "white",
-        padding: "20px",
-        width: "30%",
-        height: "80%",
-        borderRadius: "8px",
-        boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-        alignItems: "center",
-        justifyContent: "flex-start",
-      }}
-    >
+    <div className="w-full" style={{
+      display: "flex",
+      flexDirection: "column",
+      backgroundColor: "white",
+      padding: "20px",
+      width: "30%",
+      height: "80%",
+      borderRadius: "8px",
+      boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
+      alignItems: "center",
+      justifyContent: "flex-start",
+    }}>
       <h2 className="text-lg font-medium text-center">Edit Student</h2>
       <hr className="w-full my-1 border-t border-gray-300" />
       <form onSubmit={handleSubmit} className="w-full" >

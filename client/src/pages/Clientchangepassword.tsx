@@ -1,14 +1,14 @@
+import React, { useState, useEffect, FormEvent } from "react";
 import ClientSidebar from "../components/Sidebar_client";
-import { useState, useEffect } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const Changepassword = () => {
-  const [showPassword, setShowPassword] = useState(false);
-  const [newPassword, setNewPassword] = useState("");
-  const [retypePassword, setRetypePassword] = useState("");
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [passwordMatch, setPasswordMatch] = useState(true); // State variable to track password match
-  const [loading, setLoading] = useState(false); // State variable to track loading state
+const Changepassword: React.FC = () => {
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [newPassword, setNewPassword] = useState<string>("");
+  const [retypePassword, setRetypePassword] = useState<string>("");
+  const [currentPassword, setCurrentPassword] = useState<string>("");
+  const [passwordMatch, setPasswordMatch] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -18,9 +18,9 @@ const Changepassword = () => {
     setPasswordMatch(newPassword === retypePassword);
   }, [newPassword, retypePassword]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoading(true); // Set loading state to true when the request starts
+    setLoading(true);
 
     const formData = {
       currentPassword: currentPassword,
@@ -48,7 +48,7 @@ const Changepassword = () => {
     } catch (error) {
       console.log("Error:", error);
     } finally {
-      setLoading(false); // Set loading state to false when the request completes
+      setLoading(false);
     }
   };
 
@@ -61,7 +61,6 @@ const Changepassword = () => {
         </h2>
         <hr className="w-full my-2 border-t border-gray-300" />
         <form className="flex flex-col items-center w-full" onSubmit={handleSubmit}>
-          {/* Current Password Field */}
           <div className={'mb-4 w-3/4 relative'}>
             <label htmlFor="CurrentPassword" className="text-sm font-light text-gray-700">
               Current Password
@@ -84,8 +83,7 @@ const Changepassword = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
-          
-          {/* New Password Field */}
+
           <div className="mb-4 w-3/4 relative" style={{ borderColor: passwordMatch ? '' : 'red' }}>
             <label htmlFor="NewPassword" className="text-sm font-light text-gray-700">
               New Password
@@ -108,8 +106,7 @@ const Changepassword = () => {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
-          
-          {/* Retype New Password Field */}
+
           <div className="mb-4 w-3/4 relative" style={{ borderColor: passwordMatch ? '' : 'red' }}>
             <label htmlFor="RetypeNewPassword" className="text-sm font-light text-gray-700">
               Retype New Password
@@ -135,7 +132,7 @@ const Changepassword = () => {
           <button
             type="submit"
             className="w-3/4 inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium bg-blue-500 hover:bg-blue-700 text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mb-4"
-            disabled={!passwordMatch || loading} // Disable the button if password doesn't match or if loading
+            disabled={!passwordMatch || loading}
           >
             {loading ? 'Submitting...' : 'Submit'}
           </button>

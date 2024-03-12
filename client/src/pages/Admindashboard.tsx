@@ -6,8 +6,8 @@ import Roomchart from "../components/Roomchart";
 import Photo from "../assets/userpic.png";
 import { useState,useEffect } from "react";
 
-const Admindashboard = () => {
-  const [count, setCount] = useState<{ students: number, complainsPending: number,availableRooms: number }>({ students: 0, complains: 0, availableRooms: 0 });
+const Admindashboard:React.FC = () => {
+  const [count, setCount] = useState<{ students: number, complainsPending: number,availableRooms: number }>({ students: 0, complainsPending: 0, availableRooms: 0 });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -136,7 +136,7 @@ interface WidgetItemProps {
   Icon: IconType;
 }
 
-const WidgetItem = ({ heading, value, Icon }: WidgetItemProps) => (
+const WidgetItem: React.FC<WidgetItemProps> = ({ heading, value, Icon }) => (
   <article className="widget">
     <div className="widgetInfo">
       <div className="widgetContent">
@@ -147,5 +147,6 @@ const WidgetItem = ({ heading, value, Icon }: WidgetItemProps) => (
     </div>
   </article>
 );
+
 
 export default Admindashboard;

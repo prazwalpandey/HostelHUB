@@ -1,8 +1,16 @@
 import ClientSidebar from "../components/Sidebar_client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FormEvent, ChangeEvent } from "react";
+
+interface Complaint {
+  _id: string;
+  complainOn: string;
+  description: string;
+  createdAt: string;
+  status: string;
+}
 
 const Clientcomplains: React.FC = () => {
-  const [complaints, setComplaints] = useState<any[]>([]);
+  const [complaints, setComplaints] = useState<Complaint[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [complainOn, setComplainOn] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -34,7 +42,7 @@ const Clientcomplains: React.FC = () => {
     fetchComplaints();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch("http://localhost:5000/user/createcomplain", {
@@ -65,9 +73,7 @@ const Clientcomplains: React.FC = () => {
     <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
       <ClientSidebar />
       <main className="dashboard" style={{ width: "100%", height: "100%" }}>
-        <div
-          className="flex flex-col items-center w-full p-4 shadow-md bg-white"
-        >
+        <div className="flex flex-col items-center w-full p-4 shadow-md bg-white">
           <h2 className="text-2xl font-semibold text-gray-700 mb-2 mt-4 text-center">
             Register Complaints
           </h2>
@@ -87,7 +93,7 @@ const Clientcomplains: React.FC = () => {
                 type="text"
                 id="complainOn"
                 value={complainOn}
-                onChange={(e) => setComplainOn(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLInputElement>) => setComplainOn(e.target.value)}
                 required
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-10 px-2 py-1 border border-gray-400 rounded-md text-lg"
               />
@@ -102,7 +108,7 @@ const Clientcomplains: React.FC = () => {
               <textarea
                 id="description"
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
                 required
                 className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full h-32 px-2 py-1 border border-gray-400 rounded-md text-lg resize-vertical"
               />

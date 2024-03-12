@@ -1,10 +1,13 @@
-import { useState } from "react";
+import  { useState, ChangeEvent } from "react";
 
 function FileUpload() {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [uploading, setUploading] = useState(false); // Add state for upload status
-  const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState<boolean>(false); // Add state for upload status
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0]);
+    }
   };
 
   const handleUpload = async () => {
@@ -30,7 +33,7 @@ function FileUpload() {
 
       console.log("File uploaded successfully!");
       setSelectedFile(null);
-      window.location.reload()
+      window.location.reload();
     } catch (error) {
       console.log("Error uploading file:", error);
     } finally {

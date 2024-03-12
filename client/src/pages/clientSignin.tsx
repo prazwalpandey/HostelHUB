@@ -1,23 +1,24 @@
-import { useState } from "react";
+import  { useState, FormEvent } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // New state variable for loading state
+function Login(): JSX.Element {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleAdminClick = () => {
+  const handleAdminClick = (): void => {
     setIsAdmin(!isAdmin);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
-    setIsLoading(true); // Set loading state to true when the form is submitted
+    setIsLoading(true);
+
     try {
-      const loginUrl = isAdmin
+      const loginUrl: string = isAdmin
         ? "http://localhost:5000/admin/auth/login"
         : "http://localhost:5000/user/auth/login";
 
@@ -31,20 +32,21 @@ function Login() {
       });
 
       if (!response.ok) {
-        const errorMessage =
-          response.status === 401 ? "Unauthorized" : "Login failed";
+        const errorMessage: string = response.status === 401 ? "Unauthorized" : "Login failed";
         throw new Error(errorMessage);
       }
+
       const data = await response.json();
       document.cookie = `token=${data.token}`;
-      const dashboardUrl = isAdmin ? "/admin/dashboard" : "/client/dashboard";
+
+      const dashboardUrl: string = isAdmin ? "/admin/dashboard" : "/client/dashboard";
       window.location.href = dashboardUrl;
       console.log(data);
     } catch (error) {
       console.log(error);
       setError("Login failed. Please check your credentials.");
     } finally {
-      setIsLoading(false); // Reset loading state regardless of success or failure
+      setIsLoading(false);
     }
   };
 
@@ -88,16 +90,13 @@ function Login() {
             className="w-full bg-sky-500 text-white font-medium text-sm px-4 py-2 rounded-md shadow-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
             disabled={isLoading}
           >
-            {isLoading ? "Logging in..." : "Login"}{" "}
-            {/* Change button text based on loading state */}
+            {isLoading ? "Logging in..." : "Login"}
           </button>
           <button
             type="button"
             onClick={handleAdminClick}
             className={`w-full mt-4 bg-gray-200 text-gray-700 font-medium text-sm px-4 py-2 rounded-md shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 ${
-              isAdmin
-                ? "w-full mt-4 bg-gray-200 text-gray-700 font-medium text-sm px-4 py-2 rounded-md shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400"
-                : ""
+              isAdmin ? "w-full mt-4 bg-gray-200 text-gray-700 font-medium text-sm px-4 py-2 rounded-md shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400" : ""
             }`}
           >
             {isAdmin ? "Login as Client" : "Login as Admin"}
@@ -105,7 +104,6 @@ function Login() {
           {!isAdmin && (
             <button
               type="button"
-              // onClick={}
               className={`w-full mt-4 bg-gray-200 text-gray-700 font-medium text-sm px-4 py-2 rounded-md shadow-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400`}
               onClick={() => { window.location.href="/SignUp"; }}
             >

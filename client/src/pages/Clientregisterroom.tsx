@@ -1,12 +1,21 @@
-import { useState, useEffect } from 'react';
-import Select from "react-select";
+import React, { useState, useEffect, FormEvent } from 'react';
+import Select from 'react-select';
 import ClientSidebar from "../components/Sidebar_client";
 
-const Clientregisterroom = () => {
-  const [student1RollNo, setStudent1RollNo] = useState("");
-  const [student2RollNo, setStudent2RollNo] = useState("");
-  const [student3RollNo, setStudent3RollNo] = useState("");
-  const [rollNoOptions, setRollNoOptions] = useState([]);
+interface Student {
+  rollNo: string;
+}
+
+interface OptionType {
+  value: string;
+  label: string;
+}
+
+const Clientregisterroom: React.FC = () => {
+  const [student1RollNo, setStudent1RollNo] = useState<string>("");
+  const [student2RollNo, setStudent2RollNo] = useState<string>("");
+  const [student3RollNo, setStudent3RollNo] = useState<string>("");
+  const [rollNoOptions, setRollNoOptions] = useState<OptionType[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +32,7 @@ const Clientregisterroom = () => {
           throw new Error('Error fetching student roll numbers');
         }
 
-        const data = await response.json();
+        const data: { students: Student[]; } = await response.json();
         const options = data.students.map(student => ({ value: student.rollNo, label: student.rollNo }));
         setRollNoOptions(options);
       } catch (error) {
@@ -34,15 +43,15 @@ const Clientregisterroom = () => {
     fetchData();
   }, []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-      const data = {
+
+    const data = {
       student1RollNo,
       student2RollNo,
       student3RollNo
-      };
-  
+    };
+
     try {
       const response = await fetch('http://localhost:5000/registerforroom', {
         method: 'POST',
@@ -52,11 +61,11 @@ const Clientregisterroom = () => {
         },
         body: JSON.stringify(data)
       });
-  
+
       if (!response.ok) {
         throw new Error('Error registering for room');
       }
-  
+
       console.log('Room registration successful');
       alert('Room registration Successful !');
       window.location.reload();
@@ -64,9 +73,16 @@ const Clientregisterroom = () => {
       console.error('Error registering for room:', error);
     }
   };
+
+  const handleSelectChange = (selectedOption: OptionType | null, setRollNo: (rollNo: string) => void) => {
+    if (selectedOption) {
+      setRollNo(selectedOption.value);
+    } else {
+      setRollNo("");
+    }
+  };
   
 
-  // Filter out selected option from rollNoOptions for each dropdown
   const filteredOptions1 = rollNoOptions.filter(option => option.value !== student2RollNo && option.value !== student3RollNo);
   const filteredOptions2 = rollNoOptions.filter(option => option.value !== student1RollNo && option.value !== student3RollNo);
   const filteredOptions3 = rollNoOptions.filter(option => option.value !== student1RollNo && option.value !== student2RollNo);
@@ -107,7 +123,7 @@ const Clientregisterroom = () => {
                   }),
                 }}
                 value={rollNoOptions.find((option) => option.value === student1RollNo)}
-                onChange={(selectedOption) => setStudent1RollNo(selectedOption ? selectedOption.value : "")}
+                onChange={(selectedOption) => handleSelectChange(selectedOption as OptionType | null, setStudent1RollNo)}
                 options={filteredOptions1}
               />
             </div>
@@ -131,7 +147,7 @@ const Clientregisterroom = () => {
                   }),
                 }}
                 value={rollNoOptions.find((option) => option.value === student2RollNo)}
-                onChange={(selectedOption) => setStudent2RollNo(selectedOption ? selectedOption.value : "")}
+                onChange={(selectedOption) => handleSelectChange(selectedOption as OptionType | null, setStudent2RollNo)}
                 options={filteredOptions2}
               />
             </div>
@@ -155,7 +171,7 @@ const Clientregisterroom = () => {
                   }),
                 }}
                 value={rollNoOptions.find((option) => option.value === student3RollNo)}
-                onChange={(selectedOption) => setStudent3RollNo(selectedOption ? selectedOption.value : "")}
+                onChange={(selectedOption) => handleSelectChange(selectedOption as OptionType | null, setStudent3RollNo)}
                 options={filteredOptions3}
               />
             </div>

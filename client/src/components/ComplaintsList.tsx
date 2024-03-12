@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface Complaint {
   _id: number;
   complainOn: string;
   description: string;
+  createdAt:string;
   status: 'Resolved' | 'Pending'; // Assuming status can only be 'resolved' or 'pending'
 }
 
@@ -68,6 +69,7 @@ const ComplaintsList: React.FC = () => {
           <div key={complaint._id} className="bg-white rounded-lg shadow-md p-4">
             <div className="font-semibold mb-2">{complaint.complainOn}</div>
             <div className="text-gray-600 mb-2">{complaint.description}</div>
+            {/* Add createdAt field to Complaint interface */}
             <div className="text-gray-600 mb-2">Date: {new Date(complaint.createdAt).toLocaleDateString()}</div>
             <div className={`text-sm ${complaint.status === 'Resolved' ? 'text-green-600' : 'text-red-600'}`}>
               Status: {complaint.status}
@@ -81,7 +83,6 @@ const ComplaintsList: React.FC = () => {
               </button>
             )}
           </div>
-
         ))}
       </div>
     </div>

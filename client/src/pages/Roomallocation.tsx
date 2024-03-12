@@ -1,23 +1,23 @@
 import AdminSidebar from "../components/Sidebar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 
-const Roomallocation = () => {
-  const [selectedRooms, setSelectedRooms] = useState([]);
-  const [bookedRooms, setBookedRooms] = useState([]);
-  // const [groupIds,setGroupIds]=useState([]);
+
+const Roomallocation: React.FC = () => {
+  const [selectedRooms, setSelectedRooms] = useState<string[]>([]);
+  const [bookedRooms, setBookedRooms] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchBookedRooms = async () => {
       try {
-        const response = await fetch("http://localhost:5000/bookedrooms",{
+        const response = await fetch("http://localhost:5000/bookedrooms", {
           method: "GET",
-          credentials: 'include',
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-          }
+          },
         });
         if (!response.ok) {
-          throw new Error('Failed to fetch booked rooms');
+          throw new Error("Failed to fetch booked rooms");
         }
         const data = await response.json();
         setBookedRooms(data.bookedRooms);
@@ -29,7 +29,7 @@ const Roomallocation = () => {
     fetchBookedRooms();
   }, []);
 
-  const handleCheckboxChange = (event) => {
+  const handleCheckboxChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { id, checked } = event.target;
     if (checked) {
       setSelectedRooms((prevSelectedRooms) => [...prevSelectedRooms, id]);
@@ -39,69 +39,78 @@ const Roomallocation = () => {
       );
     }
   };
-  const handleReset=async()=>{
+
+  const handleReset = async () => {
     try {
       const response = await fetch("http://localhost:5000/resetrooms", {
         method: "PUT",
         credentials: "include",
         headers: {
-          'Content-Type': 'application/json',
-        }
-      })
-      if(!response.ok){
-        throw new Error('Failed to reset rooms');
-      }
-      console.log('Rooms reset successfully');
-      alert('Rooms reset successfully');
-      window.location.reload();
-    }catch(error){
-      console.error('Error resetting rooms:', error);
-    }
-  }
-  const handleSubmit = async () => {
-    try {
-      const groupResponse = await fetch("http://localhost:5000/registerforroom", {
-        method: "GET",
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json",
-        }
-      });
-  
-      if (!groupResponse.ok) {
-        throw new Error('Failed to fetch group IDs');
-      }
-  
-      const groupData = await groupResponse.json();
-      const data = groupData.groups.map(group=>group.groupId);
-      // setGroupIds(data);
-      console.log(data);
-  
-      const allocateResponse = await fetch("http://localhost:5000/allocateroom", {
-        method: "PUT",
-        credentials: "include",
-        headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ groupId: data, selectedRooms: selectedRooms }),
       });
-      console.log(data,selectedRooms);
+      if (!response.ok) {
+        throw new Error("Failed to reset rooms");
+      }
+      console.log("Rooms reset successfully");
+      alert("Rooms reset successfully");
+      window.location.reload();
+    } catch (error) {
+      console.error("Error resetting rooms:", error);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const groupResponse = await fetch(
+        "http://localhost:5000/registerforroom",
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!groupResponse.ok) {
+        throw new Error("Failed to fetch group IDs");
+      }
+
+      const groupData = await groupResponse.json();
+      const data = groupData.groups.map((group: { groupId: string }) => group.groupId);
+      console.log(data);
+
+      const allocateResponse = await fetch(
+        "http://localhost:5000/allocateroom",
+        {
+          method: "PUT",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ groupId: data, selectedRooms: selectedRooms }),
+        }
+      );
+      console.log(data, selectedRooms);
 
       if (!allocateResponse.ok) {
-        throw new Error('Failed to allocate rooms');
+        throw new Error("Failed to allocate rooms");
       }
       setSelectedRooms([]);
-      alert("Rooms allocated successfully! check the details in the student records");
+      alert(
+        "Rooms allocated successfully! check the details in the student records"
+      );
       window.location.reload();
-  
     } catch (error) {
       console.error("Error handling submit:", error);
     }
   };
-  console.log(bookedRooms);
-  
 
-  const roomNames = [
+  console.log(bookedRooms);
+
+  const roomNames: string[] = [
+    // Room names here
     "A101",
     "A102",
     "A103",
@@ -278,19 +287,13 @@ const Roomallocation = () => {
   return (
     <div className="adminContainer" style={{ width: "100vw", height: "100vh" }}>
       <AdminSidebar />
-      <main
-        className="dashboard"
-        style={{ width: "100%", height: "100%", overflowY: "auto" }}
-      >
+      <main className="dashboard" style={{ width: "100%", height: "100%", overflowY: "auto" }}>
         <div className="profile bg-white shadow-md">
           <h2 className="text-2xl font-semibold text-gray-700 mb-2 text-center">
             Random Room Assign
           </h2>
           <hr className="w-full my-4 border-t border-gray-300" />
-          <p
-            className="reminder text-center mb-4"
-            style={{ color: "#333", fontSize: "0.875rem" }}
-          >
+          <p className="reminder text-center mb-4" style={{ color: "#333", fontSize: "0.875rem" }}>
             Reminder: Select Only Available Rooms.
           </p>
           <br />
@@ -300,10 +303,7 @@ const Roomallocation = () => {
             </h4>
             {["A", "B", "C"].map((block) => (
               <div className="block-section" key={block}>
-                <p
-                  className="reminder text-center mb-2"
-                  style={{ color: "#333", fontSize: "0.875rem" }}
-                >
+                <p className="reminder text-center mb-2" style={{ color: "#333", fontSize: "0.875rem" }}>
                   Block {block}
                 </p>
                 <hr className="w-full my-4 border-t border-gray-300" />
@@ -311,10 +311,7 @@ const Roomallocation = () => {
                   {roomNames
                     .filter((room) => room.startsWith(block))
                     .map((name) => (
-                      <div
-                        key={name}
-                        className="flex items-center h-10 mr-4 mb-4"
-                      >
+                      <div key={name} className="flex items-center h-10 mr-4 mb-4">
                         <input
                           id={name}
                           type="checkbox"
@@ -323,32 +320,18 @@ const Roomallocation = () => {
                           disabled={bookedRooms.includes(name)} // Disable checkbox for booked rooms
                           checked={selectedRooms.includes(name) || bookedRooms.includes(name)} // Check if room is selected or booked
                         />
-                        <label
-                          htmlFor={name}
-                          className={bookedRooms.includes(name) ? "text-blue-500 ml-2" : "ml-2"} // Apply blue color for booked rooms
-                        >
-                          {name}
-                        </label>
+                        <label htmlFor={name} className={bookedRooms.includes(name) ? "text-blue-500 ml-2" : "ml-2"}>{name}</label>
                       </div>
-
                     ))}
                 </div>
                 <br />
               </div>
             ))}
             <div className="flex justify-center mt-4">
-              <button
-                className="bg-blue-500 hover:bg-blue-700 m-1 text-white font-small py-2 px-2 rounded"
-                style={{ width: "20%", fontSize: "20px" }}
-                onClick={handleSubmit}
-              >
+              <button className="bg-blue-500 hover:bg-blue-700 m-1 text-white font-small py-2 px-2 rounded" style={{ width: "20%", fontSize: "20px" }} onClick={handleSubmit}>
                 Submit
               </button>
-              <button
-                className="bg-gray-500 hover:bg-blue-700 m-1 text-white font-small py-2 px-2 rounded"
-                style={{ width: "20%", fontSize: "20px" }}
-                onClick={handleReset}
-              >
+              <button className="bg-gray-500 hover:bg-blue-700 m-1 text-white font-small py-2 px-2 rounded" style={{ width: "20%", fontSize: "20px" }} onClick={handleReset}>
                 Reset Rooms
               </button>
             </div>
