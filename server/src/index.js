@@ -25,19 +25,19 @@ import resetRoomsRoute from './routes/resetRooms.js';
 
 const app=express();
 
-const allowedOrigins=['http://localhost:5173']
+const allowedOrigins=['http://localhost:5173']/
 // MIDDLEWARES
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 app.use(cors({
-    origin:allowedOrigins,
+    origin:'*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders:['Content-Type', 'Authorization'],
     optionsSuccessStatus:200,
     credentials:true,
 }));
 app.use(cookieParser());
-// app.options('*', cors())
+app.options('*', cors())
 
 //  LOGIN AND REGISTRATION AND LOGOUT ROUTES
 app.use('/user/auth',authRoute);
