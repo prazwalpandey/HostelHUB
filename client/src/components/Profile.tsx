@@ -21,7 +21,7 @@ const Profile: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/getme", {
+        const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/getme", {
           method: "GET",
           credentials: "include",
           headers: {

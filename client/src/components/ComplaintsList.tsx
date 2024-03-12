@@ -15,7 +15,7 @@ const ComplaintsList: React.FC = () => {
     // Fetch user's complaints from server
     const fetchComplaints = async () => {
       try {
-        const response = await fetch('http://localhost:5000/admin/getallcomplain', {
+        const response = await fetch('https://prajjwal-bhai-test-be.asaurav.com.np/admin/getallcomplain', {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -38,7 +38,7 @@ const ComplaintsList: React.FC = () => {
 
   const handleResolveComplaint = async (complaintId: number) => {
     try {
-      const response = await fetch(`http://localhost:5000/admin/resolvecomplaint/${complaintId}`, {
+      const response = await fetch(`https://prajjwal-bhai-test-be.asaurav.com.np/admin/resolvecomplaint/${complaintId}`, {
         method: 'PUT',
         credentials: 'include',
         headers: {

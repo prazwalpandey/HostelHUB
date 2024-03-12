@@ -18,7 +18,7 @@ const Clientcomplains: React.FC = () => {
   useEffect(() => {
     const fetchComplaints = async () => {
       try {
-        const response = await fetch("http://localhost:5000/user/getcomplain", {
+        const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/user/getcomplain", {
           method: "GET",
           credentials: "include",
           headers: {
@@ -45,7 +45,7 @@ const Clientcomplains: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/user/createcomplain", {
+      const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/user/createcomplain", {
         method: "POST",
         credentials: "include",
         headers: {

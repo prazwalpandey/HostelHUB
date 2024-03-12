@@ -15,7 +15,7 @@ const ClientNotices: React.FC = () => {
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const response = await fetch("http://localhost:5000/user/getallnotice", {
+        const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/user/getallnotice", {
           method: "GET",
           credentials: "include",
           headers: {

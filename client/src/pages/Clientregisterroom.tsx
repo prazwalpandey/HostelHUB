@@ -20,7 +20,7 @@ const Clientregisterroom: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/getstudents', {
+        const response = await fetch('https://prajjwal-bhai-test-be.asaurav.com.np/getstudents', {
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -53,7 +53,7 @@ const Clientregisterroom: React.FC = () => {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/registerforroom', {
+      const response = await fetch('https://prajjwal-bhai-test-be.asaurav.com.np/registerforroom', {
         method: 'POST',
         credentials: 'include',
         headers: {

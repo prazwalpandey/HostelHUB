@@ -55,7 +55,7 @@ const Studentrecords: React.FC = () => {
       const userId = selectedStudent._id;
       const userName = selectedStudent.name;
       const response = await fetch(
-        `http://localhost:5000/deleteuser/${userId}`,
+        `https://prajjwal-bhai-test-be.asaurav.com.np/deleteuser/${userId}`,
         {
           method: "DELETE",
           credentials: "include",
@@ -80,7 +80,7 @@ const Studentrecords: React.FC = () => {
   useEffect(() => {
     const fetchStudentRecords = async () => {
       try {
-        const response = await fetch("http://localhost:5000/getstudents", {
+        const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/getstudents", {
           method: "GET",
           credentials: "include",
           headers: {

@@ -19,8 +19,8 @@ function Login(): JSX.Element {
 
     try {
       const loginUrl: string = isAdmin
-        ? "http://localhost:5000/admin/auth/login"
-        : "http://localhost:5000/user/auth/login";
+        ? "https://prajjwal-bhai-test-be.asaurav.com.np/admin/auth/login"
+        : "https://prajjwal-bhai-test-be.asaurav.com.np/user/auth/login";
 
       const response = await fetch(loginUrl, {
         method: "POST",

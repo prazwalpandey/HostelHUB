@@ -28,7 +28,7 @@ const Changepassword: React.FC = () => {
     };
 
     try {
-      const response = await fetch("http://localhost:5000/admin/auth/changepassword", {
+      const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/admin/auth/changepassword", {
         method: "PUT",
         credentials: "include",
         headers: {

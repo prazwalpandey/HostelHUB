@@ -9,7 +9,7 @@ const Roomallocation: React.FC = () => {
   useEffect(() => {
     const fetchBookedRooms = async () => {
       try {
-        const response = await fetch("http://localhost:5000/bookedrooms", {
+        const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/bookedrooms", {
           method: "GET",
           credentials: "include",
           headers: {
@@ -42,7 +42,7 @@ const Roomallocation: React.FC = () => {
 
   const handleReset = async () => {
     try {
-      const response = await fetch("http://localhost:5000/resetrooms", {
+      const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/resetrooms", {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -63,7 +63,7 @@ const Roomallocation: React.FC = () => {
   const handleSubmit = async () => {
     try {
       const groupResponse = await fetch(
-        "http://localhost:5000/registerforroom",
+        "https://prajjwal-bhai-test-be.asaurav.com.np/registerforroom",
         {
           method: "GET",
           credentials: "include",
@@ -82,7 +82,7 @@ const Roomallocation: React.FC = () => {
       console.log(data);
 
       const allocateResponse = await fetch(
-        "http://localhost:5000/allocateroom",
+        "https://prajjwal-bhai-test-be.asaurav.com.np/allocateroom",
         {
           method: "PUT",
           credentials: "include",

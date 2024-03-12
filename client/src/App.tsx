@@ -30,7 +30,7 @@ const App = () => {
     const checkAuthentication = async () => {
       try {
         const adminResponse = await fetch(
-          "http://localhost:5000/admin/auth/checkauthentication",
+          "https://prajjwal-bhai-test-be.asaurav.com.np/admin/auth/checkauthentication",
           {
             method: "GET",
             credentials: "include",
@@ -40,7 +40,7 @@ const App = () => {
           }
         );
         const userResponse = await fetch(
-          "http://localhost:5000/user/auth/checkauthentication",
+          "https://prajjwal-bhai-test-be.asaurav.com.np/user/auth/checkauthentication",
           {
             method: "GET",
             credentials: "include",

@@ -22,7 +22,7 @@ function FileUpload() {
       const formData = new FormData();
       formData.append("csvFile", selectedFile);
 
-      const response = await fetch("http://localhost:5000/fileupload", {
+      const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/fileupload", {
         method: "POST",
         body: formData,
       });

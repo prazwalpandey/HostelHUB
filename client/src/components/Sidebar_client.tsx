@@ -19,7 +19,7 @@ const ClientSidebar: React.FC = () => {
     const handleLogout = async () => {
         try {
             setIsLoggingOut(true); // Set loading state to true when logging out
-            const response = await fetch("http://localhost:5000/user/auth/logout", {
+            const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/user/auth/logout", {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

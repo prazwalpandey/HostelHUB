@@ -49,7 +49,7 @@ const EditForm: React.FC<Props> = ({ selectedStudent, onClose, onUpdate }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/update/${selectedStudent._id}`,
+        `https://prajjwal-bhai-test-be.asaurav.com.np/update/${selectedStudent._id}`,
         {
           method: "PUT",
           credentials: "include",

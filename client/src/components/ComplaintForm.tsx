@@ -8,7 +8,7 @@ const ComplaintForm: React.FC = () => {
     e.preventDefault();
     try {
       // Send complaint data to server
-      const response = await fetch('/user/complains', {
+      const response = await fetch('https://prajjwal-bhai-test-be.asaurav.com.np/user/complains', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

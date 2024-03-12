@@ -51,7 +51,7 @@ const SignUp: React.FC = () => {
     event.preventDefault();
     setRegistering(true);
     try {
-      const response = await fetch("http://localhost:5000/user/auth/register", {
+      const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/user/auth/register", {
         method: "POST",
         credentials: "include",
         headers: {

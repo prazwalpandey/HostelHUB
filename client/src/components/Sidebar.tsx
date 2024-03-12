@@ -19,7 +19,7 @@ const AdminSidebar: React.FC = () => {
     const handleLogout = async () => {
         try {
             setIsLoggingOut(true); // Set loading state to true when logging out
-            const response = await fetch("http://localhost:5000/admin/auth/logout", {
+            const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/admin/auth/logout", {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',

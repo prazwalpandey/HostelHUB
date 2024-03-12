@@ -17,7 +17,7 @@ const Notices: React.FC = () => {
   useEffect(() => {
     const fetchNotices = async () => {
       try {
-        const response = await fetch("http://localhost:5000/admin/getnotice", {
+        const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/admin/getnotice", {
           method: "GET",
           credentials: "include",
           headers: {
@@ -44,7 +44,7 @@ const Notices: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:5000/admin/createnotice", {
+      const response = await fetch("https://prajjwal-bhai-test-be.asaurav.com.np/admin/createnotice", {
         method: "POST",
         credentials: "include",
         headers: {

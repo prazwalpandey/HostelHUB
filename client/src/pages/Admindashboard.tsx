@@ -12,7 +12,7 @@ const Admindashboard:React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const responseStudent = await fetch('http://localhost:5000/studentscount',{
+        const responseStudent = await fetch('https://prajjwal-bhai-test-be.asaurav.com.np/studentscount',{
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -28,7 +28,7 @@ const Admindashboard:React.FC = () => {
           // console.log(noOfStudents);
           setCount(prevCount=>({...prevCount,students:noOfStudents}));
         }
-        const responseComplains = await fetch('http://localhost:5000/admin/complainscount',{
+        const responseComplains = await fetch('https://prajjwal-bhai-test-be.asaurav.com.np/admin/complainscount',{
           method: 'GET',
           credentials: 'include',
           headers: {
@@ -44,7 +44,7 @@ const Admindashboard:React.FC = () => {
           // console.log(noOfComplains);
           setCount(prevCount=>({...prevCount,complainsPending:noOfComplains}));
         }
-        const responseRooms = await fetch('http://localhost:5000/availableroomscount',{
+        const responseRooms = await fetch('https://prajjwal-bhai-test-be.asaurav.com.np/availableroomscount',{
         method: 'GET',
         credentials: 'include',
         headers: {
