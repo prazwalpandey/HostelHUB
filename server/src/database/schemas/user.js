@@ -42,7 +42,7 @@ const UserSchema=new mongoose.Schema({
     },
     roomNo:{
         type:Number,
-        required:true,
+        // required:true,
     },
     role:{
         type:String,

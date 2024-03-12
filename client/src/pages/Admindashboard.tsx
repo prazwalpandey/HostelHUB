@@ -17,7 +17,7 @@ const Admindashboard = () => {
           credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
-          },
+          }
         });
         if(!responseStudent.ok){
           throw new Error('Could not fetch the data for that resource');

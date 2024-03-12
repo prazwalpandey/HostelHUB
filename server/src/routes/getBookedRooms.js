@@ -3,29 +3,32 @@ import User from '../database/schemas/user.js';
 import Router from 'express';
 import { authenticateAdmin } from '../utils/authenticateUsers.js';
 
-const router=Router();
+const router = Router();
 
-router.get('/bookedrooms',authenticateAdmin,async (req, res) => {
+router.get('/bookedrooms', authenticateAdmin, async (req, res) => {
     try {
-        const users=await User.find({},'name block roomNo').exec();
-        
-        const bookedRooms=users.map(user=>{
-            const block=user.block;
-            const roomNo=user.roomNo;
-            const combinedString=block+roomNo;
+        const users = await User.find({}, 'name block roomNo').exec();
+
+        const bookedRooms = users.map(user => {
+            const block = user.block;
+            const roomNo = user.roomNo;
+            const combinedString = block + roomNo;
             return combinedString;
         });
         // console.log(bookedRooms);
-        res.status(200).json({bookedRooms});
+        res.status(200).json({ bookedRooms });
 
-    }catch(err){
+    } catch (err) {
         res.status(505).send('Internal Server Error');
     }
 })
 
+
+
+
 router.get('/availableroomscount', authenticateAdmin, async (req, res) => {
     try {
-        const bookedRooms = await User.distinct("roomNo");
+        const bookedRooms = await User.distinct("roomNo", { roomNo: { $ne: "" } });
         const noOfBookedRooms = bookedRooms.length;
         const noOfAvailableRooms = 171 - noOfBookedRooms;
         // console.log(noOfAvailableRooms);

@@ -98,6 +98,7 @@ const Roomallocation = () => {
       console.error("Error handling submit:", error);
     }
   };
+  console.log(bookedRooms);
   
 
   const roomNames = [
