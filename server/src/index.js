@@ -25,7 +25,7 @@ import resetRoomsRoute from './routes/resetRooms.js';
 
 const app=express();
 
-const allowedOrigins=['https://65f13629753a3894f2209237--enchanting-crostata-75603d.netlify.app']
+const allowedOrigins=['https://enchanting-crostata-75603d.netlify.app']
 // MIDDLEWARES
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
